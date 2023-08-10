@@ -1,4 +1,4 @@
-![Logo do projeto](./localizase-logo.jpeg)
+![Logo do projeto](./Banner.png)
 
 # Índice
 - [Sobre o projeto](#sobre-o-projeto)
