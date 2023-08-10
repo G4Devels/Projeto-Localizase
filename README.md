@@ -1,4 +1,4 @@
-![Logo do projeto](caminho_para_a_logo)
+![Logo do projeto](./localizase-logo.jpeg)
 
 # Índice
 - [Sobre o projeto](#sobre-o-projeto)
