@@ -1,4 +1,9 @@
-![Logo do projeto](./Banner.png)
+<div align="center">
+
+  ![Logo do projeto](./localizase_animation.gif)
+  
+</div>
+
 
 # Índice
 - [Sobre o projeto](#sobre-o-projeto)
