@@ -5,18 +5,22 @@
 </div>
 
 
-# Índice
+# *Índice*
 - [Sobre o projeto](#sobre-o-projeto)
 - [Tecnologias](#tecnologias)
 - [Como executar](#como-executar)
 - [Como contribuir](#como-contribuir)
+  
+---
 
 
-# Sobre o projeto
+# *Sobre o projeto*
 Consiste em um website desenvolvido a partir das necessidades dos habitantes de Fortaleza, independente da classe social, em descobrir lugares de lazer. Sendo assim, através de um "jogo" de perguntas e respostas, um questionário será construído para o serviço encontrar o perfil do usuário e então sugerir localizações com atributos próximos aos interesses do indivíduo no dia.
 
+---
 
-# Tecnologias
+
+# *Tecnologias*
 
 Setor                   | Tecnologia
 ----------------------- | -----------------
@@ -25,12 +29,14 @@ Back-end                | <img src="https://img.shields.io/badge/express-3C873A?
 Gestão SCRUM do projeto | <img src="https://img.shields.io/badge/clickup-BF6B99?style=for-the-badge&logo=clickup&logoColor=white" height="25"/>
 Design                  | <img src="https://img.shields.io/badge/figma-0078D6?style=for-the-badge&logo=figma&logoColor=white" height="25"/>
 
+---
 
-# Como executar
+# *Como executar*
 *Seção em desenvolvimento...*
 
+---
 
-# Como contribuir
+# *Como contribuir*
 1. Crie um fork deste repositório.
 2. Envie seus commits em português.
 3. Insira um pequeno resumo sobre o que foi adicionado.
