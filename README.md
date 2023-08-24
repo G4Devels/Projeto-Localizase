@@ -32,7 +32,19 @@ Design                  | <img src="https://img.shields.io/badge/figma-0078D6?st
 ---
 
 # *Como executar*
-*Seção em desenvolvimento...*
+```bash
+  # Clonar o repositório 
+  $ git clone https://github.com/G4Devels/Projeto-Localizase
+
+  # Navegar até a pasta
+  $ cd Projeto-Localizase
+
+  # Instalar dependências 
+  npm install
+
+  # Iniciar a aplicação
+  npm start
+```
 
 ---
 
