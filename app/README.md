@@ -2,8 +2,8 @@
 
 Esta seção possui como missão explicar a estrutura de pastas da pasta `src`
 
-- **component_syles**: Contém as folhas de estilo CSS dos componentes
-- **components**: Possui os componentes principais e seus fragmentos 
+- `component_syles`: Contém as folhas de estilo CSS dos componentes
+- `components`: Possui os componentes principais e seus fragmentos 
 
 # Getting Started with Create React App
 
