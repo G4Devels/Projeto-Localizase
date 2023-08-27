@@ -1,3 +1,10 @@
+# Sobre
+
+Esta seção possui como missão explicar a estrutura de pastas da pasta `src`
+
+- **component_syles**: Contém as folhas de estilo CSS dos componentes
+- **components**: Possui os componentes principais e seus fragmentos 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
