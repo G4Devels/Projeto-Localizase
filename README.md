@@ -5,22 +5,27 @@
 </div>
 
 
-# *Índice*
+# Índice
 - [Sobre o projeto](#sobre-o-projeto)
 - [Tecnologias](#tecnologias)
 - [Como executar](#como-executar)
 - [Como contribuir](#como-contribuir)
   
----
 
 
-# *Sobre o projeto*
-Consiste em um website desenvolvido a partir das necessidades dos habitantes de Fortaleza, independente da classe social, em descobrir lugares de lazer. Sendo assim, através de um "jogo" de perguntas e respostas, um questionário será construído para o serviço encontrar o perfil do usuário e então sugerir localizações com atributos próximos aos interesses do indivíduo no dia.
 
----
+# Sobre o projeto
+
+A partir de pesquisas qualitativas realizadas com residentes do município de Fortaleza, foi descoberto uma lacuna na busca por espaços de lazer apresentado por grandes mecanismos de busca como o Google e Google Maps. Os entrevistados relataram empecilhos em obter resultados adaptados aos interesses de sua personalidade e às características que ansiavam encontrar no específico dia.
+
+Sendo assim, nossa solução surge como um website desenvolvido a partir dessas necessidades do grupo populacional, independente da classe social, em descobrir lugares de lazer de maneira personalizada. Desse modo, através de um interação inicial de perguntas e respostas, um questionário será construído para o serviço encontrar o perfil do usuário e então sugerir localizações com atributos próximos aos interesses do indivíduo.
+
+Mirando futuro, temos como missão expandir o público alvo para outras cidades, estados e países, melhorando cada vez mais o algoritmo de sugestão e construindo parcerias e comunidades atrativas.
 
 
-# *Tecnologias*
+
+
+# Tecnologias
 
 Setor                   | Tecnologia
 ----------------------- | -----------------
@@ -29,9 +34,10 @@ Back-end                | <img src="https://img.shields.io/badge/express-3C873A?
 Gestão SCRUM do projeto | <img src="https://img.shields.io/badge/clickup-BF6B99?style=for-the-badge&logo=clickup&logoColor=white" height="25"/>
 Design                  | <img src="https://img.shields.io/badge/figma-0078D6?style=for-the-badge&logo=figma&logoColor=white" height="25"/>
 
----
 
-# *Como executar*
+
+
+# Como executar
 ```bash
   # Clonar o repositório 
   $ git clone https://github.com/G4Devels/Projeto-Localizase
@@ -46,9 +52,10 @@ Design                  | <img src="https://img.shields.io/badge/figma-0078D6?st
   npm start
 ```
 
----
 
-# *Como contribuir*
+
+
+# Como contribuir
 1. Crie um fork deste repositório.
 2. Envie seus commits em português.
 3. Insira um pequeno resumo sobre o que foi adicionado.
