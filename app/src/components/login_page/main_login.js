@@ -1,11 +1,11 @@
 import '../../component_styles/login_page.css'
 import { EmailAndPasswordContext } from '../../contexts/authEmailAndPasswordContext'
-import { useContext } from 'react'
+import { useContext } from 'react'  
 
 export default function MainLogin () {
 
     const {signInEmailAndPassword, user} = useContext(EmailAndPasswordContext)
-
+    
     function signIn(eventObj) {
 
         eventObj.preventDefault()
@@ -15,7 +15,6 @@ export default function MainLogin () {
 
         signInEmailAndPassword(email, password)
 
-        console.log(user)
     }
 
     return (
@@ -23,7 +22,6 @@ export default function MainLogin () {
 
             <div id="login" onSubmit={signIn}>
                 <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
-
                 <form>
                     <h1>Login</h1>
 
