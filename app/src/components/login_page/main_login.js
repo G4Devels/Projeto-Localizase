@@ -1,29 +1,21 @@
 import '../../component_styles/login_page.css'
-
-import {app, analytics} from '../../services/firebase'
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { EmailAndPasswordContext } from '../../contexts/authEmailAndPasswordContext'
+import { useContext } from 'react'
 
 export default function MainLogin () {
 
+    const {signInEmailAndPassword, user} = useContext(EmailAndPasswordContext)
+
     function signIn(eventObj) {
+
         eventObj.preventDefault()
 
         const email = eventObj.target.elements.email.value
         const password = eventObj.target.elements.password.value
 
-        const auth = getAuth();
+        signInEmailAndPassword(email, password)
 
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log(user)
-        })
-        .catch((error) => {
-            // Sign in error 
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        });
+        console.log(user)
     }
 
     return (

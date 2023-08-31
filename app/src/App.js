@@ -1,8 +1,11 @@
 import MainLogin from './components/login_page/main_login'
+import { EmailAndPasswordProvider } from './contexts/authEmailAndPasswordContext';
 
 function App() {
   return (
-    <MainLogin/>
+    <EmailAndPasswordProvider>
+      <MainLogin/>
+    </EmailAndPasswordProvider>
   );
 }
 
