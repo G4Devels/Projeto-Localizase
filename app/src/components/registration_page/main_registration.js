@@ -1,5 +1,6 @@
 import "../../component_styles/registration_page.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../services/firebaseConfig.js"
 
 
 export default function MainRegistration(){
@@ -10,7 +11,21 @@ export default function MainRegistration(){
         const password = eventObj.target.elements.password.value
         const password_2 = eventObj.target.elements.confirm_password.value
 
-        console.log(name, email, password, password_2)
+        if(password === password_2){
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    user.displayName = name
+                    console.log('foi', user)
+                  })
+                  .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log('foi', errorCode, errorMessage)
+                  });
+        }else{
+            console.log("As senhas não correspondem")
+        }
     }
     return(
         <>
