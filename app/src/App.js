@@ -1,8 +1,11 @@
-import MainLogin from './components/login_page/main_login'
+import { AppRoutes } from "./Routers/routes";
+import { AuthAccountsProvider } from "./contexts/authAccounts";
 
-function App() {
+export const App = () => {
   return (
-    <MainLogin/>
+    <AuthAccountsProvider>
+      <AppRoutes />
+    </AuthAccountsProvider>
   );
 }
 
