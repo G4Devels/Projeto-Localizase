@@ -1,11 +1,8 @@
 import '../../styles/login_page.css'
-import React, { useState, useContext, createContext } from "react";
+import React, { useState, useContext } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { getAuth } from "firebase/auth";
-import { app } from "../../services/firebaseConfig";
 
 export const MainLogin = () => {
 
@@ -16,13 +13,13 @@ export const MainLogin = () => {
 
     async function handleLoginFromGoogle(eventObj){
         await signInGoogle();
-        console.log('TO DO: Login with Google')
     };
 
     function handleLoginFromEmailAndPassword(e) {
         e.preventDefault();
         signInEmailAndPassword(email, password);
     };
+    
     
 
     if(!signed) {
@@ -56,7 +53,7 @@ export const MainLogin = () => {
 
                             <hr />
 
-                            <a href="#register"> Não possui uma conta? Cadastrar-se</a>
+                            <Link to="/registro"> Não possui uma conta? Cadastrar-se</Link>
                         </div>
                         
                     </div>
