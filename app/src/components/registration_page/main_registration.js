@@ -41,7 +41,7 @@ export default function MainRegistration(){
 
                     <button type="submit">Entrar</button>
                 </form>
-                <a href="#registro">Já possui conta? Fazer Login</a>
+                <a href="#login">Já possui conta? Fazer Login</a>
             </div>    
         </>
     )
