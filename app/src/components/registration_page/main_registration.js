@@ -7,9 +7,8 @@ import { useContext, useState } from "react";
 export default function MainRegistration(){
 
     const user = useState(null)
-    const chave = null
     
-    const { createUserInEmailAndPassword, signed } = useContext(AuthAccountsContext);
+    const { createUserInEmailAndPassword } = useContext(AuthAccountsContext);
 
     async function createUser(eventObj){
         eventObj.preventDefault()
