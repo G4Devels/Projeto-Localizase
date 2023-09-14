@@ -1,5 +1,6 @@
 body {
     min-height: 100vh;
+    width: 100%;
 
     display: flex;
     justify-content: center;
@@ -18,18 +19,22 @@ a {
     color: white;
 }
 
+#root {
+    min-width: 60%;
+}
+
 #auth-container {
     display: flex;
     
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 #auth {
     margin-top: 35px;
-    min-height: 50vh;
-
+    min-height: 60vh;
     text-align: center;
 
     display: flex;
@@ -37,12 +42,10 @@ a {
     justify-content: space-around;
     align-items: center;
 
-    padding: 20px;
-
-
+    padding: 2% 20%;
     box-shadow: 0px 0px 100px 0px rgb(25, 25, 25);
-
     border-radius: 15px;
+    width: 100%;
 }
 
 #auth hr {
@@ -65,7 +68,7 @@ a {
     border-radius: 5px;
     padding: 8px;
     color: white;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 #button-login-with-google{
@@ -88,8 +91,28 @@ a {
     cursor: pointer;
 }
 
-#auth form button:hover {
+button:hover {
     background-color: #ffffff33;
     outline: 2px solid white;
     color: white;
+}
+
+#auth a:hover {
+    text-decoration: underline;
+}
+
+#auth p {
+    margin: 0;
+}
+
+@media screen and (max-width: 700px) {
+    #root {
+        min-width: 80%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #auth {
+        padding: 2% 10%;
+    }
 }
