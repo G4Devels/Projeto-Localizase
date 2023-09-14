@@ -1,31 +1,33 @@
 import "../../styles/registration_page.css";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
-import { Link, Navigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 
 export default function MainRegistration(){
 
-    const user = useState(null)
+    const redirect = useNavigate();
     
     const { createUserInEmailAndPassword } = useContext(AuthAccountsContext);
 
     async function createUser(eventObj){
-        eventObj.preventDefault()
-        const name = eventObj.target.elements.name.value
-        const email = eventObj.target.elements.email.value
-        const password = eventObj.target.elements.password.value
-        const password_2 = eventObj.target.elements.confirm_password.value
+        eventObj.preventDefault();
+        const name = eventObj.target.elements.name.value;
+        const email = eventObj.target.elements.email.value;
+        const password = eventObj.target.elements.password.value;
+        const password_2 = eventObj.target.elements.confirm_password.value;
 
         if(password === password_2){
-            createUserInEmailAndPassword(name, email, password, password_2)
+            const userCreated = createUserInEmailAndPassword(name, email, password, password_2);
+            if (!userCreated){
+                redirect('/');
+            };
         }else{
-            console.log("As senhas não correspondem")
-        }
-    }
-    if (!!user) {
-        console.log("não deu certo")
-        return(
+            console.log("As senhas não correspondem");
+        };
+    };
+    
+    return(
             <>
                 <div id="registration" onSubmit={createUser}>
                     <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
@@ -42,10 +44,5 @@ export default function MainRegistration(){
                     <Link to="/">Já possui conta? Fazer Login</Link>
                 </div>    
             </>
-        )
-    } else {
-        return (
-            <Navigate to="/" />
-        );
-    };
-}
+    );
+};
