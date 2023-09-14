@@ -1,4 +1,4 @@
-import "../../styles/registration_page.css";
+import "../../component_styles/registration_page.css";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
