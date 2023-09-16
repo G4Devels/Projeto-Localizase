@@ -60,3 +60,69 @@ Design                  | <img src="https://img.shields.io/badge/figma-0078D6?st
 2. Envie seus commits em português.
 3. Insira um pequeno resumo sobre o que foi adicionado.
 4. Solicite um pull request.
+
+
+### 🏢 *| Conheça nosso time de colaboradores*
+
+<table align="center">
+    <tr align="center">
+      <td>
+        <a href="https://github.com/Camilay3">
+          <img src="https://avatars.githubusercontent.com/u/92113919?v=4" width="100px;" alt="Camila Azevedo"/>
+          <br>
+          <sub>
+            <b>Camila Azevedo</b>
+          </sub>
+        </a>
+        <br>
+        <p><br>Designer<br>Front-End<br><br></p>
+      </td>
+      <br>
+      <td>
+        <a href="https://github.com/vivirnogueira">
+          <img src="https://avatars.githubusercontent.com/u/95643711?v=4" width="100px;" alt="Viviane Nogueira"/>
+          <br>
+          <sub>
+            <b>Viviane Nogueira</b>
+          </sub>
+        </a>
+        <br>
+        <p><br>Front-End<br><br><br></p>
+      </td>
+      <br>
+      <td>
+        <a href="https://github.com/nicolasscarvalho">
+          <img src="https://avatars.githubusercontent.com/u/98130635?v=4" width="100px;" alt="Nicolas Carvalho"/>
+          <br>
+          <sub>
+            <b>Nicolas Carvalho</b>
+          </sub>
+        </a>
+        <br>
+        <p><br>Dev<br>Back-End<br>Front-end</p>
+      </td>
+      <td>
+        <a href="https://github.com/Daniel-Anastacio">
+          <img src="https://avatars.githubusercontent.com/u/106440986?v=4" width="100px;" alt="Daniel Anastacio"/>
+          <br>
+          <sub>
+            <b>Daniel Anastacio</b>
+          </sub>
+        </a>
+        <br>
+        <p><br>Back-End<br><br><br></p>
+      </td>
+      <br>
+      <td>
+        <a href="https://github.com/Luiiz-Henrique">
+          <img src="https://avatars.githubusercontent.com/u/106769482?s=400&u=d5eb6ec88c087770213b1a0330e04892960ae5ee&v=4" width="100px;" alt="Luiz Henrique"/>
+          <br>
+          <sub>
+            <b>Luiz Henrique</b>
+          </sub>
+        </a>
+        <br>
+        <p><br>Back-End<br><br><br></p>
+      </td>
+    </tr>
+</table>
