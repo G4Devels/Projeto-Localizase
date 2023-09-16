@@ -6,8 +6,7 @@
 
 <div align="center">
   
-  ![Nome do projeto](./Nome_Localizase.png)
-  
+  <img src="./Nome_Localizase.png" width="270px">
 </div>
 
 ---
