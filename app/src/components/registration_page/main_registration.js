@@ -1,4 +1,4 @@
-import "../../component_styles/registration_page.css";
+import "../../component_styles/auth_page.css";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -25,8 +25,11 @@ export default function MainRegistration(){
     
     return(
             <>
-                <div id="registration" onSubmit={createUser}>
+                <div id="auth-container" onSubmit={createUser}>
                     <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
+                    
+                    <div id="auth">
+
                     <form>
                         <h1>Criar Conta</h1>
 
@@ -38,6 +41,8 @@ export default function MainRegistration(){
                         <button type="submit">Entrar</button>
                     </form>
                     <Link to="/">Já possui conta? Fazer Login</Link>
+
+                    </div>
                 </div>    
             </>
     );
