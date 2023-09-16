@@ -153,3 +153,52 @@ body {
         border: 2px solid var(--color07);
     }
 }
+
+/* VERSÃO MOBILE */
+@media screen and (max-width: 900px) {
+    #container {
+        max-width: 80%;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    #container {
+        max-width: 90%;
+    }
+
+    #container form .card label {
+        width: 80px;
+        height: 80px;
+        margin: 0 10px 15px 0;
+        border-radius: 10px;
+    }
+    
+    #container form .card label i, #container h1 {
+        font-size: 1.5em;
+    }
+
+    #container form .card label p {
+        font-size: 0.6em;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    #container {
+        padding: 30px 10px;
+    }
+
+    #container form .card label {
+        width: 60px;
+        height: 60px;
+        margin: 0 10px 15px 0;
+        border-radius: 8px;
+    }
+    
+    #container form .card label i, #container h1 {
+        font-size: 1.2em;
+    }
+
+    #container form .card label p {
+        font-size: 0.5em;
+    }
+}
