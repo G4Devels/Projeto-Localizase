@@ -7,7 +7,6 @@ const providerGoogle = new GoogleAuthProvider();
 
 export const AuthAccountsContext = createContext({})
 
-
 export const AuthAccountsProvider = ({ children }) => {
 
     const auth = getAuth(app);
@@ -87,12 +86,12 @@ export const AuthAccountsProvider = ({ children }) => {
     const createUserInEmailAndPassword = async (name, email, password, password_2) => {
         await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                const user = userCredential.user;
                 updateProfile(auth.currentUser, {
                     displayName: name
                 })
                 .then(() => {})
                 .catch((error) => {});
+                window.location.href = "/"
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -115,7 +114,7 @@ export const AuthAccountsProvider = ({ children }) => {
 
 
     return (
-        <AuthAccountsContext.Provider value={{ signInGoogle, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut }}>
+        <AuthAccountsContext.Provider value={{ signInGoogle, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut}}>
             {children}
         </AuthAccountsContext.Provider>
     )

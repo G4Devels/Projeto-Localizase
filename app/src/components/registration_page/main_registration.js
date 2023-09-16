@@ -1,12 +1,10 @@
 import "../../component_styles/registration_page.css";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 
 
 export default function MainRegistration(){
-
-    const redirect = useNavigate();
     
     const { createUserInEmailAndPassword } = useContext(AuthAccountsContext);
 
@@ -16,12 +14,10 @@ export default function MainRegistration(){
         const email = eventObj.target.elements.email.value;
         const password = eventObj.target.elements.password.value;
         const password_2 = eventObj.target.elements.confirm_password.value;
+        const tela = "/"
 
         if(password === password_2){
-            const userCreated = createUserInEmailAndPassword(name, email, password, password_2);
-            if (!userCreated){
-                redirect('/');
-            };
+            await createUserInEmailAndPassword(name, email, password, password_2);
         }else{
             console.log("As senhas não correspondem");
         };
