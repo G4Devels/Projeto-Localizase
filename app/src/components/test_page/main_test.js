@@ -1,11 +1,10 @@
 import "../../component_styles/test_page.css";
-import "https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
 
-export default function MainRegistration(){
+export const MainTest = () => {
 
     /* const redirect = useNavigate();
     
@@ -34,73 +33,126 @@ export default function MainRegistration(){
 
     return(
         <>
+            <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'></link>
             <div id="container" onSubmit={saveTest}>
                 <h1>Conte-nos seus interesses...</h1>
 
                 <form>
 
                     <div class="card orange">
+                        <input type="checkbox" name="interesse" id="Praia"></input>
                         <label for="Praia">
                             <p>Praia</p>
                             <i class="fi fi-rr-umbrella-beach"></i>
                         </label>
-                        <input type="checkbox" name="interesse" id="Praia"></input>
                     </div>
                     <div class="card green">
+                        <input type="checkbox" name="interesse" id="Balada"></input>
                         <label for="Balada">
                             <p>Balada</p>
                             <i class="fi fi-rr-cocktail"></i>
                         </label>
-                        <input type="checkbox" name="interesse" id="Balada"></input>
                     </div>
                     <div class="card pink">
+                        <input type="checkbox" name="interesse" id="Tour guiado"></input>
                         <label for="Tour guiado">
                             <p>Tour guiado</p>
                             <i class="fi fi-rr-navigation"></i>
                         </label>
-                        <input type="checkbox" name="interesse" id="Tour guiado"></input>
                     </div>
                     <div class="card yellow">
+                        <input type="checkbox" name="interesse" id="Pet friendly"></input>
                         <label for="Pet friendly">
                             <p>Pet friendly</p>
                             <i class="fi fi-rr-paw"></i>
                         </label>
-                        <input type="checkbox" name="interesse" id="Pet friendly"></input>
                     </div>
 
 
                     <div class="card orange">
-                        <label for="Praia">
+                        <input type="checkbox" name="interesse" id="Praia2"></input>
+                        <label for="Praia2">
                             <p>Praia</p>
                             <i class="fi fi-rr-umbrella-beach"></i>
                         </label>
-                        <input type="checkbox" name="interesse" id="Praia"></input>
                     </div>
                     <div class="card green">
-                        <label for="Balada">
+                        <input type="checkbox" name="interesse" id="Balada2"></input>
+                        <label for="Balada2">
                             <p>Balada</p>
                             <i class="fi fi-rr-cocktail"></i>
                         </label>
-                        <input type="checkbox" name="interesse" id="Balada"></input>
                     </div>
                     <div class="card pink">
-                        <label for="Tour guiado">
+                        <input type="checkbox" name="interesse" id="Tour guiado2"></input>
+                        <label for="Tour guiado2">
                             <p>Tour guiado</p>
                             <i class="fi fi-rr-navigation"></i>
                         </label>
-                        <input type="checkbox" name="interesse" id="Tour guiado"></input>
                     </div>
                     <div class="card yellow">
-                        <label for="Pet friendly">
+                        <input type="checkbox" name="interesse" id="Pet friendly2"></input>
+                        <label for="Pet friendly2">
                             <p>Pet friendly</p>
                             <i class="fi fi-rr-paw"></i>
                         </label>
-                        <input type="checkbox" name="interesse" id="Pet friendly"></input>
                     </div>
 
 
-                    <button type="submit">Confirmar</button>
+                    <div class="card orange">
+                        <input type="checkbox" name="interesse" id="Praia3"></input>
+                        <label for="Praia3">
+                            <p>Praia</p>
+                            <i class="fi fi-rr-umbrella-beach"></i>
+                        </label>
+                    </div>
+                    <div class="card green">
+                        <input type="checkbox" name="interesse" id="Balada3"></input>
+                        <label for="Balada3">
+                            <p>Balada</p>
+                            <i class="fi fi-rr-cocktail"></i>
+                        </label>
+                    </div>
+                    <div class="card pink">
+                        <input type="checkbox" name="interesse" id="Tour guiado3"></input>
+                        <label for="Tour guiado3">
+                            <p>Tour guiado</p>
+                            <i class="fi fi-rr-navigation"></i>
+                        </label>
+                    </div>
+                    <div class="card yellow">
+                        <input type="checkbox" name="interesse" id="Pet friendly3"></input>
+                        <label for="Pet friendly3">
+                            <p>Pet friendly</p>
+                            <i class="fi fi-rr-paw"></i>
+                        </label>
+                    </div>
+
+
+                    <div class="card orange">
+                        <input type="checkbox" name="interesse" id="Praia4"></input>
+                        <label for="Praia4">
+                            <p>Praia</p>
+                            <i class="fi fi-rr-umbrella-beach"></i>
+                        </label>
+                    </div>
+                    <div class="card green">
+                        <input type="checkbox" name="interesse" id="Balada4"></input>
+                        <label for="Balada4">
+                            <p>Balada</p>
+                            <i class="fi fi-rr-cocktail"></i>
+                        </label>
+                    </div>
+                    <div class="card pink">
+                        <input type="checkbox" name="interesse" id="Tour guiado4"></input>
+                        <label for="Tour guiado4">
+                            <p>Tour guiado</p>
+                            <i class="fi fi-rr-navigation"></i>
+                        </label>
+                    </div>
+
                 </form>
+                <button type="submit">Confirmar</button>
 
             </div>    
         </>
