@@ -1,10 +1,11 @@
 # Firebase Firestore
 
-### Localizase Locations
+### Dados principais
 
 ```
 {
     "locations" : Array<LocalData>
+    "users": Object<User>
 }
 ```
 
@@ -28,17 +29,16 @@ UID (Firebase Authentication) : {
 }
 ```
 
-## Dados do usuário
+## `User`
 
 ```
-UserData : {
-    UID (Authentication): String,
-    user_taste: Array<String>,
+UID (Firebase Authentication) : {
+    user_taste: Array<String>
 }
 ```
 
+## 
 
-
-# Authentication
+# Firebase Authentication
 
 Ainda em desenvolvimento...
