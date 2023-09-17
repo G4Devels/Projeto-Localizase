@@ -9,7 +9,7 @@ export const MainLogin = () => {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
-    const { signInGoogle, signInEmailAndPassword, signed } = useContext(AuthAccountsContext);
+    const { signInGoogle, signInEmailAndPassword, signed, auth } = useContext(AuthAccountsContext);
 
     async function handleLoginFromGoogle(eventObj){
         await signInGoogle();
@@ -19,8 +19,6 @@ export const MainLogin = () => {
         e.preventDefault();
         await signInEmailAndPassword(email, password);
     };
-    
-    
 
     if(!signed) {
         return (

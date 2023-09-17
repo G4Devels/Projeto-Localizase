@@ -5,10 +5,9 @@ import { AuthAccountsContext } from "../../contexts/authAccounts";
 export const MainHome = () => {
     const { signOut } = useContext(AuthAccountsContext);
 
-    const user = localStorage.getItem("@AuthFirebase:user");
+    const user = localStorage.getItem("@AuthFirebase:user")
     const userObject = JSON.parse(user);
-    const userName = userObject.displayName
-
+    const userName = userObject.displayName;
     
     return (
         <div>

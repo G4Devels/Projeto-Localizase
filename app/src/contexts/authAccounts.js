@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, browserSessionPersistence, createUserWithEmailAndPassword, getAuth, setPersistence, signInWithPopup, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, browserLocalPersistence, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, setPersistence, signInWithPopup, updateProfile } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../services/firebaseConfig";
 import { Navigate } from "react-router-dom";
@@ -50,38 +50,25 @@ export const AuthAccountsProvider = ({ children }) => {
 
 
 
-    const signInEmailAndPassword = (email, password) => {
-
-
-// setpersistence ainda não está dando certo, ele não está persistindo no site
-        setPersistence(auth, browserSessionPersistence)
-        .then(async () => {
-            return (
-
-                await signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    setUser(user);
-                    console.log(user)
-                    localStorage.setItem('@AuthFirebase.user', JSON.stringify(user))
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                })
-
-            );
+    const signInEmailAndPassword = async (email, password) => {
+        await signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            const token = user.accessToken
+            setUser(user);
+            localStorage.setItem("@AuthFirebase:token", token);
+            localStorage.setItem("@AuthFirebase:user", JSON.stringify(user))
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
         });
-
-    }
-
+    };
 
 
 
+
+    
 
     const createUserInEmailAndPassword = async (name, email, password, password_2) => {
         await createUserWithEmailAndPassword(auth, email, password)
@@ -114,7 +101,7 @@ export const AuthAccountsProvider = ({ children }) => {
 
 
     return (
-        <AuthAccountsContext.Provider value={{ signInGoogle, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut}}>
+        <AuthAccountsContext.Provider value={{ signInGoogle, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut, auth}}>
             {children}
         </AuthAccountsContext.Provider>
     )
