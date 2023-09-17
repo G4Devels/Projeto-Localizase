@@ -13,7 +13,7 @@ export const AuthAccountsProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const loadStorageAuth = () => {
+         const loadStorageAuth = async () => {
             const sessionToken = localStorage.getItem("@AuthFirebase:token");
             const sessionUser = localStorage.getItem("@AuthFirebase:user");
             if(sessionToken && sessionUser){
@@ -27,8 +27,8 @@ export const AuthAccountsProvider = ({ children }) => {
 
 
     
-    const signInGoogle = () => {
-        signInWithPopup(auth, providerGoogle)
+    const signInGoogle = async () => {
+        await signInWithPopup(auth, providerGoogle)
             .then((result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
@@ -55,10 +55,10 @@ export const AuthAccountsProvider = ({ children }) => {
 
 // setpersistence ainda não está dando certo, ele não está persistindo no site
         setPersistence(auth, browserSessionPersistence)
-        .then(() => {
+        .then(async () => {
             return (
 
-                signInWithEmailAndPassword(auth, email, password)
+                await signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
                     setUser(user);

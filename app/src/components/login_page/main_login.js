@@ -15,9 +15,9 @@ export const MainLogin = () => {
         await signInGoogle();
     };
 
-    function handleLoginFromEmailAndPassword(e) {
+    async function handleLoginFromEmailAndPassword(e) {
         e.preventDefault();
-        signInEmailAndPassword(email, password);
+        await signInEmailAndPassword(email, password);
     };
     
     

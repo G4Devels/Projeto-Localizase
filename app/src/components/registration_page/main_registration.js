@@ -14,7 +14,6 @@ export default function MainRegistration(){
         const email = eventObj.target.elements.email.value;
         const password = eventObj.target.elements.password.value;
         const password_2 = eventObj.target.elements.confirm_password.value;
-        const tela = "/"
 
         if(password === password_2){
             await createUserInEmailAndPassword(name, email, password, password_2);
