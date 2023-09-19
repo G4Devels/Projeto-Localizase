@@ -14,9 +14,9 @@
 ```
 {
     "name" : String,
-    "localization" : String,
-    "local_tastes" : Array<String>,
-    "description" : String,
+    "locations" : String,
+    "tags" : Array<String>,
+    "about" : String,
     "rating" : Object<UserRate>
 }
 ```
@@ -33,7 +33,7 @@ UID (Firebase Authentication) : {
 
 ```
 UID (Firebase Authentication) : {
-    user_taste: Array<String>
+    tags: Array<String>
 }
 ```
 
