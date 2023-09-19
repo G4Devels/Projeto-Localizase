@@ -1,5 +1,5 @@
 # Sobre
-Esta seção possui como foco documentar links relacionados às decisões de design front-end do projeto
+Esta seção possui como foco documentar links relacionados às decisões de design front-end e back-end do projeto
 
 # Protótipos
 - [Low-Fi/Wireframe](https://www.figma.com/file/hSGRIGsvYJB7YRw98KOA75/Localizase-Design?type=design&node-id=2-4&mode=design&t=R2KVYVLEBQjHtYnU-0)
