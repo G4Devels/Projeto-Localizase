@@ -67,8 +67,10 @@ export const AuthAccountsProvider = ({ children }) => {
                     localStorage.setItem('@AuthFirebase.user', JSON.stringify(user))
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
+                    const errorCode = error.code.toString();
+                    const errorMessage = error.message.toString();
+                    console.log("[",errorCode,"]", errorMessage);
+                    renderError(errorCode);
                 })
 
             );
@@ -95,8 +97,9 @@ export const AuthAccountsProvider = ({ children }) => {
                 .catch((error) => {});
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                const errorCode = error.code.toString();
+                const errorMessage = error.message.toString();
+                console.log("[",errorCode,"]", errorMessage);
              });
     };
         
@@ -111,6 +114,18 @@ export const AuthAccountsProvider = ({ children }) => {
     }
 
 
+
+    function renderError(errorCode){
+        if (errorCode === "auth/user-not-found"){
+            window.alert("Usuário não cadastrado no sistema");
+        }else if(errorCode === "auth/email-already-in-use"){
+            window.alert("Já existe um usuário com esse email");
+        }else if(errorCode === "auth/weak-password"){
+            window.alert("Digite uma senha com pelo menos 6 caracteres");
+        }else if(errorCode === "auth/wrong-password"){
+            window.alert("Senha incorreta");
+        };
+    }
 
 
 
