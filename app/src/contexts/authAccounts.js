@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, browserSessionPersistence, createUserWithEmailAndPassword, getAuth, setPersistence, signInWithPopup, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, browserLocalPersistence, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, setPersistence, signInWithPopup, updateProfile } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../services/firebaseConfig";
 import { Navigate } from "react-router-dom";
@@ -7,14 +7,13 @@ const providerGoogle = new GoogleAuthProvider();
 
 export const AuthAccountsContext = createContext({})
 
-
 export const AuthAccountsProvider = ({ children }) => {
 
     const auth = getAuth(app);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const loadStorageAuth = () => {
+         const loadStorageAuth = async () => {
             const sessionToken = localStorage.getItem("@AuthFirebase:token");
             const sessionUser = localStorage.getItem("@AuthFirebase:user");
             if(sessionToken && sessionUser){
@@ -28,8 +27,8 @@ export const AuthAccountsProvider = ({ children }) => {
 
 
     
-    const signInGoogle = () => {
-        signInWithPopup(auth, providerGoogle)
+    const signInGoogle = async () => {
+        await signInWithPopup(auth, providerGoogle)
             .then((result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
@@ -51,48 +50,35 @@ export const AuthAccountsProvider = ({ children }) => {
 
 
 
-    const signInEmailAndPassword = (email, password) => {
-
-
-// setpersistence ainda não está dando certo, ele não está persistindo no site
-        setPersistence(auth, browserSessionPersistence)
-        .then(() => {
-            return (
-
-                signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    setUser(user);
-                    console.log(user)
-                    localStorage.setItem('@AuthFirebase.user', JSON.stringify(user))
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                })
-
-            );
+    const signInEmailAndPassword = async (email, password) => {
+        await signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            const token = user.accessToken
+            setUser(user);
+            localStorage.setItem("@AuthFirebase:token", token);
+            localStorage.setItem("@AuthFirebase:user", JSON.stringify(user))
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
         });
-
-    }
-
+    };
 
 
 
+
+    
 
     const createUserInEmailAndPassword = async (name, email, password, password_2) => {
         await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                const user = userCredential.user;
                 updateProfile(auth.currentUser, {
                     displayName: name
                 })
                 .then(() => {})
                 .catch((error) => {});
+                window.location.href = "/"
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -115,7 +101,7 @@ export const AuthAccountsProvider = ({ children }) => {
 
 
     return (
-        <AuthAccountsContext.Provider value={{ signInGoogle, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut }}>
+        <AuthAccountsContext.Provider value={{ signInGoogle, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut, auth}}>
             {children}
         </AuthAccountsContext.Provider>
     )
