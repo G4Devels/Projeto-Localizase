@@ -47,7 +47,7 @@ header .nav {
 header .nav .a {
     margin: 5px 10px;
     background-color: var(--color02);
-    border: 2px solid var(--color03);
+    border: 2px solid var(--color01);
     cursor: pointer;
     color: var(--color01);
     padding: 5px 10px;

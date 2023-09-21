@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, browserLocalPersistence, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, setPersistence, signInWithPopup, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup, updateProfile } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../services/firebaseConfig";
 import { Navigate } from "react-router-dom";
@@ -78,7 +78,7 @@ export const AuthAccountsProvider = ({ children }) => {
                 })
                 .then(() => {})
                 .catch((error) => {});
-                window.location.href = "/"
+                window.location.href = "/login"
             })
             .catch((error) => {
                 const errorCode = error.code;

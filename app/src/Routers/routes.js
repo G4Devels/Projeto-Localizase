@@ -10,8 +10,8 @@ export const AppRoutes = () => {
     return (
     <BrowserRouter>
         <Routes>
-            <Route path="/landing" element={<MainLanding />} />
-            <Route path="/" element={<MainLogin />} />
+            <Route path="/" element={<MainLanding />} />
+            <Route path="/login" element={<MainLogin />} />
             <Route path="/registro" element={<MainRegistration />}/>
             <Route path="/home" element={<PrivateRoutes />}>
                 <Route path="/home" element={<MainHome />} />
