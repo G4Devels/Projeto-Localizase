@@ -1,31 +1,6 @@
 import "../../component_styles/test_page.css";
-import { AuthAccountsContext } from "../../contexts/authAccounts";
-import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-
 
 export const MainTest = () => {
-
-    /* const redirect = useNavigate();
-    
-    const { createUserInEmailAndPassword } = useContext(AuthAccountsContext);
-
-    async function createUser(eventObj){
-        eventObj.preventDefault();
-        const name = eventObj.target.elements.name.value;
-        const email = eventObj.target.elements.email.value;
-        const password = eventObj.target.elements.password.value;
-        const password_2 = eventObj.target.elements.confirm_password.value;
-
-        if(password === password_2){
-            const userCreated = createUserInEmailAndPassword(name, email, password, password_2);
-            if (!userCreated){
-                redirect('/');
-            };
-        }else{
-            console.log("As senhas não correspondem");
-        };
-    }; */
     
     async function saveTest(eventObj) {
         console.log('a')

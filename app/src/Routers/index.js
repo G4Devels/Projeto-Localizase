@@ -6,3 +6,7 @@ export const PrivateRoutes = () => {
     const {signed} = useContext(AuthAccountsContext);
     return signed ? <Outlet /> : <Navigate to="/" />;
 };
+
+export const testDone = () => {
+    
+};
