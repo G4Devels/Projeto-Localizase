@@ -1,4 +1,4 @@
-export const CardSection = () => {
+export const CardSection = (localList) => {
     return(
         <>
         </>
