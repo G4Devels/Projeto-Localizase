@@ -14,6 +14,7 @@ Consiste em um agrupamento de documentos firebase referente aos dados dos locais
 
 | Atributo    | Tipo   | Sobre |  
 | ------------| ------ | ----- |
+| img         | String | URL da imagem do local no Firebase Storage
 | name        | String | Nome do local.                       
 | about       | String | Pequena descrição atrativa do lugar. 
 | address     | String | Endereço do ambiente.      
