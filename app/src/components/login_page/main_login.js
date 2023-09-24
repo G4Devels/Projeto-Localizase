@@ -1,4 +1,5 @@
 import '../../component_styles/auth_page.css'
+
 import React, { useState, useContext } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { Navigate } from "react-router-dom";

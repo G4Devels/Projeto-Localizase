@@ -1,4 +1,5 @@
 import "../../component_styles/auth_page.css";
+
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
