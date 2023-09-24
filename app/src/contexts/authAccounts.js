@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, browserLocalPersistence, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, setPersistence, signInWithPopup, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup, updateProfile } from "firebase/auth";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "../services/firebaseConfig";
+import { app, db } from "../services/firebaseConfig";
 import { Navigate } from "react-router-dom";
 const providerGoogle = new GoogleAuthProvider();
 
@@ -85,6 +86,15 @@ export const AuthAccountsProvider = ({ children }) => {
                 const errorMessage = error.message;
              });
     };
+
+
+
+
+    const addUserInterests = async (lista) => {
+        await setDoc(doc(db, "users", auth.currentUser.uid), {
+            tags: lista
+        });
+    };
         
 
 
@@ -101,7 +111,7 @@ export const AuthAccountsProvider = ({ children }) => {
 
 
     return (
-        <AuthAccountsContext.Provider value={{ signInGoogle, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut, auth}}>
+        <AuthAccountsContext.Provider value={{ signInGoogle, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut, auth, addUserInterests}}>
             {children}
         </AuthAccountsContext.Provider>
     )
