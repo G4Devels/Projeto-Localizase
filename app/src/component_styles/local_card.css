@@ -41,7 +41,7 @@
     white-space: nowrap;
     overflow: hidden;
     
-    background: linear-gradient(to right, transparent, white);
+    /* background: linear-gradient(to right, transparent, white); */
 
     padding: 4px 0px;
 }
@@ -60,7 +60,7 @@
 
 .card_about {
     overflow: hidden;
-    background: linear-gradient(transparent, white);
+    /* background: linear-gradient(transparent, white); */
 }
 
 
