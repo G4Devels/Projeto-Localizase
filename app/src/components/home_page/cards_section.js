@@ -1,7 +1,7 @@
 import { LocalCard } from "./local_card";
 import '../../component_styles/cards_section.css';
 
-export const CardSection = ( {locations} ) => {
+export const CardsSection = ( {locations} ) => {
     return(
         
         <div className="cards_section">
