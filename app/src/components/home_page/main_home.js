@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { CardSection } from "./cards_section";
+import { MenuSection } from "./menu_section";
 
 
 export const MainHome = () => {
@@ -9,6 +10,12 @@ export const MainHome = () => {
     const user = localStorage.getItem("@AuthFirebase:user")
     const userObject = JSON.parse(user);
     const userName = userObject.displayName;
+
+    const [choice, setChoice] = useState(0);
+
+    useEffect(() => {
+        console.log(choice)
+    })
 
     const locations = [
         {
@@ -37,6 +44,6 @@ export const MainHome = () => {
     ] 
     
     return (
-        <CardSection locations={locations}/>
+        <MenuSection setChoice={setChoice}/>
     );
 };
