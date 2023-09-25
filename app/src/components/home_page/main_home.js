@@ -5,6 +5,7 @@ import { MenuSection } from "./menu_section";
 
 
 export const MainHome = () => {
+
     const { signOut } = useContext(AuthAccountsContext);
 
     const user = localStorage.getItem("@AuthFirebase:user")
@@ -12,10 +13,6 @@ export const MainHome = () => {
     const userName = userObject.displayName;
 
     const [choice, setChoice] = useState(0);
-
-    useEffect(() => {
-        console.log(choice)
-    })
 
     const locations = [
         {
@@ -43,7 +40,30 @@ export const MainHome = () => {
         },
     ] 
     
+
+    function analyseChoice (choice) {
+        if (choice == 0) {
+            return 'Recomendado'
+        }
+
+        else if (choice == 1) {
+            return 'Em alta'
+        }
+
+        else {
+            return 'Salvos'
+        }
+    }
+
+
     return (
-        <MenuSection setChoice={setChoice}/>
+        <>
+            <MenuSection setChoice={setChoice}/>
+
+            {
+                analyseChoice(choice)
+            }
+
+        </>
     );
 };
