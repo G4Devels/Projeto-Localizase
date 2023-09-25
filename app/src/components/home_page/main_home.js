@@ -37,14 +37,6 @@ export const MainHome = () => {
     ] 
     
     return (
-        <div>
-            <h1> Bem vindo {userName} </h1>
-            <button onClick={() => signOut()}>Logout</button>  
-
-            <hr />
-
-            <CardSection locations={locations}/>
-
-        </div>
+        <CardSection locations={locations}/>
     );
 };
