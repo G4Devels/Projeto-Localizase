@@ -5,6 +5,7 @@
   box-sizing: border-box;
   font-weight: 400;
   font-size: 14px;
+  transition-duration: 150ms;
 }
 
 h1 {
