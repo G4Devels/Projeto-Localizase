@@ -3,6 +3,9 @@ import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { CardsSection } from "./cards_section";
 import { MenuSection } from "./menu_section";
 
+import { db } from "../../services/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore"; 
+
 
 export const MainHome = () => {
 
@@ -10,7 +13,6 @@ export const MainHome = () => {
 
     const user = localStorage.getItem("@AuthFirebase:user")
     const userObject = JSON.parse(user);
-    const userName = userObject.displayName;
 
     const [choice, setChoice] = useState(0);
 
@@ -79,8 +81,23 @@ export const MainHome = () => {
         return emAlta
     }
 
+    function getSalvos (userUID) {
+        
+        const docRef = doc(db, "users", userUID);
+        let savedLocations = []
 
-    function getSalvos () {
+        getDoc(docRef)
+        .then( result => {
+
+                if (result.exists()) {
+                    savedLocations = result.data().saved;
+                } else {
+                    console.log("No such document!");
+                }
+            }
+        )
+        .catch(error => console.log(error))
+
         return salvos
     }
 
@@ -97,7 +114,7 @@ export const MainHome = () => {
         }
 
         else {
-            const receivedData = getSalvos()
+            const receivedData = getSalvos(userObject.uid)
             return <CardsSection locations={receivedData}/>
         }
     }
