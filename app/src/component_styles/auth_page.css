@@ -1,22 +1,4 @@
-body {
-    min-height: 94.7vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-image: url('../assets/login_background.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    background-color: rgba(1, 32, 52, 0.870);
-    color: white;
-}
-
-a {
-    color: white;
-}
+ 
 
 #root {
     min-width: 60%;
