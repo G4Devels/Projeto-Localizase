@@ -9,14 +9,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 export const MainHome = () => {
 
-    const { signOut } = useContext(AuthAccountsContext);
 
-    const user = localStorage.getItem("@AuthFirebase:user")
-    const userObject = JSON.parse(user);
-
-    const [choice, setChoice] = useState(0);
-
-    
     const recomendados = [
         {
             'about': 'O Centro Dragão do Mar de Arte e Cultura (CDMAC) é um centro cultural, um dos maiores do Brasil, localizado em Fortaleza, Ceará. São 30 mil metros quadrados de área dedicada à arte e à cultura, com atrações como o Museu da Cultura Cearense, o Museu de Arte Contemporânea do Ceará, Planetário Rubens de Azevedo, Teatro Dragão do Mar, Salas do Cinema do Dragão, Anfiteatro Sérgio Mota, Espaço Rogaciano Leite Filho, Biblioteca Leonilson, Auditório, Multigalerias e espaços para exposições itinerantes e a Praça Verde, que abriga mais de quatro mil pessoas e também grandes shows nacionais e internacionais.',
@@ -72,6 +65,43 @@ export const MainHome = () => {
     ]
 
 
+    const { signOut } = useContext(AuthAccountsContext);
+
+    const user = localStorage.getItem("@AuthFirebase:user")
+    const userObject = JSON.parse(user);
+
+    const [choice, setChoice] = useState(0);
+
+    const [locationsData, setLocationsData] = useState([])
+
+
+    useEffect(() => {
+        analyseChoice(choice)
+    }, [choice])
+
+
+    async function getDocData (collection, document) {
+        const docSavedLocationsRef = doc(db, collection, document);
+        const data = await getDoc(docSavedLocationsRef)
+        return data.data()
+    }
+
+
+    function analyseChoice (choice) {
+        if (choice == 0) {
+            getRecomendados()
+        }
+
+        else if (choice == 1) {
+            getEmAlta()
+        }
+
+        else {
+            getSalvos(userObject.uid)
+        }
+    }
+
+
     function getRecomendados () {
         return recomendados
     }
@@ -81,53 +111,43 @@ export const MainHome = () => {
         return emAlta
     }
 
-    function getSalvos (userUID) {
-        
-        const docRef = doc(db, "users", userUID);
-        let savedLocations = []
 
-        getDoc(docRef)
-        .then( result => {
+    async function getSalvos (userUID) {
 
-                if (result.exists()) {
-                    savedLocations = result.data().saved;
-                } else {
-                    console.log("No such document!");
-                }
-            }
-        )
+
+        const userDocument = await getDocData(`users`, userUID)
+
+        const savedDocumentReferencesObject = userDocument.saved
+        const savedDocumentReferencesObjectKeys = Object.keys(savedDocumentReferencesObject)
+
+        const locationsID = savedDocumentReferencesObjectKeys.map( (key, index) => {
+            const locationPath = savedDocumentReferencesObject[key]['_key']['path']['segments']
+            const locationID = locationPath[locationPath.length - 1]
+
+            return locationID
+        })
+
+        const locationsPromisses = locationsID.map((locationID, key) => {
+            return getDocData('locations', locationID)
+        })
+
+        Promise.all(locationsPromisses)
+        .then((locationsPromise)=>{
+
+            const loadedLocationsData = locationsPromise.map( result => result )
+            setLocationsData(loadedLocationsData)
+
+        })
         .catch(error => console.log(error))
 
-        return salvos
-    }
 
-
-    function analyseChoice (choice) {
-        if (choice == 0) {
-            const receivedData = getRecomendados()
-            return <CardsSection locations={receivedData}/>
-        }
-
-        else if (choice == 1) {
-            const receivedData = getEmAlta()
-            return <CardsSection locations={receivedData}/>
-        }
-
-        else {
-            const receivedData = getSalvos(userObject.uid)
-            return <CardsSection locations={receivedData}/>
-        }
     }
 
 
     return (
         <>
             <MenuSection setChoice={setChoice}/>
-
-            {
-                analyseChoice(choice)
-            }
-
+            <CardsSection locations={locationsData}/>
         </>
     );
 };
