@@ -1,7 +1,20 @@
- 
+body {
 
-#root {
-    min-width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url('../assets/login_background.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    background-color: rgba(1, 32, 52, 0.870);
+    color: white;
+}
+
+a {
+    color: white;
 }
 
 #auth-container {
@@ -10,7 +23,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
 }
 
 #auth {
@@ -86,14 +98,21 @@ button:hover {
     margin: 0;
 }
 
-@media screen and (max-width: 700px) {
-    #root {
-        min-width: 80%;
+
+@media (min-width: 360px) {
+    #auth-container {
+        width: 300px;
     }
 }
 
-@media screen and (max-width: 500px) {
-    #auth {
-        padding: 2% 10%;
+@media (min-width: 660px) { 
+    #auth-container {
+        width: 400px;
+    }
+}
+
+@media (min-width: 860px) { 
+    #auth-container {
+        width: 500px;
     }
 }
