@@ -25,7 +25,7 @@ export const MainLogin = () => {
         return (
                 <>
 
-                    <div id="auth-container">
+                    <div class="auth-container">
                         <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
 
 

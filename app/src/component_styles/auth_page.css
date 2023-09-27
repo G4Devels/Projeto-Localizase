@@ -1,5 +1,4 @@
 body {
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,7 +16,7 @@ a {
     color: white;
 }
 
-#auth-container {
+.auth-container {
     display: flex;
     
     flex-direction: column;
@@ -100,19 +99,19 @@ button:hover {
 
 
 @media (min-width: 360px) {
-    #auth-container {
+    .auth-container {
         width: 300px;
     }
 }
 
 @media (min-width: 660px) { 
-    #auth-container {
+    .auth-container {
         width: 400px;
     }
 }
 
 @media (min-width: 860px) { 
-    #auth-container {
+    .auth-container {
         width: 500px;
     }
 }
