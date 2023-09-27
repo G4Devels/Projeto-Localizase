@@ -3,6 +3,8 @@ import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { CardsSection } from "./cards_section";
 import { MenuSection } from "./menu_section";
 
+import '../../component_styles/main_home.css'
+
 import { db } from "../../services/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore"; 
 
@@ -145,9 +147,9 @@ export const MainHome = () => {
 
 
     return (
-        <>
+        <div className="home">
             <MenuSection setChoice={setChoice}/>
             <CardsSection locations={locationsData}/>
-        </>
+        </div>
     );
 };
