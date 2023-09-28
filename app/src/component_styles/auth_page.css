@@ -16,39 +16,31 @@
     height: 100vh;
 }
 
-a {
-    color: white;
-}
-
 .auth-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     color: white;
 }
 
-<<<<<<< HEAD
-#errorHandling {
+#insertErrorHandling {
     margin: 8px;
     background-color: rgb(146, 5, 5);
     padding: 5px;
     border-radius: 5px;
     border: 3px solid rgb(73, 2, 2);
-}
-.messageErro{
     font-size: 14px;
+    display: none;
 }
 
-#auth {
-=======
+
 .auth-container a {
     color: white;
+    margin: 15px 0;
 }
 
 .auth {
->>>>>>> 8ef353c353065027219716f3d619e6a6ef6e5960
     margin-top: 35px;
     min-height: 60vh;
     text-align: center;
@@ -71,7 +63,6 @@ a {
 .auth form {
     width: 100%;
     flex-grow: 0.25;
-
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -103,7 +94,7 @@ a {
     width: 100%;
     padding: 8px;
     border: none;
-    margin: 15px 0;
+    margin-top: 15px;
     cursor: pointer;
 }
 
@@ -118,7 +109,8 @@ button:hover {
 }
 
 .auth p {
-    margin: 0;
+    font-size: 14px;
+    margin: 15px 0;
 }
 
 

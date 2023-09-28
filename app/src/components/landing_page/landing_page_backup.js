@@ -7,24 +7,16 @@ export const MainLanding = () => {
 
     const { signed } = useContext(AuthAccountsContext);
 
-    if(!signed){
-        return (
-            <body id='bodyLandingPage'>
-                <header>
-                    <div class="nav">
-                        <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
-                        <Link class="a" to="/login">Entrar</Link>
-                    </div>
-                </header>
-            </body>
+    return (
+        <div id='bodyLandingPage'>
+            <header>
+                <div class="nav">
+                    <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
+                    <Link class="a" to="/login">Entrar</Link>
+                </div>
+            </header>
+        </div>
     );
-    } else {
-        return (
-            <Navigate to="/home"/>
-        );
-    }
-
-    
 };
 
 export default MainLanding;

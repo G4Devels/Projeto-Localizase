@@ -22,18 +22,18 @@ export const MainLogin = () => {
 
     return (
         <>
-            <body id='bodyAuth'>
+            <div id='bodyAuth'>
 
                 <div class="auth-container">
                     <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
 
 
-                        <div className="auth">
-                    
-                            <form onSubmit={ handleLoginFromEmailAndPassword }>
-                                <h1>Login</h1>
+                    <div className="auth">
+                
+                        <form onSubmit={ handleLoginFromEmailAndPassword }>
+                            <h1>Login</h1>
 
-                            <div id='insertErrorHandling'> {} </div>
+                            <div id='insertErrorHandling'></div>
 
                             <input name="email" type="email" 
                             onChange={(e) => setEmail(e.target.value)}
@@ -58,7 +58,7 @@ export const MainLogin = () => {
                 
                 </div>
 
-            </body>
+            </div>
 
                 
 

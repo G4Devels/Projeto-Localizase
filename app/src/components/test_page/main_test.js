@@ -91,7 +91,7 @@ export const MainTest = () => {
 
     return(
         <>
-            <body id="bodyTest">
+            <div id="bodyTest">
 
                 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'></link>
                 <div id="container" onSubmit={saveTest}>
@@ -106,7 +106,7 @@ export const MainTest = () => {
 
                 </div> 
 
-            </body>
+            </div>
                
         </>
     );

@@ -19,13 +19,15 @@ export default function MainRegistration(){
         if(password === password_2){
             await createUserInEmailAndPassword(name, email, password, password_2);
         }else{
-            alert("As senhas não correspondem");
+            const insertErrorHandling = document.getElementById('insertErrorHandling');
+            insertErrorHandling.textContent = 'As senhas não correspondem';
+            insertErrorHandling.style.display = "block"
         };
     };
     
     return(
         <>
-            <body id="bodyAuth">
+            <div id="bodyAuth">
 
                 <div className="auth-container" onSubmit={createUser}>
                     <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
@@ -35,7 +37,7 @@ export default function MainRegistration(){
                     <form>
                         <h1>Criar Conta</h1>
 
-                        <div id='insertErrorHandling'> {} </div>
+                        <div id='insertErrorHandling'></div>
 
                         <input name="name" type="text" placeholder="Digite seu nome" required></input>
                         <input name="email" type="email" placeholder="Digite seu e-mail" required></input>
@@ -49,7 +51,7 @@ export default function MainRegistration(){
                     </div>
                 </div>
 
-            </body>
+            </div>
                 
         </>
     );
