@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
 
+    background-color: rgba(1, 32, 52, 0.870);
     background-image: url('../assets/login_background.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -21,12 +22,14 @@ a {
 
 .auth-container {
     display: flex;
-    
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    color: white;
 }
 
+<<<<<<< HEAD
 #errorHandling {
     margin: 8px;
     background-color: rgb(146, 5, 5);
@@ -39,6 +42,13 @@ a {
 }
 
 #auth {
+=======
+.auth-container a {
+    color: white;
+}
+
+.auth {
+>>>>>>> 8ef353c353065027219716f3d619e6a6ef6e5960
     margin-top: 35px;
     min-height: 60vh;
     text-align: center;
@@ -54,11 +64,11 @@ a {
     width: 100%;
 }
 
-#auth hr {
+.auth hr {
     width: 100%;
 }
 
-#auth form {
+.auth form {
     width: 100%;
     flex-grow: 0.25;
 
@@ -68,7 +78,7 @@ a {
 }
     
 
-#auth form input {
+.auth form input {
     background: none;
     border: 1px solid white;
     border-radius: 5px;
@@ -88,7 +98,7 @@ a {
     margin-left: 10px;
 }
 
-#auth form button {
+.auth form button {
     border-radius: 5px;
     width: 100%;
     padding: 8px;
@@ -103,11 +113,11 @@ button:hover {
     color: white;
 }
 
-#auth a:hover {
+.auth a:hover {
     text-decoration: underline;
 }
 
-#auth p {
+.auth p {
     margin: 0;
 }
 

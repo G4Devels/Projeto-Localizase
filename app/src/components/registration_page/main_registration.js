@@ -30,7 +30,7 @@ export default function MainRegistration(){
                 <div className="auth-container" onSubmit={createUser}>
                     <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
                     
-                    <div id="auth">
+                    <div className="auth">
 
                     <form>
                         <h1>Criar Conta</h1>
