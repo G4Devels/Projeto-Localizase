@@ -6,23 +6,26 @@ header {
     top: 0;
     left: 0;
     
-    background-image: url('../assets/jardim-japones.jpg');
+    background-image: url('../assets/landing_page_header_background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-position: bottom;
     background-size: cover;
 }
 
-header .nav {
+header .header-nav {
     background: linear-gradient(180deg, #012034 0%, rgba(1, 32, 52, 0.49) 30.73%, rgba(1, 32, 52, 0.00) 91.15%);
+    
     display: flex;
     flex-direction: row;
-    height: 15vh;
     justify-content: space-between;
     align-items: center;
+
+    height: 15vh;
     padding: 20px;
 }
 
-header .nav .a {
+header .header-nav a {
     margin: 5px 10px;
     background-color: var(--color02);
     border: 2px solid var(--color01);
@@ -32,7 +35,7 @@ header .nav .a {
     border-radius: 8px;
 }
 
-header .nav .a:hover {
+header .header-nav a:hover {
     margin: 5px 10px;
     color: var(--color02);
     background-color: var(--color01);
