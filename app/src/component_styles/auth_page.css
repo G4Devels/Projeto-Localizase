@@ -27,6 +27,17 @@ a {
     align-items: center;
 }
 
+#errorHandling {
+    margin: 8px;
+    background-color: rgb(146, 5, 5);
+    padding: 5px;
+    border-radius: 5px;
+    border: 3px solid rgb(73, 2, 2);
+}
+.messageErro{
+    font-size: 14px;
+}
+
 #auth {
     margin-top: 35px;
     min-height: 60vh;

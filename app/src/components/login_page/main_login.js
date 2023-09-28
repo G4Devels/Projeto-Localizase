@@ -33,6 +33,8 @@ export const MainLogin = () => {
                         <form onSubmit={ handleLoginFromEmailAndPassword }>
                             <h1>Login</h1>
 
+                            <div id='insertErrorHandling'> {} </div>
+
                             <input name="email" type="email" 
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Digite seu e-mail" required></input>

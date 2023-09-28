@@ -35,6 +35,8 @@ export default function MainRegistration(){
                     <form>
                         <h1>Criar Conta</h1>
 
+                        <div id='insertErrorHandling'> {} </div>
+
                         <input name="name" type="text" placeholder="Digite seu nome" required></input>
                         <input name="email" type="email" placeholder="Digite seu e-mail" required></input>
                         <input name="password" type="password" placeholder="Digite sua senha" required></input>

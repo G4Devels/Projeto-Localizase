@@ -145,12 +145,35 @@ export const AuthAccountsProvider = ({ children }) => {
     function renderError(errorCode){
         if (errorCode === "auth/user-not-found"){
             window.alert("Usuário não cadastrado no sistema");
+            return (
+                <div id="errorHandling">
+                    <p class="messageErro"> Usuário não cadastrado no sistema </p>
+                </div>
+            )
+            
         }else if(errorCode === "auth/email-already-in-use"){
             window.alert("Já existe um usuário com esse email");
+            return (
+                <div id="errorHandling">
+                    <p class="messageErro"> Já existe um usuário com esse email </p>
+                </div>
+            )
+
         }else if(errorCode === "auth/weak-password"){
             window.alert("Digite uma senha com pelo menos 6 caracteres");
+            return (
+                <div id="errorHandling">
+                    <p class="messageErro"> Digite uma senha com pelo menos 6 caracteres </p>
+                </div>
+            )
+
         }else if(errorCode === "auth/wrong-password"){
-            window.alert("Senha incorreta");
+           window.alert("Senha incorreta");
+           return (
+                <div id="errorHandling">
+                    <p class="messageErro"> Senha incorreta </p>
+                </div>
+            )
         };
     }
 
