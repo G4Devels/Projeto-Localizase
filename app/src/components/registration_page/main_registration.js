@@ -19,7 +19,7 @@ export default function MainRegistration(){
         if(password === password_2){
             await createUserInEmailAndPassword(name, email, password, password_2);
         }else{
-            console.log("As senhas não correspondem");
+            alert("As senhas não correspondem");
         };
     };
     
