@@ -110,6 +110,7 @@ export const AuthAccountsProvider = ({ children }) => {
                 const errorCode = error.code.toString();
                 const errorMessage = error.message.toString();
                 console.log("[",errorCode,"]", errorMessage);
+                renderError(errorCode);
              });
     };
 
