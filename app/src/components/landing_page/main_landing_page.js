@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import { AuthAccountsContext } from '../../contexts/authAccounts';
 
 import '../../component_styles/landing_page.css'
+import { MainFooter } from "../footer/main_footer";
 
 export const MainLanding = () => {
 
@@ -13,7 +14,7 @@ export const MainLanding = () => {
             <>
 
                 <header>
-                    <nav class="nav">
+                    <nav class="header-nav">
                         <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
                         <Link class="a" to="/login">Entrar</Link>
                     </nav>
@@ -51,12 +52,7 @@ export const MainLanding = () => {
                     </div>
                 </div>
 
-
-                <footer>
-                    <p>© G4Devels</p>
-                    <p>g4devels@gmail.com</p>
-                </footer>
-                
+                <MainFooter />                
 
             </>
     );
