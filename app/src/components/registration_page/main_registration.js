@@ -22,36 +22,28 @@ export default function MainRegistration(){
             console.log("As senhas não correspondem");
         };
     };
-
-    if(!signed){
-        return(
-            <>
-                <div className="auth-container" onSubmit={createUser}>
-                    <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
-                    
-                    <div id="auth">
-
-                    <form>
-                        <h1>Criar Conta</h1>
-
-                        <input name="name" type="text" placeholder="Digite seu nome" required></input>
-                        <input name="email" type="email" placeholder="Digite seu e-mail" required></input>
-                        <input name="password" type="password" placeholder="Digite sua senha" required></input>
-                        <input name="confirm_password" type="password" placeholder="Confirme sua senha" required></input>
-
-                        <button type="submit">Entrar</button>
-                    </form>
-                    <Link to="/login">Já possui conta? Fazer Login</Link>
-
-                    </div>
-                </div>    
-            </>
-        );
-    } else {
-        return (
-            <Navigate to="/home" />
-        );
-    }
     
-    
+    return(
+        <>
+            <div className="auth-container" onSubmit={createUser}>
+                <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
+                
+                <div id="auth">
+
+                <form>
+                    <h1>Criar Conta</h1>
+
+                    <input name="name" type="text" placeholder="Digite seu nome" required></input>
+                    <input name="email" type="email" placeholder="Digite seu e-mail" required></input>
+                    <input name="password" type="password" placeholder="Digite sua senha" required></input>
+                    <input name="confirm_password" type="password" placeholder="Confirme sua senha" required></input>
+
+                    <button type="submit">Entrar</button>
+                </form>
+                <Link to="/login">Já possui conta? Fazer Login</Link>
+
+                </div>
+            </div>    
+        </>
+    );
 };

@@ -152,4 +152,5 @@ export const MainHome = () => {
             <CardsSection locations={locationsData}/>
         </div>
     );
+    
 };
