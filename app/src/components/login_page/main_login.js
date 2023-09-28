@@ -29,7 +29,7 @@ export const MainLogin = () => {
                         <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
 
 
-                        <div id="auth">
+                        <div className="auth">
                     
                             <form onSubmit={ handleLoginFromEmailAndPassword }>
                                 <h1>Login</h1>
