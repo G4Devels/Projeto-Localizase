@@ -13,7 +13,7 @@ export const MainLanding = () => {
         return (
             <>
 
-                <header>
+                <header class='landing_page_header'>
                     <nav class="header-nav">
                         <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
                         <Link class="a" to="/login">Entrar</Link>
