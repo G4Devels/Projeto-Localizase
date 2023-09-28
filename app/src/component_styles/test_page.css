@@ -30,7 +30,7 @@ body {
     max-height: 80vh;
     margin: auto;
     color: var(--color00);
-    text-align: left;
+    text-align: center;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -200,5 +200,6 @@ body {
 
     #container form .card label p {
         font-size: 0.5em;
+        margin-bottom: 5px;
     }
 }
