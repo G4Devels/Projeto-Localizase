@@ -4,7 +4,7 @@ import { MainHome } from "../components/home_page/main_home";
 import { MainLogin } from "../components/login_page/main_login";
 import { MainTest } from "../components/test_page/main_test";
 import MainRegistration from "../components/registration_page/main_registration";
-import { MainLanding } from "../components/landing_page/main_landing";
+import { MainLanding } from "../components/landing_page/main_landing_page";
 
 
 export const AppRoutes = () => {
