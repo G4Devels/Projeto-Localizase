@@ -98,7 +98,7 @@
     cursor: pointer;
 }
 
-button:hover {
+.auth-container :hover {
     background-color: #ffffff33;
     outline: 2px solid white;
     color: white;
