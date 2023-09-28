@@ -1,4 +1,5 @@
 import '../../component_styles/auth_page.css'
+
 import React, { useState, useContext } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { Navigate } from "react-router-dom";
@@ -24,7 +25,7 @@ export const MainLogin = () => {
         return (
                 <>
 
-                    <div id="auth-container">
+                    <div class="auth-container">
                         <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
 
 

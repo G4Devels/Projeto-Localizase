@@ -1,4 +1,5 @@
 import "../../component_styles/auth_page.css";
+
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { Link, Navigate } from "react-router-dom";
 import { useContext } from "react";
@@ -25,7 +26,7 @@ export default function MainRegistration(){
     if(!signed){
         return(
             <>
-                <div id="auth-container" onSubmit={createUser}>
+                <div className="auth-container" onSubmit={createUser}>
                     <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
                     
                     <div id="auth">

@@ -1,0 +1,13 @@
+.cards_section {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 20px;
+
+}
+
+.card {
+    margin-bottom: 20px;
+}
