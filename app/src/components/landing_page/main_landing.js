@@ -9,12 +9,14 @@ export const MainLanding = () => {
 
     if(!signed){
         return (
-        <header>
-            <div class="nav">
-                <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
-                <Link class="a" to="/login">Entrar</Link>
-            </div>
-        </header>
+            <body id='bodyLandingPage'>
+                <header>
+                    <div class="nav">
+                        <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
+                        <Link class="a" to="/login">Entrar</Link>
+                    </div>
+                </header>
+            </body>
     );
     } else {
         return (

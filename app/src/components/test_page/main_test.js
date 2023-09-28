@@ -91,18 +91,23 @@ export const MainTest = () => {
 
     return(
         <>
-            <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'></link>
-            <div id="container" onSubmit={saveTest}>
-                <h1>Conte-nos seus interesses...</h1>
+            <body id="bodyTest">
 
-                <form id="form">
+                <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'></link>
+                <div id="container" onSubmit={saveTest}>
+                    <h1>Conte-nos seus interesses...</h1>
 
-                    {renderedElements}
+                    <form id="form">
 
-                </form>
-                <button className="confirm" type="submit" onClick={confirmButton}>Confirmar</button>
+                        {renderedElements}
 
-            </div>    
+                    </form>
+                    <button className="confirm" type="submit" onClick={confirmButton}>Confirmar</button>
+
+                </div> 
+
+            </body>
+               
         </>
     );
 };
