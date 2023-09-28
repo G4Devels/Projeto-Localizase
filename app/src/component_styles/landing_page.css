@@ -1,0 +1,62 @@
+:root {
+    --color00: #000;
+    --color01: #fff;
+    --color02: #012034;
+    --color03: #d9c856;
+    --color04: #ed08df;
+    --color05: #6cf15a;
+    --color06: #0166f8;
+    --color07: #ff7e00;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+header {
+    width: 100%;
+    height: 60vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('../assets/jardim-japones.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+header .nav {
+    background: linear-gradient(180deg, #012034 0%, rgba(1, 32, 52, 0.49) 30.73%, rgba(1, 32, 52, 0.00) 91.15%);
+    display: flex;
+    flex-direction: row;
+    height: 15vh;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+header .nav .a {
+    margin: 5px 10px;
+    background-color: var(--color02);
+    border: 2px solid var(--color01);
+    cursor: pointer;
+    color: var(--color01);
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+header .nav .a:hover {
+    margin: 5px 10px;
+    color: var(--color02);
+    background-color: var(--color01);
+    border: 2px solid var(--color02);
+}

@@ -4,5 +4,5 @@ import { Navigate, Outlet } from "react-router-dom";
 
 export const PrivateRoutes = () => {
     const {signed} = useContext(AuthAccountsContext);
-    return signed ? <Outlet /> : <Navigate to="/" />;
+    return signed ? <Outlet /> : <Navigate to="/login" />;
 };
