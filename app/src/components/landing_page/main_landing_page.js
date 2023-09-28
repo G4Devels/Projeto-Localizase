@@ -27,7 +27,7 @@ export const MainLanding = () => {
                             <p>Aqui você acha locais variados em Fortaleza para você explorar a cidade da melhor forma possível.</p>
                         </section>
 
-                        <img src={require('./imgs/image_1.png')} alt='Imagem de demonstração'></img>
+                        <img src={require('../../assets/landing_image_1.png')} alt='Imagem de demonstração'></img>
                     </div>
 
 
@@ -37,7 +37,7 @@ export const MainLanding = () => {
                             <p>Aqui você acha locais variados em Fortaleza para você explorar a cidade da melhor forma possível.</p>
                         </section>
 
-                        <img src={require('./imgs/image_2.png')} alt='Imagem de demonstração'></img>
+                        <img src={require('../../assets/landing_image_2.png')} alt='Imagem de demonstração'></img>
                     </div>
 
 
@@ -47,7 +47,7 @@ export const MainLanding = () => {
                             <p>Aqui você acha locais variados em Fortaleza para você explorar a cidade da melhor forma possível.</p>
                         </section>
 
-                        <img src={require('./imgs/image_3.png')} alt='Imagem de demonstração'></img>
+                        <img src={require('../../assets/landing_image_3.png')} alt='Imagem de demonstração'></img>
                     </div>
                 </div>
 
