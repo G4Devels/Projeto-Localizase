@@ -3,7 +3,7 @@ import { PrivateRoutes } from ".";
 import { MainHome } from "../components/home_page/main_home";
 import { MainLogin } from "../components/login_page/main_login";
 import MainRegistration from "../components/registration_page/main_registration";
-import { MainNavbar } from "../components/navbar/main_navbar";
+import { MainNavbar } from "../components/protected_header/protected_header";
 
 
 export const AppRoutes = () => {

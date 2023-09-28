@@ -2,7 +2,7 @@ import { Link, Navigate } from "react-router-dom";
 import React, { useContext } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 
-import '../../component_styles/navbar.css';
+import '../../component_styles/protected_header.css';
 
 export const MainNavbar = () => {
 
