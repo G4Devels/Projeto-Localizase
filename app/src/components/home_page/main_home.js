@@ -7,6 +7,8 @@ import '../../component_styles/main_home.css'
 
 import { db } from "../../services/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore"; 
+import { MainFooter } from "../footer/main_footer";
+import { MainNavbar } from "../protected_header/protected_header";
 
 
 export const MainHome = () => {
@@ -85,8 +87,11 @@ export const MainHome = () => {
     async function getDocData (collection, document) {
         const docSavedLocationsRef = doc(db, collection, document);
         const data = await getDoc(docSavedLocationsRef)
+        console.log(data.data())
         return data.data()
     }
+    getDocData("users", userObject.uid)
+
 
 
     function analyseChoice (choice) {
@@ -118,7 +123,7 @@ export const MainHome = () => {
 
 
         const userDocument = await getDocData(`users`, userUID)
-
+        console.log(userDocument)
         const savedDocumentReferencesObject = userDocument.saved
         const savedDocumentReferencesObjectKeys = Object.keys(savedDocumentReferencesObject)
 
@@ -147,10 +152,19 @@ export const MainHome = () => {
 
 
     return (
-        <div className="home">
-            <MenuSection setChoice={setChoice}/>
-            <CardsSection locations={locationsData}/>
-        </div>
+        <>
+            <header>
+                <MainNavbar />
+            </header>
+            <div className="home">
+                <MenuSection setChoice={setChoice}/>
+                <CardsSection locations={locationsData}/>
+            </div> 
+            
+            <div className="footerHome">
+                <MainFooter />
+            </div>
+            
+        </>
     );
-    
 };

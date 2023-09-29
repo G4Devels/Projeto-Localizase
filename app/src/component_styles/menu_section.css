@@ -1,13 +1,13 @@
 .menu_section {
     display: flex;
     justify-content: space-around;
+    margin-top: 15px;
 }
 
 
 .input_container {
     position: relative;
-
-    width: 88px;
+    width: 92px;
     height: 30px;
 }
 

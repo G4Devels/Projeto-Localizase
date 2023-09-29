@@ -137,7 +137,7 @@ export const AuthAccountsProvider = ({ children }) => {
     async function signOut() {
         localStorage.clear();
         setUser(null);
-        window.location.href = "/login";
+        window.location.href = "/";
     }
 
 
