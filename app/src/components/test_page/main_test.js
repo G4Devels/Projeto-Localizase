@@ -62,7 +62,7 @@ export const MainTest = () => {
         const collectionTags = await getDocs(collection(db, "tags"));
 
         let number = 0
-        const listColors = ["card orange", "card green", "card pink", "card yellow"]
+        const listColors = ["cardT orange", "cardT green", "cardT pink", "cardT yellow"]
 
         const elements = collectionTags.docs.map((Tag, index) => {
 

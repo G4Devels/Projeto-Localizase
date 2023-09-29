@@ -37,7 +37,7 @@ export const LocalCard = ( {cardData} ) => {
 
                 <section className='card_main_data'>
                     <h2>{cardData.name}</h2>
-                    <p>{cardData.address}</p>
+                    <p className='pLocalCard'>{cardData.address}</p>
                 </section>
                 
                 <section className='card_tags'>

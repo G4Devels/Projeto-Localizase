@@ -86,7 +86,7 @@
         font-size: 0.6em;
     }
 
-    span, p {
+    span, .pLocalCard {
         font-size: 0.4em ;
     }
 
@@ -113,7 +113,7 @@
         font-size: 0.7em;
     }
 
-    span, p {
+    span, .pLocalCard {
         font-size: 0.6em ;
     }
 
@@ -140,7 +140,7 @@
         font-size: 1em;
     }
 
-    span, p {
+    span, .pLocalCard {
         font-size: 0.8em ;
     }
 
