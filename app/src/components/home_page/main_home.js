@@ -150,7 +150,6 @@ export const MainHome = () => {
         <div className="home">
             <MenuSection setChoice={setChoice}/>
             <CardsSection locations={locationsData}/>
-            <button onClick={signOut}> logout </button>
         </div>
     );
     

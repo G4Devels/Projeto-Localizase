@@ -5,6 +5,7 @@ import { MainLogin } from "../components/login_page/main_login";
 import { MainTest } from "../components/test_page/main_test";
 import MainRegistration from "../components/registration_page/main_registration";
 import { MainLanding } from "../components/landing_page/main_landing_page";
+import { MainNavbar } from "../components/protected_header/protected_header";
 
 
 export const AppRoutes = () => {
