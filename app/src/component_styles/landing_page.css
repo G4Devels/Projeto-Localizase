@@ -59,5 +59,22 @@ header .header-nav a:hover {
     flex-direction: column;
     justify-content: center;
 
-    padding: 20px;
+    margin: 20px;
+    padding: 5px;
+
+    border-width: 0px 9px 9px 0px;
+    border-style: solid;
+    border-radius: 20px;
+}
+
+.about-container #about-container-card-1 {
+    border-color: var(--color06);
+}
+
+.about-container #about-container-card-2 {
+    border-color: var(--color03);
+}
+
+.about-container #about-container-card-3 {
+    border-color: var(--color07);
 }
