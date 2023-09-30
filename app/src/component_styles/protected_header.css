@@ -1,0 +1,20 @@
+.protected-header {
+    width: 100%;
+    background-color: var(--color06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.protected-header button{
+    width: 4.5em;
+    height: 2em;
+    margin: 5px 10px;
+    background-color: var(--color02);
+    border: 2px solid var(--color01);
+    cursor: pointer;
+    color: var(--color01);
+    padding: 5px 10px;
+    border-radius: 8px;
+}

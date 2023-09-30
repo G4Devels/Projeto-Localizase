@@ -1,0 +1,11 @@
+.home {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.footerHome{
+    position: absolute;
+    bottom: 0;
+    min-width: 100%
+}

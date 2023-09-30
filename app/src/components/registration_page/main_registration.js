@@ -1,12 +1,13 @@
 import "../../component_styles/auth_page.css";
+
 import { AuthAccountsContext } from "../../contexts/authAccounts";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useContext } from "react";
 
 
 export default function MainRegistration(){
     
-    const { createUserInEmailAndPassword } = useContext(AuthAccountsContext);
+    const { createUserInEmailAndPassword, signed } = useContext(AuthAccountsContext);
 
     async function createUser(eventObj){
         eventObj.preventDefault();
@@ -18,19 +19,25 @@ export default function MainRegistration(){
         if(password === password_2){
             await createUserInEmailAndPassword(name, email, password, password_2);
         }else{
-            console.log("As senhas não correspondem");
+            const insertErrorHandling = document.getElementById('insertErrorHandling');
+            insertErrorHandling.textContent = 'As senhas não correspondem';
+            insertErrorHandling.style.display = "block"
         };
     };
     
     return(
-            <>
-                <div id="auth-container" onSubmit={createUser}>
+        <>
+            <div id="bodyAuth">
+
+                <div className="auth-container" onSubmit={createUser}>
                     <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
                     
-                    <div id="auth">
+                    <div className="auth">
 
                     <form>
                         <h1>Criar Conta</h1>
+
+                        <div id='insertErrorHandling'></div>
 
                         <input name="name" type="text" placeholder="Digite seu nome" required></input>
                         <input name="email" type="email" placeholder="Digite seu e-mail" required></input>
@@ -39,10 +46,13 @@ export default function MainRegistration(){
 
                         <button type="submit">Entrar</button>
                     </form>
-                    <Link to="/">Já possui conta? Fazer Login</Link>
+                    <Link to="/login">Já possui conta? Fazer Login</Link>
 
                     </div>
-                </div>    
-            </>
+                </div>
+
+            </div>
+                
+        </>
     );
 };
