@@ -110,12 +110,12 @@ export const MainHome = () => {
 
 
     function getRecomendados () {
-        return recomendados
+        setLocationsData(recomendados)
     }
 
 
     function getEmAlta () {
-        return emAlta
+        setLocationsData(emAlta)
     }
 
 
