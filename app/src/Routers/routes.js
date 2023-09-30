@@ -5,12 +5,16 @@ import { MainLogin } from "../components/login_page/main_login";
 import { MainTest } from "../components/test_page/main_test";
 import MainRegistration from "../components/registration_page/main_registration";
 import { MainLanding } from "../components/landing_page/main_landing_page";
-import { MainNavbar } from "../components/protected_header/protected_header";
+import { MainFooter } from "../components/footer/main_footer";
+import { MainHeader } from "../components/header/main_header";
 
 
 export const AppRoutes = () => {
     return (
         <BrowserRouter>
+        
+            {/* <MainHeader/> */}
+
             <Routes>
                 <Route path="/" element={<MainLanding />} />
                 <Route path="/login" element={<MainLogin />} />
@@ -21,6 +25,9 @@ export const AppRoutes = () => {
                     <Route path="/test" element={<MainTest />} />
                 </Route>
             </Routes>
+
+            <MainFooter />
+
         </BrowserRouter>
     );
 };
