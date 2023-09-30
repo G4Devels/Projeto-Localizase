@@ -45,3 +45,13 @@ button:hover {
   background-color: rgb(240, 240, 240);
   cursor: pointer;
 }
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContainer {
+  flex: 1 1 0;
+}

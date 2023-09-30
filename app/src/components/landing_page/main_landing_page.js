@@ -1,12 +1,9 @@
 import '../../component_styles/landing_page.css';
-import { MainLandingPageHeader } from '../header/landing_page_header';
 
 export const MainLanding = () => {
 
     return (
         <>
-
-            <MainLandingPageHeader />
 
             <div className='about-container'>
                 <div id='about-container-card-1' className='about-container-card'>

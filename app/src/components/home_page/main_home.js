@@ -87,7 +87,7 @@ export const MainHome = () => {
     async function getDocData (collection, document) {
         const docSavedLocationsRef = doc(db, collection, document);
         const data = await getDoc(docSavedLocationsRef)
-        console.log(data.data())
+
         return data.data()
     }
     getDocData("users", userObject.uid)
@@ -123,7 +123,6 @@ export const MainHome = () => {
 
 
         const userDocument = await getDocData(`users`, userUID)
-        console.log(userDocument)
         const savedDocumentReferencesObject = userDocument.saved
         const savedDocumentReferencesObjectKeys = Object.keys(savedDocumentReferencesObject)
 
@@ -154,8 +153,6 @@ export const MainHome = () => {
     return (
         <>
 
-            <MainProtectedHeader />
-            
             <div className="home">
                 <MenuSection setChoice={setChoice}/>
                 <CardsSection locations={locationsData}/>

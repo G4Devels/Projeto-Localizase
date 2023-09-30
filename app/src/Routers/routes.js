@@ -5,28 +5,23 @@ import { MainLogin } from "../components/login_page/main_login";
 import { MainTest } from "../components/test_page/main_test";
 import MainRegistration from "../components/registration_page/main_registration";
 import { MainLanding } from "../components/landing_page/main_landing_page";
-import { MainFooter } from "../components/footer/main_footer";
-import { MainHeader } from "../components/header/main_header";
-
+import { ProtectedContainer } from "../components/protectedContainer";
+import { CommonContainer } from "../components/commonContainer";
 
 export const AppRoutes = () => {
     return (
         <BrowserRouter>
-        
-            {/* <MainHeader/> */}
 
             <Routes>
-                <Route path="/" element={<MainLanding />} />
-                <Route path="/login" element={<MainLogin />} />
-                <Route path="/registro" element={<MainRegistration />}/>
+                <Route path="/" element={ <CommonContainer> <MainLanding/> </CommonContainer> } />
+                <Route path="/login" element={ <CommonContainer> <MainLogin/> </CommonContainer> } />
+                <Route path="/registro" element={ <CommonContainer> <MainRegistration/> </CommonContainer> }/>
 
                 <Route element={<PrivateRoutes />}>
-                    <Route path="/home" element={<MainHome />} />
-                    <Route path="/test" element={<MainTest />} />
+                    <Route path="/test" element={ <ProtectedContainer> <MainTest/> </ProtectedContainer> } />
+                    <Route path="/home" element={ <ProtectedContainer> <MainHome/> </ProtectedContainer> } />
                 </Route>
             </Routes>
-
-            <MainFooter />
 
         </BrowserRouter>
     );
