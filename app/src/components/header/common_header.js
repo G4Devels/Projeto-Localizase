@@ -15,10 +15,7 @@ export const CommonHeader = () => {
                     <nav className="header-nav">
                         <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
                         
-                        <div className='landing-menu-section'>
-                            <Link className="a" to={signed ? "/home" : "/login"}>Entrar</Link>
-                        </div>
-
+                        <Link className="a" to={signed ? "/home" : "/login"}>Entrar</Link>
                     </nav>
             </header>    
         

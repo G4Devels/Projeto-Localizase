@@ -25,14 +25,7 @@ header .header-nav {
     padding: 20px;
 }
 
-header .header-nav .landing-menu-section {
-    display: flex;
-    justify-content: space-between;
-
-    width: 250px;
-}
-
-header .header-nav .landing-menu-section .a, button {
+header .header-nav .a, button {
     padding: 5px;
     background-color: #ECE8DE;
     border: none;
@@ -40,7 +33,7 @@ header .header-nav .landing-menu-section .a, button {
 
     color: black;
 
-    width: max-content;
+    width: 65px;
     height: 35px;
 
     display: flex;
@@ -48,7 +41,7 @@ header .header-nav .landing-menu-section .a, button {
     align-items: center;
 }
 
-header .header-nav .landing-menu-section .a:hover, button:hover {
+header .header-nav .a:hover, button:hover {
     background-color: var(--color02);
     color: #ECE8DE;
 }
