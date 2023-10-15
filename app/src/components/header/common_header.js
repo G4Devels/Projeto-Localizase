@@ -16,8 +16,6 @@ export const CommonHeader = () => {
                         <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
                         
                         <div className='landing-menu-section'>
-                            <button className='a'>Sobre nós</button>
-                            <button className='a'>Experiências</button>
                             <Link className="a" to={signed ? "/home" : "/login"}>Entrar</Link>
                         </div>
 
