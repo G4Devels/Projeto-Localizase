@@ -25,3 +25,12 @@
 .about-container #about-container-card-3 {
     border-color: var(--color07);
 }
+
+.about-container {
+    margin-top: 62vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+}

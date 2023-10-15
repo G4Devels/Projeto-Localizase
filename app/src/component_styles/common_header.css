@@ -45,12 +45,3 @@ header .header-nav .a:hover, button:hover {
     background-color: var(--color02);
     color: #ECE8DE;
 }
-
-.about-container {
-    margin-top: 62vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    flex-wrap: wrap;
-}
