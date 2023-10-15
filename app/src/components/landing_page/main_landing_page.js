@@ -4,6 +4,12 @@ export const MainLanding = () => {
 
     return (
         <>
+            
+            <div className='landing-page-menu-section'>
+                <button>Sobre nós</button>
+                <button>Nosso serviço</button>
+                <button>Experiências</button>
+            </div>
 
             <div className='about-container'>
                 <div id='about-container-card-1' className='about-container-card'>
