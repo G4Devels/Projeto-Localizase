@@ -14,8 +14,8 @@ export const AppRoutes = () => {
 
             <Routes>
                 <Route path="/" element={ <CommonContainer> <MainLanding/> </CommonContainer> } />
-                <Route path="/login" element={ <CommonContainer> <MainLogin/> </CommonContainer> } />
-                <Route path="/registro" element={ <CommonContainer> <MainRegistration/> </CommonContainer> }/>
+                <Route path="/login" element={ <MainLogin/> } />
+                <Route path="/registro" element={ <MainRegistration/> }/>
 
                 <Route element={<PrivateRoutes />}>
                     <Route path="/test" element={ <ProtectedContainer> <MainTest/> </ProtectedContainer> } />
