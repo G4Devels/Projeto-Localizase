@@ -4,7 +4,7 @@ var router = express.Router();
 //const { db } = require('../services/firebaseFirestoreConfig');
 
 // POST getRecomendados page.
-router.get('/recomendados/', function(req, res, next) {
+router.get('/recomendados', function(req, res, next) {
 
   // const userID = req.params.userID
   // console.log(userID)
