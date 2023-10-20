@@ -4,6 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.post('/emalta', function(req, res, next) {
   console.log('Pedido recebido [EM ALTA]')
+  res.send('Pedido recebido [EM ALTA]')
 });
 
 module.exports = router;
