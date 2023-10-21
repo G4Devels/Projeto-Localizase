@@ -1,24 +1,19 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express')
+const app = express()
+const port = 5000
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var getEmAlta = require('./routes/getEmAlta');
-var getRecomendados = require('./routes/getRecomendados');
+const { db } = require('./services/firebaseFirestoreConfig')
 
-var app = express();
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.get('/getrecomendados/:userID', (req, res)=>{
+    console.log('[getRecomendados] ON')
+    const userID = req.params.userID
+})
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/emalta', getEmAlta);
-app.use('/recomendados', getRecomendados);
+app.get('getemalta', (req, res)=>{
+    console.log('[getEmAlta] ON')
+})
 
-module.exports = app;
+app.listen(port, ()=>{
+    console.log('[SERVER] OK')
+})
