@@ -1,13 +1,15 @@
 import "../../component_styles/auth_page.css";
 
 import { AuthAccountsContext } from "../../contexts/authAccounts";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { PasswordVisible } from "../passwordVisible";
 
 
 export default function MainRegistration(){
     
-    const { createUserInEmailAndPassword, signed } = useContext(AuthAccountsContext);
+    const { createUserInEmailAndPassword } = useContext(AuthAccountsContext);
 
     async function createUser(eventObj){
         eventObj.preventDefault();
@@ -19,15 +21,18 @@ export default function MainRegistration(){
         if(password === password_2){
             await createUserInEmailAndPassword(name, email, password, password_2);
         }else{
-            const insertErrorHandling = document.getElementById('insertErrorHandling');
+            toast.error('Senha menor que 6 caracteres');
+            /*const insertErrorHandling = document.getElementById('insertErrorHandling');
             insertErrorHandling.textContent = 'As senhas não correspondem';
-            insertErrorHandling.style.display = "block"
+            insertErrorHandling.style.display = "block"*/
         };
     };
     
     return(
         <>
             <div id="bodyAuth">
+
+                <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'></link>
 
                 <div className="auth-container" onSubmit={createUser}>
                     <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
@@ -37,14 +42,25 @@ export default function MainRegistration(){
                     <form>
                         <h1>Criar Conta</h1>
 
-                        <div id='insertErrorHandling'></div>
+                        {/* <div id='insertErrorHandling'></div> */}
 
                         <input name="name" type="text" placeholder="Digite seu nome" required></input>
                         <input name="email" type="email" placeholder="Digite seu e-mail" required></input>
-                        <input name="password" type="password" placeholder="Digite sua senha" required></input>
-                        <input name="confirm_password" type="password" placeholder="Confirme sua senha" required></input>
 
-                        <button type="submit">Entrar</button>
+                        <div className='divThePassword'>
+                            <input id="wordPass" name="password" type="password" placeholder="Digite sua senha" required></input>
+                            <PasswordVisible element="wordPass"/>
+                        </div>
+                        
+
+                        <div className='divThePassword'>
+                            <input id="wordPass2" name="confirm_password" type="password" placeholder="Confirme sua senha" required></input>
+                            <PasswordVisible element="wordPass2"/>
+                        </div>
+                        
+
+
+                        <button type="submit">Criar</button>
                     </form>
                     <Link to="/login">Já possui conta? Fazer Login</Link>
 
@@ -52,6 +68,8 @@ export default function MainRegistration(){
                 </div>
 
             </div>
+
+            <ToastContainer autoClose={8000} />
                 
         </>
     );

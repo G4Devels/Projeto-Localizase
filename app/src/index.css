@@ -33,7 +33,7 @@ a {
   color: black;
 }
 
-button {
+/*button {
   background-color: white;
   border-radius: 5px;
   border: 1px solid black;
@@ -44,6 +44,11 @@ button {
 button:hover {
   background-color: rgb(240, 240, 240);
   cursor: pointer;
+}*/
+
+input:focus{
+  outline: 0;
+  box-shadow: 0 0 0.25em  white;
 }
 
 .mainContent {

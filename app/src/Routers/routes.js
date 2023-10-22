@@ -7,6 +7,7 @@ import MainRegistration from "../components/registration_page/main_registration"
 import { MainLanding } from "../components/landing_page/main_landing_page";
 import { ProtectedContainer } from "../components/protectedContainer";
 import { CommonContainer } from "../components/commonContainer";
+import { ForgotPassword } from "../components/forgotPassword/forgotPassword"
 
 export const AppRoutes = () => {
     return (
@@ -14,8 +15,9 @@ export const AppRoutes = () => {
 
             <Routes>
                 <Route path="/" element={ <CommonContainer> <MainLanding/> </CommonContainer> } />
-                <Route path="/login" element={ <CommonContainer> <MainLogin/> </CommonContainer> } />
-                <Route path="/registro" element={ <CommonContainer> <MainRegistration/> </CommonContainer> }/>
+                <Route path="/login" element={<MainLogin/>} />
+                <Route path="/registro" element={<MainRegistration/>}/>
+                <Route path="/recuperar-senha" element={<ForgotPassword/>}/>
 
                 <Route element={<PrivateRoutes />}>
                     <Route path="/test" element={ <ProtectedContainer> <MainTest/> </ProtectedContainer> } />

@@ -90,7 +90,7 @@ export const MainHome = () => {
 
         return data.data()
     }
-    getDocData("users", userObject.uid)
+    
 
 
 
@@ -121,10 +121,18 @@ export const MainHome = () => {
 
     async function getSalvos (userUID) {
 
-
+        
         const userDocument = await getDocData(`users`, userUID)
         const savedDocumentReferencesObject = userDocument.saved
-        const savedDocumentReferencesObjectKeys = Object.keys(savedDocumentReferencesObject)
+        let savedDocumentReferencesObjectKeys = null
+
+        if (savedDocumentReferencesObject != undefined) {
+            savedDocumentReferencesObjectKeys = Object.keys(savedDocumentReferencesObject)
+        }
+        else {
+            return setLocationsData(null)
+        }
+        
 
         const locationsID = savedDocumentReferencesObjectKeys.map( (key, index) => {
             const locationPath = savedDocumentReferencesObject[key]['_key']['path']['segments']
