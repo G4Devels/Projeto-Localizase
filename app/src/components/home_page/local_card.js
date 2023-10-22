@@ -46,12 +46,12 @@ export const LocalCard = ( {cardData} ) => {
 
                 <div class="card-info">
                     <img src={locationIcon} alt="local" />
-                    <p>Av. Alberto Nepomuceno, 1 - Centro, Fortaleza - CE, 60055-000</p>
+                    <p>{cardData.address}</p>
                 </div>
 
                 <div class="card-info">
                     <img src={descriptionIcon} alt="descrição" />
-                    <p>Majestosa catedral católica de estilo gótico, com vitrais coloridos e uma arquitetura impressionante.</p>
+                    <p>{cardData.about}</p>
                 </div>
 
             </div>
