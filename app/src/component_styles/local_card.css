@@ -74,6 +74,9 @@
 
 .card .card-content .card-info p {
     margin: 14px 0px;
+    max-width: 304px;
+    max-height: 54px;
+    overflow: hidden;
 }
 
 .card .card-content .card-info img {
