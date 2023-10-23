@@ -1,27 +1,18 @@
-.about-container .about-container-card {
-    width: 300px;
-    height: 380px;
+.landing-page-content {
+    margin-top: 62vh;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    margin: 20px;
-    padding: 5px;
-
-    border-width: 0px 9px 9px 0px;
-    border-style: solid;
-    border-radius: 20px;
+    align-items: center;
 }
 
-.about-container #about-container-card-1 {
-    border-color: var(--color06);
+.landing-page-menu-section {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
 }
 
-.about-container #about-container-card-2 {
-    border-color: var(--color03);
-}
-
-.about-container #about-container-card-3 {
-    border-color: var(--color07);
+.landing-page-menu-section button {
+    width: max-content;
 }
