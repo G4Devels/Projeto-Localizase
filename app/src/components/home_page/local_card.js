@@ -4,6 +4,9 @@ import '../../component_styles/local_card.css';
 import { db } from "../../services/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore"; 
 
+import locationIcon from '../../assets/localpin-icon.svg';
+import descriptionIcon from '../../assets/description-icon.svg';
+
 export const LocalCard = ( {cardData} ) => {
 
     const [tagsName, setTagsName] = useState([])
@@ -31,22 +34,25 @@ export const LocalCard = ( {cardData} ) => {
 
         <div className='card'>
             
-            <img className='card_img' src={cardData.img} alt="Imagem do card"></img>
+            <img className='card-img' src={cardData.img} alt="Imagem do card"></img>
 
-            <div className='card_info'>
+            <i>
+                <p>{cardData.name}</p>
+            </i>
 
-                <section className='card_main_data'>
-                    <h2>{cardData.name}</h2>
-                    <p className='pLocalCard'>{cardData.address}</p>
-                </section>
+            <div className='card-content'>
                 
-                <section className='card_tags'>
-                    {
-                        tagsName.map( (tagName, key) => <span key={key}> {tagName} </span> )
-                    }
-                </section>
+                <a href='#'>Ver mais</a>
 
-                <p className='card_about'> {cardData.about} </p>
+                <div class="card-info">
+                    <img src={locationIcon} alt="local" />
+                    <p>{cardData.address}</p>
+                </div>
+
+                <div class="card-info">
+                    <img src={descriptionIcon} alt="descrição" />
+                    <p>{cardData.about}</p>
+                </div>
 
             </div>
 

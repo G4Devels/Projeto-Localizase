@@ -1,147 +1,120 @@
 .card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    text-align: justify;
-
-    padding: 10px;
-
-    border: 1px solid #EACF44;
-    border-radius: 10px;
+    position: relative;
+    width: 350px;
+    height: 450px;
+    box-shadow: 0 25px 50px #00000026;
+    border: 3px solid #012034;
+    border-radius: 0 20px;
+    margin: 10px 5px;
 }
 
-.card:hover {
-    cursor: pointer;
-}
-
-
-.card_img {
-    width: 50%;
+.card img {
+    width: 100%;
     height: 100%;
-    border-radius: 10px;
-    object-fit: cover;
+    border-radius: 0 20px;
+
+    overflow-clip-margin: content-box;
+    overflow: clip;
 }
 
-
-.card_info {
-    width: 50%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.card i {
+    position: absolute;
+    top: 10px;
+    left: -15px;
+    width: 95%;
+    height: 50px;
+    background-color: #003B62;
+    border-radius: 30px;
+    border-bottom-left-radius: 0;
 }
 
-
-.card_tags {
-    display: flex;
-    align-items: center;
-
-    white-space: nowrap;
-    overflow: hidden;
-    
-    /* background: linear-gradient(to right, transparent, white); */
-
-    padding: 4px 0px;
-}
-
-.card_tags span{
-    padding: 2px;
-    margin: 7px 5px 7px 0px;
-
-    height: fit-content;
-    width: fit-content;
-
-    background-color: rgba(1, 32, 52, 0.870);
+.card i p {
     color: white;
-    
-    border-radius: 5px;
+    text-align: center;
+    margin: 14px 0px;
 }
 
+.card i::after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    width: 15px;
+    height: 15px;
+    background-color: #003B62;
+    z-index: 1;
+}
 
-.card_about {
+.card i::before {
+    content: '';
+    position: absolute;
+    top: 50px;
+    width: 15px;
+    height: 30px;
+    background-color: #001b2c;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    z-index: 2;
+}
+
+.card .card-content {
+    position: absolute;
+    bottom: 0;
+    z-index: 3;
+    background-color: white;
+    border-radius: 0px 20px;
+    padding: 8px;
+}
+
+.card .card-content .card-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+}
+
+.card .card-content .card-info p {
+    margin: 14px 0px;
+    max-width: 304px;
+    max-height: 54px;
     overflow: hidden;
-    /* background: linear-gradient(transparent, white); */
 }
 
+.card .card-content .card-info img {
+    margin-right: 10px;
+    width: 15px;
+    border-radius: 0;
 
-@media (min-width: 360px) {
-    
-    .card {
-        width: 300px;
-        height: 150px;
-    }
-
-    .card_img {
-        width: 125px;
-        height: 125px;
-    }
-
-    .card_info {
-        height: 125px;
-    }
-
-    h2 {
-        font-size: 0.6em;
-    }
-
-    span, .pLocalCard {
-        font-size: 0.4em ;
-    }
-
+    overflow-clip-margin: content-box;
+    overflow: clip;
 }
 
-
-@media (min-width: 660px) {
+.card .card-content a {
+    border-radius: 5px;
+    background-color: #012034;
+    border: 2px solid #012034;
+    padding: 5px 20px;
+    color: white;
+    top: -30px;
+    position: absolute;
     
-    .card {
-        width: 400px;
-        height: 200px;
-    }
-
-    .card_img {
-        width: 175px;
-        height: 175px;
-    }
-
-    .card_info {
-        height: 175px;
-    }
-
-    h2 {
-        font-size: 0.7em;
-    }
-
-    span, .pLocalCard {
-        font-size: 0.6em ;
-    }
-
+    z-index: 2;
 }
 
+.card .card-content a:hover {
+    background-color: white;
+    border: 2px solid #012034;
+    color: var(--color02);
+    font-weight: bold;
+}
 
-@media (min-width: 860px) {
-    
-    .card {
-        width: 500px;
-        height: 250px;
-    }
-
-    .card_img {
-        width: 225px;
-        height: 225px;
-    }
-
-    .card_info {
-        height: 225px;
-    }
-
-    h2 {
-        font-size: 1em;
-    }
-
-    span, .pLocalCard {
-        font-size: 0.8em ;
-    }
-
+.card .card-content::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 0;
+    width: 35%;
+    height: 25%;
+    border-top-right-radius: 20px;
+    background-color: white;
+    z-index: 1;
 }
