@@ -1,4 +1,6 @@
 const express = require('express')
+var bodyParser = require('body-parser')
+const cors = require('cors')
 const app = express()
 const port = 5000
 
@@ -16,13 +18,24 @@ const db = getFirestore()
 
 
 
-app.get('/getrecomendados/:userID', async (req, res)=>{
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST']
+}))
+
+app.use( bodyParser.json() );       
+
+app.use(bodyParser.urlencoded({     
+  extended: true
+})); 
+
+app.post('/getrecomendados', async (req, res)=>{
 
     console.log('[getRecomendados] ON')
 
 
     // getting user tags
-    const userID = req.params.userID
+    const userID = req.body.userID
 
     const userDocRef = db.collection('users').doc(userID);
     const userDocData = await userDocRef.get()
