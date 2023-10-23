@@ -1,9 +1,12 @@
 import { createContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup, updateProfile } from "firebase/auth";
-import { collection, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup, updateProfile, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
+import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { app, db } from "../services/firebaseConfig";
+
+import 'react-toastify/dist/ReactToastify.min.css'
+import { toast } from "react-toastify";
 import { Navigate } from "react-router-dom";
+
 const providerGoogle = new GoogleAuthProvider();
 
 export const AuthAccountsContext = createContext({})
@@ -57,7 +60,6 @@ export const AuthAccountsProvider = ({ children }) => {
                 setUser(user)
                 localStorage.setItem("@AuthFirebase:token", token);
                 localStorage.setItem("@AuthFirebase:user", JSON.stringify(user));
-                console.log("ele não quer ir parte um")
                 readDataUser(auth.currentUser.uid)
             })
             .catch((error) => {
@@ -76,6 +78,10 @@ export const AuthAccountsProvider = ({ children }) => {
     const signInEmailAndPassword = async (email, password) => {
         await signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
+            if(!auth.currentUser.emailVerified){
+                toast.error("verifique seu email!")
+                return
+            }
             const user = userCredential.user;
             const token = user.accessToken
             setUser(user);
@@ -84,8 +90,9 @@ export const AuthAccountsProvider = ({ children }) => {
             readDataUser(auth.currentUser.uid)
         })
         .catch((error) => {
-            const errorCode = error.code.toString();
-            const errorMessage = error.message.toString();
+            console.log(email)
+            const errorCode = error.code;
+            const errorMessage = error.message;
             console.log("[",errorCode,"]", errorMessage);
             RenderError(errorCode);
         })
@@ -94,6 +101,7 @@ export const AuthAccountsProvider = ({ children }) => {
 
 
 
+    
     
 
     const createUserInEmailAndPassword = async (name, email, password, password_2) => {
@@ -104,7 +112,20 @@ export const AuthAccountsProvider = ({ children }) => {
                 })
                 .then(() => {})
                 .catch((error) => {});
-                window.location.href = "/login"
+
+                sendEmailVerification(auth.currentUser)
+                
+
+                .then(()=>{
+                    toast.success("foi enviado um email de verificação para " + email, {
+                        autoClose: 5000,
+                        hideProgressBar: true,
+                    })
+                    setTimeout(() => {
+                        window.location.href = "/login"
+                    }, 3000);
+                })
+                
             })
             .catch((error) => {
                 const errorCode = error.code.toString();
@@ -137,12 +158,32 @@ export const AuthAccountsProvider = ({ children }) => {
     async function signOut() {
         localStorage.clear();
         setUser(null);
-        window.location.href = "/";
+        window.location.href = "/"
     }
 
 
 
-    function RenderError(errorCode){
+
+    function recoverPassword(email){
+        sendPasswordResetEmail(auth, email)
+        .then(()=>{
+            toast.success("foi enviado um email de verificação para " + email, {
+                autoClose: 5000,
+                hideProgressBar: true,
+            })
+        })
+        .catch(()=>{
+            toast.error(email + " não cadastrado", {
+                autoClose: 5000,
+                hideProgressBar: true,
+            })
+        })
+    }
+
+
+
+
+    /*function RenderError(errorCode){
         const insertErrorHandling = document.getElementById('insertErrorHandling');
         if ((errorCode === "auth/user-not-found") || (errorCode === "auth/wrong-password")){
             insertErrorHandling.textContent = 'Email ou Senha incorreto';
@@ -156,12 +197,24 @@ export const AuthAccountsProvider = ({ children }) => {
             insertErrorHandling.textContent = 'Senha menor que 6 caracteres';
             insertErrorHandling.style.display = "block"
         }
+    }*/
+
+    function RenderError(errorCode){
+        if ((errorCode === "auth/user-not-found") || (errorCode === "auth/wrong-password")){
+            toast.error('Email ou Senha incorreto');
+         
+        }else if(errorCode === "auth/email-already-in-use"){
+            toast.error('Email Já cadastrado');
+
+        }else if(errorCode === "auth/weak-password"){
+            toast.error('Senha menor que 6 caracteres');
+        }
     }
 
 
 
     return (
-        <AuthAccountsContext.Provider value={{ signInGoogle, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut, auth, addUserInterests}}>
+        <AuthAccountsContext.Provider value={{ signInGoogle, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut, auth, addUserInterests, recoverPassword}}>
             {children}
         </AuthAccountsContext.Provider>
     )

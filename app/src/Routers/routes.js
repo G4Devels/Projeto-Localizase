@@ -7,6 +7,7 @@ import MainRegistration from "../components/registration_page/main_registration"
 import { MainLanding } from "../components/landing_page/main_landing_page";
 import { ProtectedContainer } from "../components/protectedContainer";
 import { CommonContainer } from "../components/commonContainer";
+import { ForgotPassword } from "../components/forgotPassword/forgotPassword"
 
 export const AppRoutes = () => {
     return (

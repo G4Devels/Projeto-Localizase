@@ -1,15 +1,63 @@
 import '../../component_styles/auth_page.css'
 
+import { ToastContainer } from "react-toastify";
 import React, { useState, useContext } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { Link } from "react-router-dom";
+import { PasswordVisible } from "../passwordVisible"
 
 export const MainLogin = () => {
 
+    const { signInGoogle, signInEmailAndPassword, recoverPassword } = useContext(AuthAccountsContext);
+
+
+
+        
+    const [forgotPassHTML, setForgotPassHTML] = useState("")
+    
+    function navigateToRecoverPassword(event){
+        event.preventDefault()
+        recoverPassword(event.target[0].value)
+    }
+
+    function ForgotPassword(){
+        setForgotPassHTML (
+            <>
+                <div className='forgotPassDivBackground'>
+                    <div className='forgotPassDiv'>
+
+                        <form onSubmit={ navigateToRecoverPassword }>
+
+                            <i class="fi fi-br-cross" onClick={ closeForgotPassword }></i>
+
+                            <h2> Recuperação de Senha </h2>
+
+                            <p> Para recuperarmos sua senha, insira seu email para a verificação: </p>
+
+                            <input name="recoverPassEmail" type="email"
+                            placeholder="Digite seu e-mail" required></input>
+
+                            <button type='submit'>Enviar</button>
+
+                        </form>
+                            
+                    </div>
+                </div> 
+            </>
+        )
+    }
+
+    function closeForgotPassword(){
+        setForgotPassHTML("")
+    }
+
+
+
+
+
+
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
-
-    const { signInGoogle, signInEmailAndPassword } = useContext(AuthAccountsContext);
 
     async function handleLoginFromGoogle(eventObj){
         await signInGoogle();
@@ -20,9 +68,13 @@ export const MainLogin = () => {
         await signInEmailAndPassword(email, password);
     };
 
+
     return (
         <>
             <div id='bodyAuth'>
+
+            <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'></link>
+            <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'></link>
 
                 <div class="auth-container">
                     <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
@@ -33,17 +85,23 @@ export const MainLogin = () => {
                         <form onSubmit={ handleLoginFromEmailAndPassword }>
                             <h1>Login</h1>
 
-                            <div id='insertErrorHandling'></div>
-
                             <input name="email" type="email" 
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Digite seu e-mail" required></input>
-                            <input name="password" type="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Digite sua senha" required></input>
+
+                            <div className='divThePassword'>
+                                <input id="wordPass" name="password" type="password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Digite sua senha" required></input>
+                                <PasswordVisible element="wordPass"/>
+                            </div>
 
                             <button type="submit">Entrar</button>
+                            
                         </form>
+
+                        <button className='forgotPass' onClick={ ForgotPassword }>Esqueceu a senha?</button>
+                        
 
                         <p>ou</p>
 
@@ -54,13 +112,16 @@ export const MainLogin = () => {
                         <hr />
 
                         <Link to="/registro"> Não possui uma conta? Cadastrar-se</Link>
+
+                        {forgotPassHTML}
+
                     </div>
                 
                 </div>
 
             </div>
 
-                
+            <ToastContainer autoClose={8000}/>
 
         </>
     );

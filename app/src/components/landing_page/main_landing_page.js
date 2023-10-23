@@ -23,6 +23,14 @@ export const MainLanding = () => {
                 sectionsComponents[landingPageMenuSection]
             }
 
+
+            <div id='about-container-card-3' className='about-container-card'>
+                <section>
+                    <h1>Mais perto de Você</h1>
+                    <p>Aqui você acha locais variados em Fortaleza para você explorar a cidade da melhor forma possível.</p>
+                </section>
+            </div>
+
         </div>
 
     );
