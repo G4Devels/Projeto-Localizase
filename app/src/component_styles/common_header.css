@@ -25,28 +25,23 @@ header .header-nav {
     padding: 20px;
 }
 
-header .header-nav a {
-    margin: 5px 10px;
-    background-color: var(--color02);
-    border: 2px solid var(--color01);
-    cursor: pointer;
-    color: var(--color01);
-    padding: 5px 10px;
+header .header-nav .a {
+    padding: 5px;
+    background-color: #ECE8DE;
+    border: none;
     border-radius: 8px;
-}
 
-header .header-nav a:hover {
-    margin: 5px 10px;
-    color: var(--color02);
-    background-color: var(--color01);
-    border: 2px solid var(--color02);
-}
+    color: black;
 
-.about-container {
-    margin-top: 62vh;
+    width: 65px;
+    height: 35px;
+
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
-    flex-wrap: wrap;
+header .header-nav .a:hover {
+    background-color: var(--color02);
+    color: #ECE8DE;
 }
