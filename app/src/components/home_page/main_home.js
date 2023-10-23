@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { CardsSection } from "./cards_section";
 import { MenuSection } from "./menu_section";
+import axios from 'axios'
 
 import '../../component_styles/main_home.css'
 
@@ -110,6 +111,11 @@ export const MainHome = () => {
 
 
     function getRecomendados () {
+
+        axios.post(`http://localhost:5000/getrecomendados`, {userID: userObject.uid})
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+
         setLocationsData(recomendados)
     }
 
