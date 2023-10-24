@@ -13,6 +13,13 @@ export const MainLanding = () => {
         
         <div className='landing-page-content'>
 
+            <blockquote>
+                Vai, aonde te levar a alma,
+                Na senda que teu coração decidir.
+                Desfruta da jornada, encontra prazeres,
+                Pois a vida é uma aventura a prosseguir.
+            </blockquote>
+
             <div className='landing-page-menu-section'>
                 <button onClick={() => setLandingPageMenuSection(0)} >Sobre nós</button>
                 <button onClick={() => setLandingPageMenuSection(1)} >Nosso serviço</button>
@@ -22,14 +29,6 @@ export const MainLanding = () => {
             {
                 sectionsComponents[landingPageMenuSection]
             }
-
-
-            <div id='about-container-card-3' className='about-container-card'>
-                <section>
-                    <h1>Mais perto de Você</h1>
-                    <p>Aqui você acha locais variados em Fortaleza para você explorar a cidade da melhor forma possível.</p>
-                </section>
-            </div>
 
         </div>
 
