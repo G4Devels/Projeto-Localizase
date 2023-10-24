@@ -113,10 +113,11 @@ export const MainHome = () => {
     function getRecomendados () {
 
         axios.post(`http://localhost:5000/getrecomendados`, {userID: userObject.uid})
-        .then(res => console.log(res))
+        .then(res => {
+            setLocationsData(res.data)
+        })
         .catch(error => console.log(error))
 
-        setLocationsData(recomendados)
     }
 
 
