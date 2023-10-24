@@ -60,5 +60,6 @@ input:focus{
 
 .mainContainer {
   flex: 1 1 0;
+  margin: 50px 0px;
   display: flex;
 }
