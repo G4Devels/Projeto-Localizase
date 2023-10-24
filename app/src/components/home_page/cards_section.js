@@ -1,6 +1,9 @@
 import { LocalCard } from "./local_card";
 import '../../component_styles/cards_section.css';
 
+import {GenericErrorMessage} from "../../components/generic_error_message";
+import errorCrying from '../../assets/error_crying.png'
+
 export const CardsSection = ( {locations} ) => {
 
     if (locations != null || locations != undefined) {
@@ -18,13 +21,7 @@ export const CardsSection = ( {locations} ) => {
     }
     else {
         return (
-
-            <div className="cards_section">
-
-                <h6> Você não possui locais salvos! </h6>
-                
-            </div>
-
+            <GenericErrorMessage errorMessageData={{img: errorCrying, title: 'Ops! Ainda não há nada por aqui...', msg: 'Um erro ocorreu ao carregar os dados.'}} />
         )
     }
     
