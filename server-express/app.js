@@ -80,10 +80,12 @@ app.get('/getrecomendados/:userID', async (req, res)=>{
 app.get('/getemalta', async (req, res)=>{
     console.log('[getEmAlta] ON')
 
+    var local_dict = {}
+
     const request_details = async (data)=>{
         // console.log(data, JSON.stringify(places_key.key))
         const api_url = JSON.stringify(places_key.url)
-        const res =  await fetch(`https://maps.googleapis.com/maps/api/place/details/json?fields=name%2Crating%2Cformatted_phone_number&place_id=${data}&key=AIzaSyCMJrJhS4l2cYlWoPEMhtF3y929GY8U6C8`)
+        const result =  await fetch(`https://maps.googleapis.com/maps/api/place/details/json?fields=name%2Crating&place_id=${data}&key=AIzaSyCMJrJhS4l2cYlWoPEMhtF3y929GY8U6C8&reviews_no_translations=false&reviews_sort=newest`)
             // .then((response)=>{
             //     console.log("deu certo")
             //     const data =  response.json();
@@ -92,19 +94,34 @@ app.get('/getemalta', async (req, res)=>{
             // .catch((error)=>{
             //     console.log(error)
             // })
-        if (res.ok) {
-            console.log("deu certo");
-            const data = await res.json();
-            console.log(data);
+        if (result.ok) {
+            // console.log("deu certo");
+            const data = await result.json();
+            // console.log(data);
+            local_dict[data.result.name] = data.result.rating;
+            // console.log(local_dict);
+            const ordered_array = Object.entries(local_dict);
+            ordered_array.sort((a,b)=>b[1]-a[1]);
+            const ordered_dict = Object.fromEntries(ordered_array);
+            // console.log(ordered_dict);
+            local_dict = ordered_dict;
+            // console.log(local_dict, "Saída");
           } else{
-            console.log("Erro na requisição:", res.status, res.statusText, );
+            console.log("Erro na requisição:", result.status, result.statusText, );
           }
     }
     
     const tratement_request = async (list_IDs)=>{
-        list_IDs.forEach(async (item)=>{
-            await request_details(item)
-        })
+        for (const item of list_IDs) {
+            // console.log(item)
+            await request_details(item);
+            
+            if (item == list_IDs[list_IDs.length]){
+                break
+            }
+          }
+        //   console.log(local_dict, "Saída 2");
+          res.send(JSON.stringify(local_dict))
     }
 
      // getting local IDs
@@ -117,7 +134,8 @@ app.get('/getemalta', async (req, res)=>{
             locations.push(doc.data().local_ID);
         });
         tratement_request(locations)
-        res.send("complete!")
+        
+        // console.log(local_dict)
      }catch(error){
         console.error('Erro ao buscar dados:', error);
         res.status(500).json({ error: 'Erro ao buscar dados' });
