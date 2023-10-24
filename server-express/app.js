@@ -57,10 +57,12 @@ app.post('/getrecomendados', async (req, res)=>{
     if (!snapshot.empty) {
         snapshot.forEach(doc => {
             const tagsLocationIDs = doc.data().tags.map(tagRef => tagRef._path.segments).map(tagID => tagID[1]);
+            
+            let tagPoints = []
 
-            let tagPoints = tagsLocationIDs.map(locationTagID => {
-                if (locationTagID in userTagsIDs) {
-                    return 1
+            tagsLocationIDs.forEach(locationTagID => {
+                if (userTagsIDs.includes(locationTagID)) {
+                    tagPoints.push(1)
                 }
             })
 
