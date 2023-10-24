@@ -9,6 +9,7 @@
   --color05: #6cf15a;
   --color06: #0166f8;
   --color07: #ff7e00;
+  --color08: rgb(172, 193, 201);
 }
 
 body, html {
@@ -59,4 +60,5 @@ input:focus{
 
 .mainContainer {
   flex: 1 1 0;
+  display: flex;
 }
