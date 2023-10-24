@@ -1,0 +1,9 @@
+.error-message {
+    color: rgba(0, 0, 0, 0.500);
+    display: flex;
+    align-items: center;
+}
+
+.error-message section {
+    margin-left: 10px;
+}
