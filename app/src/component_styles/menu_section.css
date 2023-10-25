@@ -7,8 +7,8 @@
 
 .input_container {
     position: relative;
-    width: 100px;
-    height: 38px;
+    width: 108px;
+    height: 46px;
 }
 
 
@@ -24,6 +24,8 @@
 
     border: 1px solid rgba(1, 32, 52, 0.870);
     border-radius: 5px;
+
+    padding: 5px;
 }
 
 

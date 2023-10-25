@@ -3,6 +3,8 @@ import '../../component_styles/landing_page.css';
 import { AboutUs } from './about_us';
 import { OurService } from './our_service';
 import { Experiences } from './experiences';
+import { MenuSection } from '../menu_section';
+import { MenuSectionInput } from '../menu_section_input' 
 
 export const MainLanding = () => {
 
@@ -12,7 +14,7 @@ export const MainLanding = () => {
     return (
         
         <div className='landing-page-content'>
-
+            
             <blockquote>
                 Vai, aonde te levar a alma,
                 Na senda que teu coração decidir.
@@ -20,11 +22,11 @@ export const MainLanding = () => {
                 Pois a vida é uma aventura a prosseguir.
             </blockquote>
 
-            <div className='landing-page-menu-section'>
-                <button onClick={() => setLandingPageMenuSection(0)} >Sobre nós</button>
-                <button onClick={() => setLandingPageMenuSection(1)} >Nosso serviço</button>
-                <button onClick={() => setLandingPageMenuSection(2)} >Experiências</button>
-            </div>
+            <MenuSection>
+                <MenuSectionInput choiceValue={0} inputName={'Sobre nós'} setChoice={setLandingPageMenuSection} />
+                <MenuSectionInput choiceValue={1} inputName={'Nosso serviço'} setChoice={setLandingPageMenuSection} />
+                <MenuSectionInput choiceValue={2} inputName={'Experiências'} setChoice={setLandingPageMenuSection} />
+            </MenuSection>
 
             {
                 sectionsComponents[landingPageMenuSection]

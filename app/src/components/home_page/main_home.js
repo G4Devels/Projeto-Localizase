@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { CardsSection } from "./cards_section";
-import { MenuSection } from "./menu_section";
+import { MenuSection } from "../menu_section";
 import axios from 'axios'
 
 import '../../component_styles/main_home.css'
@@ -10,6 +10,7 @@ import { db } from "../../services/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore"; 
 import { MainFooter } from "../footer/main_footer";
 import { MainNavbar, MainProtectedHeader } from "../header/protected_header";
+import { MenuSectionInput } from "../menu_section_input";
 
 
 export const MainHome = () => {
@@ -169,7 +170,12 @@ export const MainHome = () => {
         <>
 
             <div className="home">
-                <MenuSection setChoice={setChoice}/>
+                <MenuSection>
+                    <MenuSectionInput choiceValue={0} inputName={'Recomendados'} setChoice={setChoice} />
+                    <MenuSectionInput choiceValue={1} inputName={'Em alta'} setChoice={setChoice} />
+                    <MenuSectionInput choiceValue={2} inputName={'Salvos'} setChoice={setChoice} />
+                </MenuSection>
+
                 <CardsSection locations={locationsData}/>
             </div> 
             
