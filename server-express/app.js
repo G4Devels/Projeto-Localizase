@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require("cors")
 const app = express()
 const port = 5000
 
@@ -14,7 +15,7 @@ initializeApp({
 
 const db = getFirestore()
 
-
+app.use(cors());
 
 app.get('/getrecomendados/:userID', async (req, res)=>{
 
@@ -76,9 +77,90 @@ app.get('/getrecomendados/:userID', async (req, res)=>{
 })
 
 
-app.get('getemalta', (req, res)=>{
+app.get('/getemalta', async (req, res)=>{
     console.log('[getEmAlta] ON')
+
+    var local_dict = {}
+
+    const request_details = async (data)=>{
+        // console.log(data, JSON.stringify(places_key.key))
+        const result =  await fetch(`https://maps.googleapis.com/maps/api/place/details/json?fields=name%2Crating%2Cformatted_address&place_id=${data}&key=AIzaSyCMJrJhS4l2cYlWoPEMhtF3y929GY8U6C8&reviews_no_translations=false&reviews_sort=newest`)
+            // .then((response)=>{
+            //     console.log("deu certo")
+            //     const data =  response.json();
+            //     console.log(data);
+            // })
+            // .catch((error)=>{
+            //     console.log(error)
+            // })
+        if (result.ok) {
+            // console.log("deu certo");
+            const data = await result.json();
+            // console.log(data);
+            local_dict[data.result.formatted_address] = data.result.rating;
+            // console.log(local_dict);
+            const ordered_array = Object.entries(local_dict);
+            ordered_array.sort((a,b)=>b[1]-a[1]);
+            const ordered_dict = Object.fromEntries(ordered_array);
+            // console.log(ordered_dict);
+            local_dict = ordered_dict;
+            // console.log(local_dict, "Saída");
+          } else{
+            console.log("Erro na requisição:", result.status, result.statusText, );
+          }
+    }
+    
+    const tratement_request = async (list_IDs)=>{
+        for (const item of list_IDs) {
+            // console.log(item)
+            await request_details(item);
+            
+            if (item == list_IDs[list_IDs.length]){
+                break
+            }
+          }
+        //   console.log(local_dict, "Saída 2");
+          res.send(JSON.stringify(local_dict))
+    }
+
+     // getting local IDs
+     try {
+        const locationsRef = db.collection('locations'); // Referência à coleção "locations"
+        const querySnapshot = await locationsRef.get();
+        const locations = []; // Array para armazenar os valores de "local_ID"
+        querySnapshot.forEach((doc) => {
+            // Para cada documento na coleção, obtenha o campo "local_ID" e adicione ao array
+            locations.push(doc.data().local_ID);
+        });
+        tratement_request(locations)
+        
+        // console.log(local_dict)
+     }catch(error){
+        console.error('Erro ao buscar dados:', error);
+        res.status(500).json({ error: 'Erro ao buscar dados' });
+     }
 })
+
+// app.get('/getemalta', async (req, res) => {
+//     console.log('[getEmAlta] ON');
+
+//     try {
+//         const locationsRef = collection(db, 'locations'); // Referência à coleção "locations"
+//         const querySnapshot = await getDocs(locationsRef);
+
+//         const locations = []; // Array para armazenar os valores de "local_ID"
+
+//         querySnapshot.forEach((doc) => {
+//             // Para cada documento na coleção, obtenha o campo "local_ID" e adicione ao array
+//             locations.push(doc.data().local_ID);
+//         });
+
+//         res.json(locations); // Envie os valores de "local_ID" como uma resposta JSON
+//     } catch (error) {
+//         console.error('Erro ao buscar dados:', error);
+//         res.status(500).json({ error: 'Erro ao buscar dados' });
+//     }
+// });
 
 
 app.listen(port, ()=>{

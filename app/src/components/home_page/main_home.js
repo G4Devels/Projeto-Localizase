@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { CardsSection } from "./cards_section";
 import { MenuSection } from "./menu_section";
@@ -6,13 +7,12 @@ import { MenuSection } from "./menu_section";
 import '../../component_styles/main_home.css'
 
 import { db } from "../../services/firebaseConfig";
-import { doc, getDoc } from "firebase/firestore"; 
+import { doc, getDoc, getDocs, query, where, collection } from "firebase/firestore"; 
 import { MainFooter } from "../footer/main_footer";
 import { MainNavbar, MainProtectedHeader } from "../header/protected_header";
 
 
 export const MainHome = () => {
-
 
     const recomendados = [
         {
@@ -78,6 +78,8 @@ export const MainHome = () => {
 
     const [locationsData, setLocationsData] = useState([])
 
+    const [post, setPost] = useState(null)
+
 
     useEffect(() => {
         analyseChoice(choice)
@@ -113,9 +115,83 @@ export const MainHome = () => {
         setLocationsData(recomendados)
     }
 
+    function customJsonStringify(obj) {
+        if (typeof obj !== 'object' || obj === null) {
+          // Se não for um objeto, retorne seu valor diretamente
+          if (typeof obj === 'string') {
+            return `"${obj}"`;
+          } else {
+            return String(obj);
+          }
+        } else if (Array.isArray(obj)) {
+          // Se for um array, construa a representação JSON do array
+          const items = obj.map((item) => customJsonStringify(item));
+          return `[${items.join(', ')}]`;
+        } else {
+          // Se for um objeto, construa a representação JSON do objeto
+          const pairs = Object.entries(obj).map(([key, value]) => {
+            return `"${key}": ${customJsonStringify(value)}`;
+          });
+          return `{${pairs.join(', ')}}`;
+        }
+      }
 
-    function getEmAlta () {
+    const  getEmAlta = async () => {
+        const baseURL = "http://localhost:5000/getemalta"
+        axios.get(baseURL).then( async (response) => {
+            setPost(response.data);
+            console.log(response.data)
+            // const dict_json = JSON.parse(response.data)
+            const local_list = Object.keys(response.data)
+            console.log(response.data, "\n", local_list)
+            var locations = [];
+            const locationsRef = collection(db, 'locations');
+            local_list.forEach(async (datas)=>{
+                console.log(datas)
+                const queryLocal = query(locationsRef, where("address", "==", datas))
+                const objLocal = await getDocs(queryLocal)
+                if(!queryLocal.empty){
+                    objLocal.forEach((docs)=>{
+                        const item = Object.keys(docs.data()).reduce((result, key) => {
+                            result[key.toString()] = docs.data()[key];
+                            return result;
+                          }, {});
+                        console.log(item)
+                        console.log(item.name)
+                        locations.push(item)
+                        console.log(locations.indexOf(item))
+                    })
+                }else{
+                    console.log("Elemento não encontrado")
+                }
+            })
+            
+            console.log(locations,"correct\n", locations.length)
+            // console.log(locations[0][name])
+            setLocationsData(locations)
+            // // Referência à coleção "locations"
+            // const querySnapshotlocal = await locationsReflocal.get();
+            // const locations = []; // Array para armazenar os valores de "local_ID"
+            // querySnapshotlocal.forEach((doc) => {
+            // // Para cada documento na coleção, obtenha o campo "local_ID" e adicione ao array
+            //     locations.push(doc.data());
+            // });
+          }).catch((error)=>{
+            if (error.response && error.response.status === 404) {
+                console.log('Recurso não encontrado');
+              } else {
+                console.error('Erro desconhecido:', error);
+              }
+          })
         setLocationsData(emAlta)
+        if (!post) return null;
+
+        return (
+          <div>
+            <h1>{post.title}</h1>
+            <p>{post.body}</p>
+          </div>
+        );
     }
 
 
