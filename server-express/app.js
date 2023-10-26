@@ -81,6 +81,34 @@ app.get('/getemalta', async (req, res)=>{
     console.log('[getEmAlta] ON')
 
     var local_dict = {}
+    var locations = [];
+    var newObj;
+
+    // function removeElementosRepetidos(lista) {
+    //     const mapa = new Map();
+    //     const listaSemRepeticao = [];
+
+    //     for (const item of lista) {
+    //         if (!mapa.has(item[propriedade])) {
+    //         mapa.set(item[propriedade], true);
+    //         listaSemRepeticao.push(item);
+    //         }
+    //     }
+
+    //     return listaSemRepeticao;
+    // }
+
+    function keysToString(obj) {
+        const newObj = {};
+      
+        for (const key in obj) {
+          if (Object.hasOwnProperty.call(obj, key)) {
+            newObj[String(key)] = obj[key];
+          }
+        }
+      
+        return newObj;
+      }
 
     const request_details = async (data)=>{
         // console.log(data, JSON.stringify(places_key.key))
@@ -105,6 +133,64 @@ app.get('/getemalta', async (req, res)=>{
             // console.log(ordered_dict);
             local_dict = ordered_dict;
             // console.log(local_dict, "Saída");
+            const local_list = Object.keys(local_dict)
+            console.log(local_dict, "\n", local_list)
+            // const locationsRef = collection(db, 'locations');
+            const locationsRef = db.collection('locations');
+            // local_list.forEach(async (datas)=>{
+            //     console.log(datas ,"locais")
+            //     // const queryLocal = query(locationsRef, where("address", "==", datas))
+            //     // const objLocal = await getDocs(queryLocal)
+            //     const queryLocal = await locationsRef.where("address", "==", datas).get();
+            //     const doc = queryLocal.docs[0]
+            //     const objLocal = doc.data()
+            //     console.log(objLocal.name, "local")
+            //     if(!queryLocal.empty && !locations.includes(newObj)){
+            //         // objLocal.forEach((docs)=>{
+            //         //     const item = Object.keys(docs.data()).reduce((result, key) => {
+            //         //         result[key.toString()] = docs.data()[key];
+            //         //         return result;
+            //         //       }, {});
+            //             newObj = keysToString(objLocal)
+            //             console.log(newObj.name, "string keys")
+            //             // console.log(item.name)
+            //             locations.push(newObj)
+                        
+            //             // console.log(locations.indexOf(item))
+            //         // })
+            //     }else{
+            //         console.log("Elemento não encontrado")
+            //     }
+            // })
+            for(const datas of local_list){
+                console.log(datas ,"locais")
+                    // const queryLocal = query(locationsRef, where("address", "==", datas))
+                    // const objLocal = await getDocs(queryLocal)
+                    const queryLocal = await locationsRef.where("address", "==", datas).get();
+                    const doc = queryLocal.docs[0]
+                    const objLocal = doc.data()
+                    console.log(objLocal.name, "local")
+                    if(!queryLocal.empty){
+                        // objLocal.forEach((docs)=>{
+                        //     const item = Object.keys(docs.data()).reduce((result, key) => {
+                        //         result[key.toString()] = docs.data()[key];
+                        //         return result;
+                        //       }, {});
+                            newObj = keysToString(objLocal)
+                            console.log(newObj.name, "string keys")
+                            const existeNaLista = locations.some(location => location.name === objLocal.name);
+                            // console.log(item.name)
+                            if (!existeNaLista){
+                                locations.push(newObj)
+                            }
+                            
+                            // console.log(locations.indexOf(item))
+                        // })
+                    }else{
+                        console.log("Elemento não encontrado")
+                    }
+
+            }
           } else{
             console.log("Erro na requisição:", result.status, result.statusText, );
           }
@@ -119,8 +205,8 @@ app.get('/getemalta', async (req, res)=>{
                 break
             }
           }
-        //   console.log(local_dict, "Saída 2");
-          res.send(JSON.stringify(local_dict))
+        //    console.log(local_dict, "Saída 2");
+           res.send(locations)
     }
 
      // getting local IDs

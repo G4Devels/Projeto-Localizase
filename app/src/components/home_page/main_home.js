@@ -141,34 +141,8 @@ export const MainHome = () => {
         axios.get(baseURL).then( async (response) => {
             setPost(response.data);
             console.log(response.data)
-            // const dict_json = JSON.parse(response.data)
-            const local_list = Object.keys(response.data)
-            console.log(response.data, "\n", local_list)
-            var locations = [];
-            const locationsRef = collection(db, 'locations');
-            local_list.forEach(async (datas)=>{
-                console.log(datas)
-                const queryLocal = query(locationsRef, where("address", "==", datas))
-                const objLocal = await getDocs(queryLocal)
-                if(!queryLocal.empty){
-                    objLocal.forEach((docs)=>{
-                        const item = Object.keys(docs.data()).reduce((result, key) => {
-                            result[key.toString()] = docs.data()[key];
-                            return result;
-                          }, {});
-                        console.log(item)
-                        console.log(item.name)
-                        locations.push(item)
-                        console.log(locations.indexOf(item))
-                    })
-                }else{
-                    console.log("Elemento não encontrado")
-                }
-            })
-            
-            console.log(locations,"correct\n", locations.length)
             // console.log(locations[0][name])
-            setLocationsData(locations)
+            setLocationsData(response.data)
             // // Referência à coleção "locations"
             // const querySnapshotlocal = await locationsReflocal.get();
             // const locations = []; // Array para armazenar os valores de "local_ID"
