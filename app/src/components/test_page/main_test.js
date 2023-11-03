@@ -3,6 +3,7 @@ import "../../component_styles/test_page.css";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
+import { ToastContainer, toast } from "react-toastify";
 
 export const MainTest = () => {
 
@@ -10,6 +11,7 @@ export const MainTest = () => {
     
     const [renderedElements, setRenderedElements] = useState(null);
     const [listInteresses, setListInteresses] = useState([]);
+    let listValues = []
 
 
 
@@ -29,21 +31,70 @@ export const MainTest = () => {
     }
 
 
+    // function valorInteresse(interesse){
+    //     if (listInteresses.includes(interesse)) {
+
+    //         //Se ja contém na lista excluirá
+    //         listInteresses.forEach((elemento, index) => {
+    //             console.log('Index: ' + index + ' Value: ' + elemento);
+    //             if (interesse === elemento){
+    //                 listInteresses.splice(index, 1)
+    //             }
+    //         })
+
+    //     } else {
+
+    //         // adicionando o interesse a lista
+    //         setListInteresses(interesse)
+    //         console.log(listInteresses)
+            
+    //     };
+    // };
+
+
+    // function valorInteresse(interesse){
+    //     if (!listInteresses.includes(interesse)) {
+
+    //         // adicionando o interesse a lista
+    //         setListInteresses(interesse);
+    //         console.log(listInteresses)
+    //     } else {
+
+    //         // Se ja contém na lista excluirá
+    //         setListInteresses(() => {
+
+    //             const updateList = listInteresses.forEach((elemento, index) => {
+    //                 console.log('Index: ' + index + ' Value: ' + elemento);
+    //                 if (interesse === elemento){
+    //                     listInteresses.splice(index, 1)
+    //                 }
+    //             })
+
+    //             console.log(updateList)
+
+    //             //const index = prevState.indexOf(interesse);
+    //             //const updatedList = [...prevState];
+    //             //updatedList.splice(index, 1);
+    //             //console.log(listInteresses)
+    //             //return updatedList
+    //         });
+    //     };
+    // };
 
     function valorInteresse(interesse){
-        if (!listInteresses.includes(interesse)) {
-
-            // adicionando o interesse a lista
-            setListInteresses((prevState) => [...prevState, interesse]);
-        } else {
-
-            // Se ja contém na lista excluirá
-            setListInteresses((prevState) => {
-                const index = prevState.indexOf(interesse);
-                const updatedList = [...prevState];
-                updatedList.splice(index, 1);
-            });
-        };
+        if (!listValues.includes(interesse)){
+            listValues.push(interesse)
+        }
+        else {
+            listValues.forEach((elemento, index) => {
+                console.log('Index: ' + index + ' Value: ' + elemento);
+                if (interesse === elemento){
+                    listValues.splice(index, 1)
+                }
+            })
+        }
+        console.log(listValues)
+        setListInteresses(listValues)
     };
 
 
@@ -53,7 +104,7 @@ export const MainTest = () => {
         if (listInteresses.length >= 3){
             await addUserInterests(listInteresses)
         } else {
-            alert ("Escolha 3 interesses!")
+            toast.error("Escolha 3 interesses!")
         }
     }
 
@@ -107,7 +158,7 @@ export const MainTest = () => {
                 </div> 
 
             </div>
-               
+            <ToastContainer autoClose={8000}/>
         </>
     );
 };
