@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup, updateProfile, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup, updateProfile, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, FacebookAuthProvider } from "firebase/auth";
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { app, db } from "../services/firebaseConfig";
 
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { Navigate } from "react-router-dom";
 
 const providerGoogle = new GoogleAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
 
 export const AuthAccountsContext = createContext({})
 
@@ -67,6 +68,27 @@ export const AuthAccountsProvider = ({ children }) => {
                 const errorMessage = error.message;
                 const email = error.customData.email;
                 const credential = GoogleAuthProvider.credentialFromError(error);
+            });
+    };
+
+
+
+    const signInFacebook = async () => {
+        await signInWithPopup(auth, providerFacebook)
+            .then((result) => {
+                const credential = FacebookAuthProvider.credentialFromResult(result);    
+                const token = credential.accessToken;
+                const user = result.user;
+                setUser(user);
+                localStorage.setItem("@AuthFirebase:token", token);
+                localStorage.setItem("@AuthFirebase:user", JSON.stringify(user));
+                readDataUser(auth.currentUser.uid);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.customData.email;
+                const credential = FacebookAuthProvider.credentialFromError(error);
             });
     };
 
@@ -214,7 +236,7 @@ export const AuthAccountsProvider = ({ children }) => {
 
 
     return (
-        <AuthAccountsContext.Provider value={{ signInGoogle, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut, auth, addUserInterests, recoverPassword}}>
+        <AuthAccountsContext.Provider value={{ signInGoogle, signInFacebook, signInEmailAndPassword, createUserInEmailAndPassword, signed: !!user, user, signOut, auth, addUserInterests, recoverPassword}}>
             {children}
         </AuthAccountsContext.Provider>
     )

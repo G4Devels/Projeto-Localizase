@@ -89,16 +89,20 @@
     margin-top: 20px;
 }
 
-#button-login-with-google{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.line {
+    border-top: 1px solid white ;
+    margin: 45px 0 10px 0;
+    width: 100%;
 }
 
-#button-login-with-google::after {
-    content: 'Continue com o google';
-    margin-left: 10px;
+.accountsSVG svg {
+    fill: #fff;
+    width: 1.6em;
+    height: 1.6em;
+    margin: 0.4em;
+    cursor: pointer;
 }
+
 
 .auth form button {
     border-radius: 5px;
@@ -121,7 +125,7 @@
 
 .auth p {
     font-size: 14px;
-    margin: 15px 0;
+    margin: 0px 0;
 }
 
 .divThePassword {
@@ -200,6 +204,11 @@
 @media (min-width: 360px) {
     .auth-container {
         width: 300px;
+    }
+    .accountsSVG svg {
+        width: 1.9em;
+        height: 1.9em;
+        margin: 1em;
     }
 }
 
