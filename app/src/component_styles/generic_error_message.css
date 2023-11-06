@@ -1,0 +1,15 @@
+.error-message-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.error-message-container .error-message-content {
+    color: rgba(0, 0, 0, 0.500);
+    display: flex;
+    align-items: center;
+}
+
+.error-message-container .error-message-content section {
+    margin-left: 10px;
+}

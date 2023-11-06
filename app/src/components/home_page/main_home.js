@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { CardsSection } from "./cards_section";
-import { MenuSection } from "./menu_section";
+import { MenuSection } from "../menu_section";
+import axios from 'axios'
 
 import '../../component_styles/main_home.css'
 
@@ -9,6 +10,7 @@ import { db } from "../../services/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore"; 
 import { MainFooter } from "../footer/main_footer";
 import { MainNavbar, MainProtectedHeader } from "../header/protected_header";
+import { MenuSectionInput } from "../menu_section_input";
 
 
 export const MainHome = () => {
@@ -90,7 +92,7 @@ export const MainHome = () => {
 
         return data.data()
     }
-    getDocData("users", userObject.uid)
+    
 
 
 
@@ -110,7 +112,13 @@ export const MainHome = () => {
 
 
     function getRecomendados () {
-        setLocationsData(recomendados)
+
+        axios.post(`http://localhost:5000/getrecomendados`, {userID: userObject.uid})
+        .then(res => {
+            setLocationsData(res.data)
+        })
+        .catch(error => console.log(error))
+
     }
 
 
@@ -121,10 +129,18 @@ export const MainHome = () => {
 
     async function getSalvos (userUID) {
 
-
+        
         const userDocument = await getDocData(`users`, userUID)
         const savedDocumentReferencesObject = userDocument.saved
-        const savedDocumentReferencesObjectKeys = Object.keys(savedDocumentReferencesObject)
+        let savedDocumentReferencesObjectKeys = null
+
+        if (savedDocumentReferencesObject != undefined) {
+            savedDocumentReferencesObjectKeys = Object.keys(savedDocumentReferencesObject)
+        }
+        else {
+            return setLocationsData(null)
+        }
+        
 
         const locationsID = savedDocumentReferencesObjectKeys.map( (key, index) => {
             const locationPath = savedDocumentReferencesObject[key]['_key']['path']['segments']
@@ -154,7 +170,12 @@ export const MainHome = () => {
         <>
 
             <div className="home">
-                <MenuSection setChoice={setChoice}/>
+                <MenuSection>
+                    <MenuSectionInput choiceValue={0} inputName={'Recomendados'} setChoice={setChoice} />
+                    <MenuSectionInput choiceValue={1} inputName={'Em alta'} setChoice={setChoice} />
+                    <MenuSectionInput choiceValue={2} inputName={'Salvos'} setChoice={setChoice} />
+                </MenuSection>
+
                 <CardsSection locations={locationsData}/>
             </div> 
             

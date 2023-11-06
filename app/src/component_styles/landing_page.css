@@ -1,27 +1,49 @@
-.about-container .about-container-card {
-    width: 300px;
-    height: 380px;
-
+.landing-page-content {
+    margin-top: 70vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    margin: 20px;
-    padding: 5px;
-
-    border-width: 0px 9px 9px 0px;
-    border-style: solid;
-    border-radius: 20px;
+    align-items: center;
 }
 
-.about-container #about-container-card-1 {
-    border-color: var(--color06);
+.landing-page-menu-section {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
 }
 
-.about-container #about-container-card-2 {
-    border-color: var(--color03);
+.landing-page-menu-section button {
+    width: max-content;
 }
 
-.about-container #about-container-card-3 {
-    border-color: var(--color07);
+
+.landing-page-content blockquote{
+    width: 350px;
+    padding: 40px;
+    border-radius: 10px;
+
+    background-color: #ff8000b9;
+    color: white;
+
+    backdrop-filter: blur( 13px );
+    -webkit-backdrop-filter: blur( 13px );
+
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.500);
+
+    position: absolute;
+    top: 50vh;
+
+    text-align: justify;
+}
+
+.landing-page-content blockquote::before {
+    font-size: 6em;
+    position: absolute;
+}
+
+.landing-page-content blockquote::before {
+    content: '\201c';
+    margin-top: -50px;
+    margin-left: -25px;
 }

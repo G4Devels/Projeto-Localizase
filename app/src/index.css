@@ -9,6 +9,7 @@
   --color05: #6cf15a;
   --color06: #0166f8;
   --color07: #ff7e00;
+  --color08: rgb(172, 193, 201);
 }
 
 body, html {
@@ -33,7 +34,7 @@ a {
   color: black;
 }
 
-button {
+/*button {
   background-color: white;
   border-radius: 5px;
   border: 1px solid black;
@@ -44,6 +45,11 @@ button {
 button:hover {
   background-color: rgb(240, 240, 240);
   cursor: pointer;
+}*/
+
+input:focus{
+  outline: 0;
+  box-shadow: 0 0 0.25em  white;
 }
 
 .mainContent {
@@ -54,4 +60,6 @@ button:hover {
 
 .mainContainer {
   flex: 1 1 0;
+  margin: 50px 0px;
+  display: flex;
 }

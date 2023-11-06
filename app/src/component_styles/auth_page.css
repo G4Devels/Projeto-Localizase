@@ -9,11 +9,22 @@
     background-repeat: no-repeat;
     background-size: cover;
 
-    background-color: rgba(1, 32, 52, 0.870);
     color: white;
 
     width: 100%;
     height: 100vh;
+}
+
+#bodyAuth #button-login-with-google, .auth form button, .forgotPassDiv button{
+    background-color: white;
+    border-radius: 5px;
+    width: 100%;
+    padding: 8px;
+}
+  
+#bodyAuth #button-login-with-google:hover, .auth form button:hover, .forgotPassDiv button:hover {
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
 }
 
 .auth-container {
@@ -69,7 +80,7 @@
 }
     
 
-.auth form input {
+.auth form input, .forgotPassDiv input{
     background: none;
     border: 1px solid white;
     border-radius: 5px;
@@ -78,16 +89,20 @@
     margin-top: 20px;
 }
 
-#button-login-with-google{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.line {
+    border-top: 1px solid white ;
+    margin: 45px 0 10px 0;
+    width: 100%;
 }
 
-#button-login-with-google::after {
-    content: 'Continue com o google';
-    margin-left: 10px;
+.accountsSVG svg {
+    fill: #fff;
+    width: 1.6em;
+    height: 1.6em;
+    margin: 0.4em;
+    cursor: pointer;
 }
+
 
 .auth form button {
     border-radius: 5px;
@@ -110,13 +125,90 @@
 
 .auth p {
     font-size: 14px;
-    margin: 15px 0;
+    margin: 0px 0;
 }
 
+.divThePassword {
+    position: relative;
+}
+
+.divThePassword input{
+    width: 100%;
+}
+
+.auth .forgotPass {
+    padding-top: 5px;
+    font-size: 12px;
+    margin: 0;
+    background: none;
+    color: white;
+    margin-left: auto;
+}
+.forgotPass:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.forgotPassDiv {
+    color: white;
+    position: absolute;
+    background-color: rgba(1, 32, 52);
+    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+    text-align: center;
+}
+
+.forgotPassDivBackground {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.forgotPassDiv h2{
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.forgotPassDiv p {
+    margin-bottom: 12px;
+}
+
+.forgotPassDiv input{
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.forgotPassDiv i {
+    top: 15px;
+    right: 15px;
+    color: white;
+    position: absolute;
+}
+
+.forgotPassDiv i:hover{
+    color: rgb(220, 220, 220);
+    cursor: pointer;
+}
+
+.forgotPassDiv i:checked{
+    color: red;
+}
 
 @media (min-width: 360px) {
     .auth-container {
         width: 300px;
+    }
+    .accountsSVG svg {
+        width: 1.9em;
+        height: 1.9em;
+        margin: 1em;
     }
 }
 
