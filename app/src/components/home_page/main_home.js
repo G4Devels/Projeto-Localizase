@@ -115,41 +115,12 @@ export const MainHome = () => {
         setLocationsData(recomendados)
     }
 
-    function customJsonStringify(obj) {
-        if (typeof obj !== 'object' || obj === null) {
-          // Se não for um objeto, retorne seu valor diretamente
-          if (typeof obj === 'string') {
-            return `"${obj}"`;
-          } else {
-            return String(obj);
-          }
-        } else if (Array.isArray(obj)) {
-          // Se for um array, construa a representação JSON do array
-          const items = obj.map((item) => customJsonStringify(item));
-          return `[${items.join(', ')}]`;
-        } else {
-          // Se for um objeto, construa a representação JSON do objeto
-          const pairs = Object.entries(obj).map(([key, value]) => {
-            return `"${key}": ${customJsonStringify(value)}`;
-          });
-          return `{${pairs.join(', ')}}`;
-        }
-      }
-
     const  getEmAlta = async () => {
         const baseURL = "http://localhost:5000/getemalta"
         axios.get(baseURL).then( async (response) => {
             setPost(response.data);
             console.log(response.data)
-            // console.log(locations[0][name])
             setLocationsData(response.data)
-            // // Referência à coleção "locations"
-            // const querySnapshotlocal = await locationsReflocal.get();
-            // const locations = []; // Array para armazenar os valores de "local_ID"
-            // querySnapshotlocal.forEach((doc) => {
-            // // Para cada documento na coleção, obtenha o campo "local_ID" e adicione ao array
-            //     locations.push(doc.data());
-            // });
           }).catch((error)=>{
             if (error.response && error.response.status === 404) {
                 console.log('Recurso não encontrado');
