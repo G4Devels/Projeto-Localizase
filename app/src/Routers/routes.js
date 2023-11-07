@@ -8,6 +8,7 @@ import { MainLanding } from "../components/landing_page/main_landing_page";
 import { ProtectedContainer } from "../components/protectedContainer";
 import { CommonContainer } from "../components/commonContainer";
 import { ForgotPassword } from "../components/forgotPassword/forgotPassword"
+import { LocalDetail } from "../components/local_detail/main_local_detail";
 
 export const AppRoutes = () => {
     return (
@@ -21,6 +22,7 @@ export const AppRoutes = () => {
                 <Route element={<PrivateRoutes />}>
                     <Route path="/test" element={ <ProtectedContainer> <MainTest/> </ProtectedContainer> } />
                     <Route path="/home" element={ <ProtectedContainer> <MainHome/> </ProtectedContainer> } />
+                    <Route path="/home/localdetail/:local_id" element={ <ProtectedContainer> <LocalDetail /> </ProtectedContainer> } />
                 </Route>
             </Routes>
 
