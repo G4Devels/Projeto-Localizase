@@ -35,9 +35,9 @@
 
 .local-detail .main-content {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-
-    height: 32px;
+    height: max-content;
     align-items: center;
 }
 
@@ -63,4 +63,23 @@
 
 .local-detail .local-description {
     text-align: justify;
+}
+
+
+.get-and-show-statistics {
+    margin-top: 20px;
+    width: 300px;
+    height: max-content;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (min-width: 762px) {
+    .get-and-show-statistics {
+        margin-top: 0px;
+    }
 }

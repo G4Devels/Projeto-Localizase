@@ -27,8 +27,11 @@ export const LocalDetail = () => {
                         <h1>Nome do local</h1>
                         <p>XXXX, YY - Bairro ZZZZ- WW • CEP 12345-678</p>
                     </section>
-
-                    <SaveIcon savedState={savedState} setSavedState={setSavedState}/>
+                    
+                    <section className="get-and-show-statistics">
+                        <LocalRating />
+                        <SaveIcon savedState={savedState} setSavedState={setSavedState}/>
+                    </section>
                 </div>
 
 
@@ -40,12 +43,10 @@ export const LocalDetail = () => {
 
 
                 <p className="local-description">{localDescription}</p>
+                
 
-
-                <LocalRating />
             </div>
             
-
         </div>
 
     )

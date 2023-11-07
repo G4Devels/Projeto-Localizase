@@ -1,0 +1,35 @@
+.local-rating {
+    display: flex;
+    height: max-content;
+    width: 200px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.rating-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.rating-data progress::-webkit-progress-bar{
+    background-color: gainsboro;
+    border-radius: 20px;
+}
+
+.rating-data progress::-webkit-progress-value{
+    background-color: #223D4E;
+    border-radius: 20px;
+}
+
+
+.star-section {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.star-section img{
+    width: 2em;
+    height: 2em;
+}
+
