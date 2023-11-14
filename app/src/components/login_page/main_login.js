@@ -5,6 +5,7 @@ import React, { useState, useContext } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { Link } from "react-router-dom";
 import { PasswordVisible } from "../passwordVisible"
+import { Loader } from "../loader_component"
 
 export const MainLogin = () => {
 
@@ -14,6 +15,7 @@ export const MainLogin = () => {
 
         
     const [forgotPassHTML, setForgotPassHTML] = useState("")
+    const [componentLoading, setComponentLoading] = useState(false)
     
     function navigateToRecoverPassword(event){
         event.preventDefault()
@@ -68,8 +70,10 @@ export const MainLogin = () => {
     };
 
     async function handleLoginFromEmailAndPassword(event) {
+        setComponentLoading(true)
         event.preventDefault();
         await signInEmailAndPassword(email, password);
+        setComponentLoading(false)
     };
 
 
@@ -100,7 +104,7 @@ export const MainLogin = () => {
                                 <PasswordVisible element="wordPass"/>
                             </div>
 
-                            <button type="submit">Entrar</button>
+                            <button type="submit">{ componentLoading ? <Loader /> : "Entrar"}</button>
                             
                         </form>
 

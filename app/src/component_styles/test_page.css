@@ -1,3 +1,8 @@
+@font-face {
+    font-family: SuperBoys;
+    src: url(../assets/SuperBoys.ttf);
+}
+
 :root {
     --color00: #000;
     --color01: #fff;
@@ -86,6 +91,12 @@
     font-size: 2em;
 }
 
+#container h1{
+    font-size: 3em;
+    font-family: SuperBoys;
+    color: var(--color02);
+}
+
 #container form .cardT input:checked ~ label {
     color: var(--color01);
     box-shadow: 4px 4px 0px 0px var(--color02);
@@ -129,19 +140,36 @@
 
 #container button {
     border-radius: 5px;
-    width: fit-content;
+    width: 88px;
     padding: 8px 12px;
-    border: none;
     cursor: pointer;
     margin-top: 20px;
+    border: 2px solid var(--color06);
+    animation: neon 2s infinite ease-in-out;
 }
 
-#container button:hover {
-    border: 2px solid var(--color06);
-    padding: 6px;
-    color: var(--color01);
-    background-color: var(--color02);
-    animation: neon 2s infinite ease-in-out;
+#container button:hover{
+    
+    /* padding: 6px; */
+    background-color: rgb(1, 32, 52, 0.25);
+    cursor: pointer;
+}
+
+.loadingTest .loadingAuthPage{
+    width: 50px;
+}
+
+.loadingTest .divLoadingAuthPage{
+    height: 50px;
+}
+
+.confirm .loadingAuthPage{
+    width: 18px;
+}
+
+.confirm .divLoadingAuthPage{
+    height: 18px;
+    width: 100%;
 }
 
 @keyframes neon {
