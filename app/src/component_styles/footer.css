@@ -8,6 +8,10 @@ footer {
     align-items: stretch;
 }
 
+footer h2 {
+    margin-bottom: 20px;
+}
+
 footer li {
     list-style-type: none;
     display: flex;

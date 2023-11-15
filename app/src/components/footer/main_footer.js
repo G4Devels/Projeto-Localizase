@@ -12,19 +12,19 @@ export const MainFooter = () => {
         <footer>
             
             <div className='footer-section website-sections'>
-                <p>Mapa do site</p>
+                <h2>Mapa do site</h2>
 
                 <ul>
-                    <li><Link>Landing</Link></li>
-                    <li><Link>Sobre nós</Link></li>
-                    <li><Link>Sobre nós</Link></li>
-                    <li><Link>Nosso serviço</Link></li>
-                    <li><Link>Experiências</Link></li>
+                    <li><Link> <span>Landing</span> </Link></li>
+                    <li><Link> <span>Sobre nós</span> </Link></li>
+                    <li><Link> <span>Sobre nós</span> </Link></li>
+                    <li><Link> <span>Nosso serviço</span> </Link></li>
+                    <li><Link> <span>Experiências</span> </Link></li>
                 </ul>
             </div>
 
             <div className='footer-section contact-us'>
-                <p>Contate-nos</p>
+                <h2>Contate-nos</h2>
 
                 <ul>
                     <li>
@@ -48,12 +48,12 @@ export const MainFooter = () => {
 
 
             <div className='footer-section legal'>
-                <p>Legal</p>
+                <h2>Legal</h2>
 
                 <ul>
-                    <li>g4devels@gmail.com</li>
-                    <li><Link>Política e privacidade</Link></li>
-                    <li>© G4Devels</li>
+                    <li> <span>g4devels@gmail.com</span> </li>
+                    <li><Link> <span>Política e privacidade</span> </Link></li>
+                    <li> <span>© G4Devels</span> </li>
                 </ul>
             </div>
             
