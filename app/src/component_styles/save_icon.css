@@ -1,0 +1,8 @@
+.save-icon {
+    width: 2em;
+    height: 2em;
+}
+
+.save-icon:hover {
+    cursor: pointer;
+}
