@@ -29,6 +29,14 @@ h1 {
   font-size: 1.5em;
 }
 
+h2 {
+  font-size: 1.40em;
+}
+
+p, span{
+  font-size: 1.25em;
+}
+
 a {
   text-decoration: none;
   color: black;
