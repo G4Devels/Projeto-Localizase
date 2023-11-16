@@ -5,12 +5,14 @@
     position: absolute;
     top: 0;
     left: 0;
-    
-    background-image: url('../assets/common_header_background.jpg');
+
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: bottom;
     background-size: cover;
+
+    display: flex;
+    justify-content: center;
 }
 
 .common-header-content {
@@ -60,12 +62,12 @@ header .header-nav .link-btn:hover {
 }
 
 header .header-nav a {
-    color: white;
+    color: var(--color01);
 }
 
 header .header-nav .nav-link-to-section:hover {
     color: whitesmoke;
-    border: solid white;
+    border: solid var(--color01);
     border-width: 0px 0px 2px 0px;
 }
 
@@ -129,4 +131,44 @@ header .header-nav .nav-link-to-section:hover {
         right: 20px;
     }
 
+}
+
+
+header blockquote{
+    width: 350px;
+    padding: 40px;
+    border-radius: 10px;
+
+    background-color: #ff8000b9;
+    color: var(--color01);
+
+    backdrop-filter: blur( 13px );
+    -webkit-backdrop-filter: blur( 13px );
+
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.500);
+
+    position: absolute;
+    top: 50vh;
+
+    text-align: justify;
+}
+
+header blockquote hr {
+    border: 1px solid var(--color01);
+    margin: 8px 0px;
+}
+
+header blockquote::before {
+    font-size: 6em;
+    position: absolute;
+
+    content: '\201c';
+    margin-top: -50px;
+    margin-left: -25px;
+    transition-duration: 150ms;
+}
+
+header blockquote:hover::before {
+    margin-top: -60px;
+    margin-left: -35px;
 }
