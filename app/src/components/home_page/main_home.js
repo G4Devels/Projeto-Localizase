@@ -123,7 +123,7 @@ export const MainHome = () => {
 
 
     const  getEmAlta = async () => {
-        const baseURL = "http://localhost:5000/getemalta"
+        /*const baseURL = "http://localhost:5000/getemalta"
         axios.get(baseURL).then( async (response) => {
             setPost(response.data);
             console.log(response.data)
@@ -143,7 +143,7 @@ export const MainHome = () => {
             <h1>{post.title}</h1>
             <p>{post.body}</p>
           </div>
-        );
+        );*/
     }
 
     async function getSalvos (userUID) {

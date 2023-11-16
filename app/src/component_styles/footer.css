@@ -1,59 +1,187 @@
-footer {
-    background-color: var(--color08);
-    color: black;
-    padding: 20px;
+:root {
+    --color00: #000;
+    --color01: #fff;
+    --color02: #012034;
+    --color03: #d9c856;
+    --color04: #ed08df;
+    --color05: #6cf15a;
+    --color06: #0166f8;
+    --color07: #ff7e00;
+    --color08: rgb(172, 193, 201);
+    --color09: #012034;
+    --color10: #003B62;
+}
 
-    display: flex;
+@keyframes neon {
+    25% {
+        border: 2px solid var(--color07);
+    }
+    50% {
+        border: 2px solid var(--color05);
+    }
+    75% {
+        border: 2px solid var(--color04);
+    }
+    100% {
+        border: 2px solid var(--color07);
+    }
+}
+
+footer {
+    background-color: var(--color09);
+    color: black;
+
+    display: flex;  
+    flex-flow: row wrap;
     justify-content: space-around;
     align-items: stretch;
 }
 
+.span {
+    color: var(--color08);
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.website-sections span:hover{
+    color: var(--color01);
+}
+
 footer h2 {
+    color: var(--color01);
     margin-bottom: 20px;
 }
 
-footer li {
+.socialMidia li {
+    display: inline-block;
+}
+
+footer .listPolitic li{
+    margin: 0 10px;
+}
+
+footer .listPolitic{
+    text-align: center;
+    margin-top: 5px;
+}
+
+.socialMidia li svg{
+    background-color: var(--color01);
+    border-radius: 100%;
+    padding: 2px;
+    margin: 5px;
+    border: 2px solid var(--color01);
+}
+
+.socialMidia li svg:hover{
+    animation: neon 2s infinite ease-in-out;
+    cursor: pointer;
+    background-color: rgb(240, 240, 240);
+}
+
+
+footer li{
     list-style-type: none;
     display: flex;
     align-items: center;
     margin-bottom: 5px;
-}
-
-footer img {
-    width: 1em;
-    height: 1em;
+    justify-content: center;
 }
 
 .footer-section {
-    margin: 20px;
+    margin: 40px 10px;
+    text-align: center;
 }
 
-.footer-section p{
+footer .dark p{
     margin-bottom: 15px;
 }
 
-.contact-us span {
+/* .contact-us span {
     margin-left: 10px;
+} */
+
+@keyframes neonLine {
+    25% {
+        border-top: 1px solid var(--color07);
+    }
+    50% {
+        border-top: 1px solid var(--color05);
+    }
+    75% {
+        border-top: 1px solid var(--color04);
+    }
+    100% {
+        border-top: 1px solid var(--color07);
+    }
 }
 
+footer .linha{
+    border-top: 1px solid var(--color01);
+    animation: neonLine 2s infinite ease-in-out;
+    width: 100%;
+    height: 1px;
+}
+
+footer .logo {
+    width: 153px;
+    height: 37.5px;
+    
+}
+
+footer .logo:hover {
+    cursor: pointer;
+}
+
+footer .logoLink{
+    margin: 20px;
+    text-align: center;
+}
+
+footer .dark{
+    background-color: #021725;
+    width: 100%;
+    color: var(--color08);
+}
+
+footer .dark p{
+    font-size: 14px;
+    color: var(--color08);
+    text-align: center;
+    margin: 5px 0;
+    margin-bottom: 80px;
+}
+
+.dark .span:hover{
+    color: var(--color01);
+}
+
+footer .listPolitic li{
+    display: inline-block;
+    margin-bottom: 5px;
+}
 
 @media (min-width: 360px) {
-    footer {
+    /* footer {
         flex-direction: column;
         align-items: center;
-    }
+    } */
 }
 
 @media (min-width: 660px) { 
-    footer {
+    /* footer {
         flex-direction: row;
         align-items: stretch;
-    }
+    } */
+    .footer-section { flex: 1 0 0; } 
+    footer .website-sections { order: 1; }
+    footer .socialMidia  { order: 3; }
+    footer .contact { order: 2;}
+    footer .linha  { order: 4; }
+    footer .logoLink { order: 5;}
+    footer .dark { order: 6; }
 }
 
-@media (min-width: 860px) { 
-    footer {
-        flex-direction: row;
-        align-items: stretch;
-    }
+@media (min-width: 660px) { 
+    
 }
