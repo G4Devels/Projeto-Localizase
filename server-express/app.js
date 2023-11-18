@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require("cors")
 const app = express()
-const port = 5000
+const port = 5001
 
 
 const { initializeApp, cert } = require('firebase-admin/app');
@@ -16,6 +16,8 @@ initializeApp({
 const db = getFirestore()
 
 app.use(cors());
+
+app.use(express.json())
 
 app.get('/getrecomendados/:userID', async (req, res)=>{
 
@@ -160,7 +162,51 @@ app.get('/getemalta', async (req, res)=>{
      }
 })
 
+//post dos comentários no bd
+
+app.post("/postcoments",(req, res)=>{
+    console.log("[postcoments] ON")
+    const jsonData = req.body
+    
+    const uid = '9qyGid0M1MZWAZo3U7E9LcDE3Ws2' //deve ser fornecido no post, é um exemplo tirado do firebase
+    const local_id = "Cs8WHee0NDvdVFS8Yaqn" //deve ser fornecido no post, é um exemplo tirado do firebase
+    const docRefNewAssessment= db.collection(`users/${uid}/assessments`).doc(`${local_id}`)
+    const docRefLocal = db.collection(`locations`).doc(`${local_id}`)
+    
+    console.log(jsonData)
+    console.log(jsonData.comment);
+    console.log(typeof pathToLocal)
+
+    const objectAssessment = {
+        "comment" : String(jsonData.comment),
+        "note" : jsonData.note
+    }
+    
+    const listAssessmentReference = {"assessment":[docRefNewAssessment]}
+   
+    docRefNewAssessment.set(objectAssessment, {merge: true})
+        .then(()=>{
+            console.log("referencia e documento adicionados")
+        })
+        .catch((error)=>{
+            console.log(error)
+            console.log("Deu ruim")
+        })
+    
+    docRefLocal.set(listAssessmentReference, {merge:true})
+        .then(()=>{
+            console.log("referencia no locations adicionada")
+        })
+        .catch((error)=>{
+            console.log(error)
+            console.log("Deu ruim")
+        })
+
+    res.send("DEU BOM");
+
+
+})
 
 app.listen(port, ()=>{
-    console.log('[SERVER] OK')
+    console.log('[SERVER] OK porta:', port)
 })
