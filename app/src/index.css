@@ -10,6 +10,8 @@
   --color06: #0166f8;
   --color07: #ff7e00;
   --color08: rgb(172, 193, 201);
+  --color09: #012034;
+  --color10: #003B62;
 }
 
 body, html {
@@ -26,12 +28,19 @@ body, html {
 }
 
 h1 {
-  font-size: 18px;
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.40em;
+}
+
+p, span{
+  font-size: 1.25em;
 }
 
 a {
   text-decoration: none;
-  color: black;
 }
 
 /*button {
@@ -55,7 +64,7 @@ input:focus{
 .mainContent {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .mainContainer {

@@ -7,7 +7,7 @@ export const AboutUs = () => {
 
         <div className='about-container'>
 
-            <div className='landing-page-content-section who-are-section'>
+            <div className='landing-page-content-section about-us-section'>
                 <h1>G4 Devels</h1>
 
                 <section>

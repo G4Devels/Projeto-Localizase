@@ -122,10 +122,29 @@ export const MainHome = () => {
     }
 
 
-    function getEmAlta () {
+    const  getEmAlta = async () => {
+        /*const baseURL = "http://localhost:5000/getemalta"
+        axios.get(baseURL).then( async (response) => {
+            setPost(response.data);
+            console.log(response.data)
+            setLocationsData(response.data)
+          }).catch((error)=>{
+            if (error.response && error.response.status === 404) {
+                console.log('Recurso não encontrado');
+              } else {
+                console.error('Erro desconhecido:', error);
+              }
+          })
         setLocationsData(emAlta)
-    }
+        if (!post) return null;
 
+        return (
+          <div>
+            <h1>{post.title}</h1>
+            <p>{post.body}</p>
+          </div>
+        );*/
+    }
 
     async function getSalvos (userUID) {
 
