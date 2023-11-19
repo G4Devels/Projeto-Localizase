@@ -10,6 +10,8 @@
   --color06: #0166f8;
   --color07: #ff7e00;
   --color08: rgb(172, 193, 201);
+  --color09: #012034;
+  --color10: #003B62;
 }
 
 body, html {
@@ -39,7 +41,6 @@ p, span{
 
 a {
   text-decoration: none;
-  color: black;
 }
 
 /*button {
