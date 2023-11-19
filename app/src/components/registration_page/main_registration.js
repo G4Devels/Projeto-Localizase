@@ -2,16 +2,18 @@ import "../../component_styles/auth_page.css";
 
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { PasswordVisible } from "../passwordVisible";
+import { Loader } from "../loader_component"
 
 
 export default function MainRegistration(){
-    
+    const [componentLoading, setComponentLoading] = useState(false)
     const { createUserInEmailAndPassword } = useContext(AuthAccountsContext);
 
     async function createUser(eventObj){
+        setComponentLoading(true)
         eventObj.preventDefault();
         const name = eventObj.target.elements.name.value;
         const email = eventObj.target.elements.email.value;
@@ -20,8 +22,10 @@ export default function MainRegistration(){
 
         if(password === password_2){
             await createUserInEmailAndPassword(name, email, password, password_2);
+            setComponentLoading(false)
         }else{
             toast.error('Senha menor que 6 caracteres');
+            setComponentLoading(false)
             /*const insertErrorHandling = document.getElementById('insertErrorHandling');
             insertErrorHandling.textContent = 'As senhas não correspondem';
             insertErrorHandling.style.display = "block"*/
@@ -60,7 +64,7 @@ export default function MainRegistration(){
                         
 
 
-                        <button type="submit">Criar</button>
+                        <button type="submit">{ componentLoading ? <Loader /> : "Criar"}</button>
                     </form>
                     <Link to="/login">Já possui conta? Fazer Login</Link>
 
