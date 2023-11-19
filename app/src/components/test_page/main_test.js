@@ -111,9 +111,7 @@ export const MainTest = () => {
             setComponentLoading(false)
         } else {
             toast.error("Escolha 3 interesses!")
-            setTimeout(()=>{
-                setComponentLoading(false)
-            }, 3000)
+            setComponentLoading(false)
         }
     }
 
@@ -156,18 +154,17 @@ export const MainTest = () => {
                 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'></link>
                 <div id="container" onSubmit={saveTest}>
                     <h1>REVELE SEUS GOSTOS!</h1>
-                    
-                    <form id="form">
 
-                        {renderedElements}
-                        <div className="loadingTest">
+                    <div className="loadingTest">
                         {!removeComponentLoading && <Loader />}
                     </div>
 
+                    <form id="form">
+
+                        {renderedElements}
+
                     </form>
-
-                     
-
+                    
                     <button className="confirm" type="submit" onClick={confirmButton}>{ componentLoading ? <LoaderWhite /> : "Confirmar"}</button>
 
                 </div> 
