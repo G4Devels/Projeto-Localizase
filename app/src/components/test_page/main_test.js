@@ -4,7 +4,7 @@ import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
 import { ToastContainer, toast } from "react-toastify";
-import { Loader } from "../loader_component"
+import { LoaderWhite, Loader } from "../loader_component"
 
 export const MainTest = () => {
 
@@ -111,7 +111,9 @@ export const MainTest = () => {
             setComponentLoading(false)
         } else {
             toast.error("Escolha 3 interesses!")
-            setComponentLoading(false)
+            setTimeout(()=>{
+                setComponentLoading(false)
+            }, 3000)
         }
     }
 
@@ -158,14 +160,15 @@ export const MainTest = () => {
                     <form id="form">
 
                         {renderedElements}
+                        <div className="loadingTest">
+                        {!removeComponentLoading && <Loader />}
+                    </div>
 
                     </form>
 
-                    <div className="loadingTest">
-                        {!removeComponentLoading && <Loader />}
-                    </div> 
+                     
 
-                    <button className="confirm" type="submit" onClick={confirmButton}>{ componentLoading ? <Loader /> : "Confirmar"}</button>
+                    <button className="confirm" type="submit" onClick={confirmButton}>{ componentLoading ? <LoaderWhite /> : "Confirmar"}</button>
 
                 </div> 
 
