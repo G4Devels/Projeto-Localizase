@@ -153,6 +153,10 @@ header blockquote{
     text-align: justify;
 }
 
+header blockquote:hover {
+    cursor: pointer;
+}
+
 header blockquote hr {
     border: 1px solid var(--color01);
     margin: 8px 0px;
