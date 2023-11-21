@@ -16,34 +16,3 @@
 .landing-page-menu-section button {
     width: max-content;
 }
-
-
-.landing-page-content blockquote{
-    width: 350px;
-    padding: 40px;
-    border-radius: 10px;
-
-    background-color: #ff8000b9;
-    color: white;
-
-    backdrop-filter: blur( 13px );
-    -webkit-backdrop-filter: blur( 13px );
-
-    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.500);
-
-    position: absolute;
-    top: 50vh;
-
-    text-align: justify;
-}
-
-.landing-page-content blockquote::before {
-    font-size: 6em;
-    position: absolute;
-}
-
-.landing-page-content blockquote::before {
-    content: '\201c';
-    margin-top: -50px;
-    margin-left: -25px;
-}

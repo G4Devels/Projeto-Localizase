@@ -15,13 +15,6 @@ export const MainLanding = () => {
         
         <div className='landing-page-content'>
             
-            <blockquote>
-                Vai, aonde te levar a alma,
-                Na senda que teu coração decidir.
-                Desfruta da jornada, encontra prazeres,
-                Pois a vida é uma aventura a prosseguir.
-            </blockquote>
-
             <MenuSection>
                 <MenuSectionInput choiceValue={0} inputName={'Sobre nós'} setChoice={setLandingPageMenuSection} />
                 <MenuSectionInput choiceValue={1} inputName={'Nosso serviço'} setChoice={setLandingPageMenuSection} />
