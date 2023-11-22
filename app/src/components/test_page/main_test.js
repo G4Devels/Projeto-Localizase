@@ -4,6 +4,7 @@ import { AuthAccountsContext } from "../../contexts/authAccounts";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
 import { ToastContainer, toast } from "react-toastify";
+import { LoaderWhite, Loader } from "../loader_component"
 
 export const MainTest = () => {
 
@@ -11,6 +12,8 @@ export const MainTest = () => {
     
     const [renderedElements, setRenderedElements] = useState(null);
     const [listInteresses, setListInteresses] = useState([]);
+    const [componentLoading, setComponentLoading] = useState(false)
+    const [removeComponentLoading, setRemoveComponentLoading] = useState(false)
     let listValues = []
 
 
@@ -19,6 +22,7 @@ export const MainTest = () => {
         const fetchElements = async () => {
             const elements = await AddCardTags();
             setRenderedElements(elements);
+            setRemoveComponentLoading(true)
         };
         fetchElements();
     }, []);
@@ -100,11 +104,14 @@ export const MainTest = () => {
 
 
     async function confirmButton(e){
+        setComponentLoading(true)
         e.preventDefault();
         if (listInteresses.length >= 3){
             await addUserInterests(listInteresses)
+            setComponentLoading(false)
         } else {
             toast.error("Escolha 3 interesses!")
+            setComponentLoading(false)
         }
     }
 
@@ -146,14 +153,19 @@ export const MainTest = () => {
 
                 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'></link>
                 <div id="container" onSubmit={saveTest}>
-                    <h1>Conte-nos seus interesses...</h1>
+                    <h1>REVELE SEUS GOSTOS!</h1>
+
+                    <div className="loadingTest">
+                        {!removeComponentLoading && <Loader />}
+                    </div>
 
                     <form id="form">
 
                         {renderedElements}
 
                     </form>
-                    <button className="confirm" type="submit" onClick={confirmButton}>Confirmar</button>
+                    
+                    <button className="confirm" type="submit" onClick={confirmButton}>{ componentLoading ? <LoaderWhite /> : "Confirmar"}</button>
 
                 </div> 
 
