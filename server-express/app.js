@@ -207,6 +207,27 @@ app.post("/postcoments",(req, res)=>{
 
 })
 
+app.post("/postsavelocations",(req, res)=>{
+    console.log("[postsavelocations] ON")
+    const jsonData = req.body
+    const uid = "BvlaZV4hblOjPkcDzzknsxW3BNl1"
+    const local_id = "WSHBw4ZFsh9zEV1y61Au"
+
+    const docRefUserSaverLocation = db.collection(`user`).doc(`${uid}`)
+    const docRefLocationToSave = db.collection("locations").doc(`${local_id}`)
+    const localToSave = {"saved":[docRefLocationToSave]}
+
+    docRefUserSaverLocation.set(localToSave, {merge:true})
+    .then(()=>{
+        console.log("referencia e documento adicionados")
+    })
+    .catch((error)=>{
+        console.log(error)
+        console.log("Deu ruim")
+    })
+    res.send("Deu bom")
+})
+
 app.listen(port, ()=>{
     console.log('[SERVER] OK porta:', port)
 })
