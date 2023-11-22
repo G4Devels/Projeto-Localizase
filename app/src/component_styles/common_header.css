@@ -27,7 +27,7 @@
     align-items: center;
 }
 
-.common-header-content img{
+.common-header-content .localizase-logo img{
     width: 200px;
     height: 46px;
 }
@@ -37,7 +37,7 @@ header .header-nav {
     min-height: 15vh;
     padding: 20px;
 
-    min-width: 500px;
+    min-width: 700px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -49,11 +49,12 @@ header .header-nav .link-btn {
     background-color: var(--color07);
     border-radius: 8px;
 
-    width: 65px;
+    width: 110px;
     height: 35px;
+    padding: 10px;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -63,6 +64,13 @@ header .header-nav .link-btn:hover {
 
 header .header-nav a {
     color: var(--color01);
+}
+
+header .header-nav .nav-link-to-section {
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 header .header-nav .nav-link-to-section:hover {
@@ -175,4 +183,11 @@ header blockquote::before {
 header blockquote:hover::before {
     margin-top: -60px;
     margin-left: -35px;
+}
+
+
+.section-icons {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
 }

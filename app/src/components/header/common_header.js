@@ -7,6 +7,12 @@ import backgroundImg_1 from '../../assets/common_header_background_1.jpg' ;
 import backgroundImg_2 from '../../assets/common_header_background_2.jpg' ;
 import backgroundImg_3 from '../../assets/common_header_background_3.jpg' ;
 
+import aboutUsIcon from '../../assets/common-landing-page-about-us-icon.png'
+import experienceIcon from '../../assets/common-landing-page-experiences-icon.png'
+import loginIcon from '../../assets/common-landing-page-login-icon.png'
+import ourServiceIcon from '../../assets/common-landing-page-our-service-icon.png'
+
+
 import '../../component_styles/common_header.css';
 
 export const CommonHeader = () => {
@@ -62,11 +68,25 @@ export const CommonHeader = () => {
                         
                     <nav ref={navRef} className="header-nav">
 
-                        <a className='nav-link-to-section' href='#about-us'>Sobre n√≥s</a>
-                        <a className='nav-link-to-section' href='#our-service'>Nosso servi√ßo</a>
-                        <a className='nav-link-to-section' href='#experience'>Experi√™ncias</a>
+                        <a className='nav-link-to-section' href='#about-us'>
+                            Sobre n√≥s
+                            <img className='section-icons' src={aboutUsIcon} alt='Õcone'/>
+                        </a>
+
+                        <a className='nav-link-to-section' href='#our-service'>
+                            Nosso servi√ßo
+                            <img className='section-icons' src={ourServiceIcon} alt='Õcone'/>
+                        </a>
                         
-                        <Link className="link-btn" to={signed ? "/home" : "/login"}>Entrar</Link>
+                        <a className='nav-link-to-section' href='#experience'>
+                            Experi√™ncias
+                            <img className='section-icons' src={experienceIcon} alt='Õcone'/>
+                        </a>
+                        
+                        <Link className="link-btn" to={signed ? "/home" : "/login"}>
+                            Entrar
+                            <img className='section-icons' src={loginIcon} alt='Õcone'/>
+                        </Link>
                         
                         <button className='nav-btn nav-btn-close' onClick={showNavBar}>
                             <FaTimes/>
