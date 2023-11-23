@@ -68,24 +68,24 @@ export const CommonHeader = () => {
                         
                     <nav ref={navRef} className="header-nav">
 
-                        <a className='nav-link-to-section' href='#about-us'>
+                        <a className='nav-link-to-section' href='#about-us-container'>
                             Sobre n√≥s
-                            <img className='section-icons' src={aboutUsIcon} alt='Õcone'/>
+                            <img className='section-icons' src={aboutUsIcon} alt='ÔøΩcone'/>
                         </a>
 
-                        <a className='nav-link-to-section' href='#our-service'>
+                        <a className='nav-link-to-section' href='#our-service-container'>
                             Nosso servi√ßo
-                            <img className='section-icons' src={ourServiceIcon} alt='Õcone'/>
+                            <img className='section-icons' src={ourServiceIcon} alt='ÔøΩcone'/>
                         </a>
                         
-                        <a className='nav-link-to-section' href='#experience'>
+                        <a className='nav-link-to-section' href='#experiences-container'>
                             Experi√™ncias
-                            <img className='section-icons' src={experienceIcon} alt='Õcone'/>
+                            <img className='section-icons' src={experienceIcon} alt='ÔøΩcone'/>
                         </a>
                         
                         <Link className="link-btn" to={signed ? "/home" : "/login"}>
                             Entrar
-                            <img className='section-icons' src={loginIcon} alt='Õcone'/>
+                            <img className='section-icons' src={loginIcon} alt='ÔøΩcone'/>
                         </Link>
                         
                         <button className='nav-btn nav-btn-close' onClick={showNavBar}>
