@@ -11,6 +11,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { MainFooter } from "../footer/main_footer";
 import { MainNavbar, MainProtectedHeader } from "../header/protected_header";
 import { MenuSectionInput } from "../menu_section_input";
+import { Loader } from "../loader_component"
 
 
 export const MainHome = () => {
@@ -70,6 +71,7 @@ export const MainHome = () => {
         },
     ]
 
+    const [componentLoading, setComponentLoading] = useState(false)
 
     const { signOut } = useContext(AuthAccountsContext);
 
@@ -181,7 +183,13 @@ export const MainHome = () => {
 
 
     useEffect(() => {
-        analyseChoice(choice)
+        
+        
+        setTimeout(() => {
+            analyseChoice(choice)
+            setComponentLoading(true)
+        }, 5000);
+
     }, [choice])
 
 
@@ -196,6 +204,11 @@ export const MainHome = () => {
                 </MenuSection>
 
                 <CardsSection locations={locationsData}/>
+                <div className="loadingHome">
+
+                    {!componentLoading && <Loader/>}
+
+                </div>
             </div> 
             
         </>

@@ -9,3 +9,11 @@
     bottom: 0;
     min-width: 100%
 }
+
+.loadingHome .loadingAuthPage{
+    width: 50px;
+}
+
+.loadingHome .divLoadingAuthPage{
+    height: 50px;
+}
