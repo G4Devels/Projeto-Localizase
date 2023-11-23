@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../component_styles/local_card.css';
 
 import { db } from "../../services/firebaseConfig";
@@ -8,31 +8,10 @@ import locationIcon from '../../assets/localpin-icon.svg';
 import descriptionIcon from '../../assets/description-icon.svg';
 
 export const LocalCard = ( {cardData} ) => {
-
-    const [tagsName, setTagsName] = useState([])
-
-    async function getTagName (tagData) {
-        
-        const tagIdPath = tagData['_key']['path']['segments']
-        const tagID = tagIdPath[tagIdPath.length - 1]
-
-        const tagDocRef = doc(db, 'tags', tagID)
-        const tagContent = await getDoc(tagDocRef)
-
-        return tagContent.data().name
-
-    }
-
-    const tagsNamePromisses = cardData.tags.map( (tagData, key) => getTagName(tagData) )
-
-    Promise.all(tagsNamePromisses)
-    .then(result => setTagsName(result))
-    .catch(error => console.log(error))
-    
-
+    console.log(cardData.local_ID)
     return(
 
-        <div className='card'>
+        <div className='card' onClick={() => window.location.assign( `/localdetail/${cardData.local_ID}`) }>
             
             <img className='card-img' src={cardData.img} alt="Imagem do card"></img>
 
@@ -44,12 +23,12 @@ export const LocalCard = ( {cardData} ) => {
                 
                 <a href='#'>Ver mais</a>
 
-                <div class="card-info">
+                <div className="card-info">
                     <img src={locationIcon} alt="local" />
                     <p>{cardData.address}</p>
                 </div>
 
-                <div class="card-info">
+                <div className="card-info">
                     <img src={descriptionIcon} alt="descrição" />
                     <p>{cardData.about}</p>
                 </div>

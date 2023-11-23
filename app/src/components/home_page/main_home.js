@@ -81,11 +81,6 @@ export const MainHome = () => {
     const [locationsData, setLocationsData] = useState([])
 
 
-    useEffect(() => {
-        analyseChoice(choice)
-    }, [choice])
-
-
     async function getDocData (collection, document) {
         const docSavedLocationsRef = doc(db, collection, document);
         const data = await getDoc(docSavedLocationsRef)
@@ -183,6 +178,11 @@ export const MainHome = () => {
 
 
     }
+
+
+    useEffect(() => {
+        analyseChoice(choice)
+    }, [choice])
 
 
     return (

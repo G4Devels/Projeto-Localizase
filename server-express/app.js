@@ -160,6 +160,21 @@ app.get('/getemalta', async (req, res)=>{
      }
 })
 
+app.post('/localdetail', async (req, res)=>{
+
+    console.log('[localdetail] ON')
+    const local_ID = req.body.local_ID
+
+    const localRef = db.collection('locations').doc(local_ID);
+    const doc = await localRef.get();
+
+    if (!doc.exists) {
+        console.log('No such document!');
+    } else {
+        res.send( doc.data() );
+    }
+
+})
 
 app.listen(port, ()=>{
     console.log('[SERVER] OK')
