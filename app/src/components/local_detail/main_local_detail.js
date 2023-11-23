@@ -19,6 +19,7 @@ export const LocalDetail = () => {
     const [width, setWidth] = useState(0)
 
     useEffect(() => {
+        console.log(local_id)
         setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
 
         axios.post(`http://localhost:5000/localdetail`, {local_ID: local_id})
@@ -34,13 +35,13 @@ export const LocalDetail = () => {
     return localData === null ? null : (
 
         <div className="local-detail">
-        
-            <div className="img-gradient">
-                <img className='local-background-image' src={localData.img} alt="Imagem do local"/>
-            </div>
-            
 
             <div className="content">
+
+                <div className="img-gradient">
+                    <img className='local-background-image' src={localData.img} alt="Imagem do local"/>
+                </div>
+
                 <div className="main-content">
                     <section>
                         <h1>{localData.name}</h1>
