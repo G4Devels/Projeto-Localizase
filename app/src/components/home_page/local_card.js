@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../component_styles/local_card.css';
 
 import { db } from "../../services/firebaseConfig";
@@ -8,7 +8,7 @@ import locationIcon from '../../assets/localpin-icon.svg';
 import descriptionIcon from '../../assets/description-icon.svg';
 
 export const LocalCard = ( {cardData} ) => {
-
+    console.log(cardData.local_ID)
     return(
 
         <div className='card' onClick={() => window.location.assign( `/localdetail/${cardData.local_ID}`) }>
