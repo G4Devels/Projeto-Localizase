@@ -97,11 +97,11 @@ export const MainHome = () => {
 
 
     function analyseChoice (choice) {
-        if (choice == 0) {
+        if (choice === 0) {
             getRecomendados()
         }
 
-        else if (choice == 1) {
+        else if (choice === 1) {
             getEmAlta()
         }
 
@@ -153,7 +153,7 @@ export const MainHome = () => {
         const savedDocumentReferencesObject = userDocument.saved
         let savedDocumentReferencesObjectKeys = null
 
-        if (savedDocumentReferencesObject != undefined) {
+        if (savedDocumentReferencesObject !== undefined) {
             savedDocumentReferencesObjectKeys = Object.keys(savedDocumentReferencesObject)
         }
         else {
