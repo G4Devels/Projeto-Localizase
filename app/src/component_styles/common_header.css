@@ -67,10 +67,8 @@ header .header-nav a {
 }
 
 header .header-nav .nav-link-to-section {
-    width: 150px;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 header .header-nav .nav-link-to-section:hover {
@@ -187,7 +185,7 @@ header blockquote:hover::before {
 
 
 .section-icons {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     margin-left: 10px;
 }
