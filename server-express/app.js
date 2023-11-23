@@ -168,14 +168,10 @@ app.post("/postcoments",(req, res)=>{
     console.log("[postcoments] ON")
     const jsonData = req.body
     
-    const uid = '9qyGid0M1MZWAZo3U7E9LcDE3Ws2' //deve ser fornecido no post, é um exemplo tirado do firebase
-    const local_id = "Cs8WHee0NDvdVFS8Yaqn" //deve ser fornecido no post, é um exemplo tirado do firebase
+    const uid = jsonData.uid //deve ser fornecido no post, é um exemplo tirado do firebase
+    const local_id = jsonData.local_id//deve ser fornecido no post, é um exemplo tirado do firebase
     const docRefNewAssessment= db.collection(`users/${uid}/assessments`).doc(`${local_id}`)
     const docRefLocal = db.collection(`locations`).doc(`${local_id}`)
-    
-    console.log(jsonData)
-    console.log(jsonData.comment);
-    console.log(typeof pathToLocal)
 
     const objectAssessment = {
         "comment" : String(jsonData.comment),
@@ -189,8 +185,8 @@ app.post("/postcoments",(req, res)=>{
             console.log("referencia e documento adicionados")
         })
         .catch((error)=>{
+            console.log("Erro ao adicionar")
             console.log(error)
-            console.log("Deu ruim")
         })
     
     docRefLocal.set(listAssessmentReference, {merge:true})
@@ -198,11 +194,11 @@ app.post("/postcoments",(req, res)=>{
             console.log("referencia no locations adicionada")
         })
         .catch((error)=>{
+            console.log("Erro ao adicionar")
             console.log(error)
-            console.log("Deu ruim")
         })
 
-    res.send("DEU BOM");
+    res.send("Operação realizada sem erros");
 
 
 })
@@ -210,8 +206,8 @@ app.post("/postcoments",(req, res)=>{
 app.post("/postsavelocations",(req, res)=>{
     console.log("[postsavelocations] ON")
     const jsonData = req.body
-    const uid = "BvlaZV4hblOjPkcDzzknsxW3BNl1"
-    const local_id = "WSHBw4ZFsh9zEV1y61Au"
+    const uid = jsonData.uid
+    const local_id = jsonData.local_id
 
     const docRefUserSaverLocation = db.collection(`user`).doc(`${uid}`)
     const docRefLocationToSave = db.collection("locations").doc(`${local_id}`)
@@ -222,10 +218,10 @@ app.post("/postsavelocations",(req, res)=>{
         console.log("referencia e documento adicionados")
     })
     .catch((error)=>{
+        console.log("Erro ao adicionar")
         console.log(error)
-        console.log("Deu ruim")
     })
-    res.send("Deu bom")
+    res.send("Operação realizada sem erros")
 })
 
 app.listen(port, ()=>{
