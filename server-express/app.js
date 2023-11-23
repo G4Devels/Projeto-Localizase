@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require("cors")
+var bodyParser = require('body-parser')
+var jsonParser = bodyParser.json()
 const app = express()
 const port = 5000
 
@@ -160,9 +162,10 @@ app.get('/getemalta', async (req, res)=>{
      }
 })
 
-app.post('/localdetail', async (req, res)=>{
+app.post('/localdetail', jsonParser, async (req, res)=>{
 
     console.log('[localdetail] ON')
+
     const local_ID = req.body.local_ID
 
     const localRef = db.collection('locations').doc(local_ID);
