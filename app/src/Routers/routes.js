@@ -23,7 +23,7 @@ export const AppRoutes = () => {
                 <Route element={<PrivateRoutes />}>
                     <Route path="/test" element={ <ProtectedContainer> <MainTest/> </ProtectedContainer> } />
                     <Route path="/home" element={ <ProtectedContainer> <MainHome/> </ProtectedContainer> } />
-                    <Route path="/home/localdetail/:local_id" element={ <ProtectedContainer> <LocalDetail /> </ProtectedContainer> } />
+                    <Route path="/localdetail/:local_id" element={ <ProtectedContainer> <LocalDetail /> </ProtectedContainer> } />
                 </Route>
 
                 <Route path="/pagina_nao_encontrada" element={ <Error_404/> }/>
