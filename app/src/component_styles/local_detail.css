@@ -24,7 +24,12 @@
 .local-detail .img-gradient {
     width: 100%;
     height: 40vh;
+    margin-bottom: 50px;
     /* background: linear-gradient(var(--color08) 0%, transparent); */
+}
+
+.local-detail .img-gradient img {
+    border-radius: 20px;
 }
 
 .local-detail .local-background-image {

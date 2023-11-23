@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require("cors")
+var bodyParser = require('body-parser')
+var jsonParser = bodyParser.json()
 const app = express()
 const port = 5000
 
@@ -17,13 +19,13 @@ const db = getFirestore()
 
 app.use(cors());
 
-app.get('/getrecomendados/:userID', async (req, res)=>{
+app.post('/getrecomendados', jsonParser, async (req, res)=>{
 
     console.log('[getRecomendados] ON')
 
 
     // getting user tags
-    const userID = req.params.userID
+    const userID = req.body.userID
 
     const userDocRef = db.collection('users').doc(userID);
     const userDocData = await userDocRef.get()
@@ -160,6 +162,22 @@ app.get('/getemalta', async (req, res)=>{
      }
 })
 
+app.post('/localdetail', jsonParser, async (req, res)=>{
+
+    console.log('[localdetail] ON')
+
+    const local_ID = req.body.local_ID
+
+    const localRef = db.collection('locations').doc(local_ID);
+    const doc = await localRef.get();
+
+    if (!doc.exists) {
+        console.log('No such document!');
+    } else {
+        res.send( doc.data() );
+    }
+
+})
 
 app.listen(port, ()=>{
     console.log('[SERVER] OK')

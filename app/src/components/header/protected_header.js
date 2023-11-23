@@ -1,5 +1,9 @@
 import React, { useContext } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
+
+import logoutIcon from '../../assets/protected-header-logout-icon.png'
+import userIcon from '../../assets/common-landing-page-login-icon.png'
+
 import '../../component_styles/protected_header.css';
 
 export const MainProtectedHeader = () => {
@@ -10,8 +14,23 @@ export const MainProtectedHeader = () => {
         <>
         
             <header className='protected-header'>
-                <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
-                <button onClick={() => signOut()}>Sair</button>  
+
+                <div className='localizase-logo'>
+                    <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
+                </div>
+                
+                <div className="buttons-and-sections">
+                    <button onClick={() => signOut()}>
+                        Sair
+                        <img src={logoutIcon} className='icon' alt="Ícone"/>
+                    </button>  
+
+                    <button className="highlighted-button" onClick={() => signOut()}>
+                        Perfil
+                        <img src={userIcon} className='icon' alt="Ícone"/>
+                    </button>  
+                </div>
+                
             </header>
         
         </>

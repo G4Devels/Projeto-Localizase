@@ -81,11 +81,6 @@ export const MainHome = () => {
     const [locationsData, setLocationsData] = useState([])
 
 
-    useEffect(() => {
-        analyseChoice(choice)
-    }, [choice])
-
-
     async function getDocData (collection, document) {
         const docSavedLocationsRef = doc(db, collection, document);
         const data = await getDoc(docSavedLocationsRef)
@@ -97,11 +92,11 @@ export const MainHome = () => {
 
 
     function analyseChoice (choice) {
-        if (choice == 0) {
+        if (choice === 0) {
             getRecomendados()
         }
 
-        else if (choice == 1) {
+        else if (choice === 1) {
             getEmAlta()
         }
 
@@ -113,7 +108,7 @@ export const MainHome = () => {
 
     function getRecomendados () {
 
-        axios.post(`http://localhost:5000/getrecomendados`, {userID: userObject.uid})
+        axios.post('http://localhost:5000/getrecomendados', {userID: userObject.uid})
         .then(res => {
             setLocationsData(res.data)
         })
@@ -153,7 +148,7 @@ export const MainHome = () => {
         const savedDocumentReferencesObject = userDocument.saved
         let savedDocumentReferencesObjectKeys = null
 
-        if (savedDocumentReferencesObject != undefined) {
+        if (savedDocumentReferencesObject !== undefined) {
             savedDocumentReferencesObjectKeys = Object.keys(savedDocumentReferencesObject)
         }
         else {
@@ -183,6 +178,11 @@ export const MainHome = () => {
 
 
     }
+
+
+    useEffect(() => {
+        analyseChoice(choice)
+    }, [choice])
 
 
     return (
