@@ -203,26 +203,40 @@ app.post("/postcoments",(req, res)=>{
 
 })
 
-app.post("/postsavelocations",(req, res)=>{
+app.post("/postsavelocations", async (req, res) => {
     console.log("[postsavelocations] ON")
-    const jsonData = req.body
-    const uid = jsonData.uid
-    const local_id = jsonData.local_id
+    const jsonData = req.body;
+    const uid = jsonData.uid;
+    const local_id = jsonData.local_id;
 
-    const docRefUserSaverLocation = db.collection(`user`).doc(`${uid}`)
-    const docRefLocationToSave = db.collection("locations").doc(`${local_id}`)
-    const localToSave = {"saved":[docRefLocationToSave]}
+    const docRefUserSaverLocation = db.collection(`users`).doc(`${uid}`);
 
-    docRefUserSaverLocation.set(localToSave, {merge:true})
-    .then(()=>{
-        console.log("referencia e documento adicionados")
-    })
-    .catch((error)=>{
-        console.log("Erro ao adicionar")
-        console.log(error)
-    })
-    res.send("Operação realizada sem erros")
-})
+    try {
+        // Obtém o documento do usuário
+        const userDoc = await docRefUserSaverLocation.get();
+
+        if (userDoc.exists) {
+            // Obtém o array existente ou cria um novo se não existir
+            const savedArray = userDoc.data().saved || [];
+
+            // Adiciona a nova referência ao array
+            const docRefLocationToSave = db.collection("locations").doc(`${local_id}`);
+            savedArray.push(docRefLocationToSave);
+
+            // Atualiza o campo "saved" no documento do usuário
+            await docRefUserSaverLocation.set({ saved: savedArray }, { merge: true });
+
+            console.log("Referência adicionada com sucesso");
+            res.send("Operação realizada sem erros");
+        } else {
+            console.log("Usuário não encontrado");
+            res.status(404).send("Usuário não encontrado");
+        }
+    } catch (error) {
+        console.error("Erro ao adicionar referência:", error);
+        res.status(500).send("Erro interno do servidor");
+    }
+});
 
 app.listen(port, ()=>{
     console.log('[SERVER] OK porta:', port)
