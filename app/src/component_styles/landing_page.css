@@ -10,13 +10,11 @@
 
 .landing-main-section {
     width: 100%;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
 }
 
 .landing-page-subsection section{
     text-align: justify;
-    width: 300px;
-    height: 210px;
 }
 
 .landing-page-subsection section h1{
@@ -43,4 +41,56 @@
     100% {
         background-position: 400%;
     }
+}
+
+
+.subsection-border {
+    position: absolute;
+    width: 300px;
+    height: 500px;
+    border-width: 0px 30px 30px 0px;
+    border-style: solid;
+}
+
+.subsection1-border {
+    border-color: #f9cb567c;
+}
+
+.subsection2-border {
+    border-color: #33bfc463;
+}
+
+.subsection3-border {
+    border-color: #b8604888;
+}
+
+
+.landing-page-subsection-board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.landing-page-subsection-board section {
+    width: 300px;
+    height: 500px;
+    
+    display: flex;
+    flex-direction: column;
+
+    padding: 30px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.500);
+}
+
+.landing-page-subsection-board section:hover {
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.500);
+    cursor: pointer;
+    padding: 29px;
+}
+
+.landing-page-subsection-board img{
+    margin-top: 30px;
 }
