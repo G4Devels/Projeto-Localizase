@@ -1,4 +1,4 @@
-.landing-page-content {
+.landing-page-container {
     margin-top: 80vh;
     width: 100%;
     display: flex;
@@ -7,12 +7,40 @@
     align-items: center;
 }
 
-.landing-page-menu-section {
-    display: flex;
-    justify-content: space-between;
-    width: 300px;
+
+.landing-main-section {
+    width: 100%;
+    margin-bottom: 60px;
 }
 
-.landing-page-menu-section button {
-    width: max-content;
+.landing-page-subsection section{
+    text-align: justify;
+    width: 300px;
+    height: 210px;
+}
+
+.landing-page-subsection section h1{
+    margin-bottom: 10px;
+}
+
+
+.landing-subsection-title {
+    margin-bottom: 45px;
+    text-align: center;
+    font-size: 4em;
+    background: linear-gradient(45deg, #fc9e3f, #ff9830, #fc9e3f, #ff9830, #fc9e3f);
+    animation: degrade 15s linear infinite alternate;
+    background-size: 400% 100%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes degrade {
+    0% {
+        background-position-x: 0%;
+    }
+
+    100% {
+        background-position: 400%;
+    }
 }
