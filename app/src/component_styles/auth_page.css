@@ -209,6 +209,9 @@
 .loadingAuthPage{
     width: 18px
 }
+.linkCreateAccount{
+    font-size: 1.1em;
+}
 
 
 @media (min-width: 360px) {
@@ -218,7 +221,7 @@
     .accountsSVG svg {
         width: 1.9em;
         height: 1.9em;
-        margin: 1em;
+        margin: 1.1em;
     }
 }
 

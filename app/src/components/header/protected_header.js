@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthAccountsContext } from "../../contexts/authAccounts";
 
 import logoutIcon from '../../assets/protected-header-logout-icon.png'
@@ -6,18 +6,21 @@ import userIcon from '../../assets/common-landing-page-login-icon.png'
 
 import '../../component_styles/protected_header.css';
 
+import logo2 from "../../assets/logo_colorida.png"
+import logo from "../../assets/logo_branca.png"
+import { Link } from "react-router-dom";
+
 export const MainProtectedHeader = () => {
 
     const { signOut } = useContext(AuthAccountsContext);
+    const [imageSrc, setImageSrc] = useState(logo)
 
     return (
         <>
         
             <header className='protected-header'>
 
-                <div className='localizase-logo'>
-                    <img src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
-                </div>
+                <Link to='/' ><img className='localizase-logo' src={ imageSrc } onMouseOver={() => setImageSrc( logo2 )} onMouseOut={() => setImageSrc( logo )} alt="Imagem"></img></Link>
                 
                 <div className="buttons-and-sections">
                     <button onClick={() => signOut()}>

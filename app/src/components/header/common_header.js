@@ -14,6 +14,8 @@ import ourServiceIcon from '../../assets/common-landing-page-our-service-icon.pn
 
 
 import '../../component_styles/common_header.css';
+import logo2 from "../../assets/logo_colorida.png"
+import logo from "../../assets/logo_branca.png"
 
 export const CommonHeader = () => {
 
@@ -21,6 +23,7 @@ export const CommonHeader = () => {
     const navRef = useRef();
     
     const [currentBackgroundimageState, setCurrentBackgroundimageState] = useState(0)
+    const [imageSrc, setImageSrc] = useState(logo)
 
     const backgroundContent = [
         {
@@ -64,7 +67,7 @@ export const CommonHeader = () => {
 
                 <div className='common-header-content'>
 
-                    <img className='localizase-logo' src={require('../../assets/localizase_logo.png')} alt="Logo do localizase"/>
+                    <Link to='/'><img className='localizase-logo' src={ imageSrc } onMouseOver={() => setImageSrc( logo2 )} onMouseOut={() => setImageSrc( logo )} alt="Imagem"></img></Link>
                         
                     <nav ref={navRef} className="header-nav">
 

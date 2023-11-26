@@ -17,6 +17,8 @@ export const MainLanding = () => {
     return (
         
         <div className='landing-page-content'>
+
+            <div className='linhaLanding'></div>
             
             {/* <MenuSection>
                 <MenuSectionInput choiceValue={0} inputName={'Sobre nós'} setChoice={setLandingPageMenuSection} />

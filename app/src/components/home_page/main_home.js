@@ -185,10 +185,8 @@ export const MainHome = () => {
     useEffect(() => {
         
         
-        setTimeout(() => {
-            analyseChoice(choice)
-            setComponentLoading(true)
-        }, 5000);
+        analyseChoice(choice)
+        setComponentLoading(true)
 
     }, [choice])
 
