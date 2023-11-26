@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require("cors")
 const app = express()
-const port = 5001
+const port = 5000
 
 
 const { initializeApp, cert } = require('firebase-admin/app');
@@ -108,27 +108,24 @@ app.get('/getemalta', async (req, res)=>{
             const ordered_dict = Object.fromEntries(ordered_array);
             local_dict = ordered_dict;
             const local_list = Object.keys(local_dict)
-            console.log(local_dict, "\n", local_list)
             const locationsRef = db.collection('locations');
             for(const datas of local_list){
-                console.log(datas ,"locais")
-                    const queryLocal = await locationsRef.where("address", "==", datas).get();
-                    const doc = queryLocal.docs[0]
-                    const objLocal = doc.data()
-                    console.log(objLocal.name, "local")
-                    if(!queryLocal.empty){
-                            newObj = keysToString(objLocal)
-                            console.log(newObj.name, "string keys")
-                            const existeNaLista = locations.some(location => location.name === objLocal.name);
-                            if (!existeNaLista){
-                                locations.push(newObj)
-                            }
-                    }else{
-                        console.log("Elemento não encontrado")
-                    }
+                const queryLocal = await locationsRef.where("address", "==", datas).get();
+                const doc = queryLocal.docs[0]
+                const objLocal = doc.data()
+                console.log(objLocal.name, "local")
+                if(!queryLocal.empty){
+                        newObj = keysToString(objLocal)
+                        const existeNaLista = locations.some(location => location.name === objLocal.name);
+                        if (!existeNaLista){
+                            locations.push(newObj)
+                        }
+                }else{
+                    console.log("Elemento não encontrado")
+                }
 
             }
-          } else{
+          }else{
             console.log("Erro na requisição:", result.status, result.statusText, );
           }
     }
@@ -151,11 +148,9 @@ app.get('/getemalta', async (req, res)=>{
         const locations = []; // Array para armazenar os valores de "local_ID"
         querySnapshot.forEach((doc) => {
             // Para cada documento na coleção, obtenha o campo "local_ID" e adicione ao array
-            locations.push(doc.data().local_ID);
+            locations.push(doc.data().places_id_api);
         });
         tratement_request(locations)
-        
-        // console.log(local_dict)
      }catch(error){
         console.error('Erro ao buscar dados:', error);
         res.status(500).json({ error: 'Erro ao buscar dados' });
