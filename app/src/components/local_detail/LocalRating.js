@@ -2,9 +2,7 @@ import { useState } from 'react'
 import '../../component_styles/local_rating.css'
 import { StarRating } from './star-rating'
 
-export const LocalRating = () => {
-    const starIndexes = [...new Array(5).keys()]
-    const [selectedIndex, setSelectedIndex] = useState(undefined)
+export const LocalRating = ({starIndexes, selectedIndex, setSelectedIndex}) => {
 
     return (
         <div className='local-rating'>

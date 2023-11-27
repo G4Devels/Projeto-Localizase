@@ -10,7 +10,10 @@ export const LocalDetail = () => {
 
     const {local_id} = useParams()
     const [localData, setLocalData] = useState(null)
+
     const [savedState, setSavedState] = useState(false)
+    const starIndexes = [...new Array(5).keys()]
+    const [selectedIndex, setSelectedIndex] = useState(undefined)
 
     const tagArray = ['Pet friendly', 'Sair a noite', 'Gastrobar', 'Familiar']
     const [carouselImgs, setCarouselImgs] = useState(null)
@@ -48,10 +51,10 @@ export const LocalDetail = () => {
                         <p>{localData.address}</p>
                     </section>
                     
-                    <section className="get-and-show-statistics">
-                        <LocalRating />
+                    <form onChange={(e) => {e.preventDefault(); console.log('oi')}} className="get-and-show-statistics">
+                        <LocalRating selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} starIndexes={starIndexes} />
                         <SaveIcon savedState={savedState} setSavedState={setSavedState}/>
-                    </section>
+                    </form>
                 </div>
 
 
