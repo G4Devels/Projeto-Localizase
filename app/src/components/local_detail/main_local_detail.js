@@ -21,9 +21,8 @@ export const LocalDetail = () => {
     const carousel = useRef()
     const [width, setWidth] = useState(0)
 
-    // TO DO: Lógica para ler a avaliação e verificar se o local já está salvo 
-
     useEffect(() => {
+        
         setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
 
         axios.post(`http://localhost:5000/localdetail`, {local_ID: local_id})
@@ -32,9 +31,6 @@ export const LocalDetail = () => {
             setCarouselImgs(res.data.carousel_imgs)
         })
         .catch(error => console.log(error))
-
-        
-        // TO DO: Lógica para salvar local e avaliação atual no banco de dados
 
     }, [selectedIndex, savedState])
 
