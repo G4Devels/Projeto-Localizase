@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require("cors")
+var bodyParser = require('body-parser')
+var jsonParser = bodyParser.json()
 const app = express()
 const port = 5000
 
@@ -18,14 +20,13 @@ const db = getFirestore()
 app.use(cors());
 
 app.use(express.json())
-
-app.get('/getrecomendados/:userID', async (req, res)=>{
+app.post('/getrecomendados', jsonParser, async (req, res)=>{
 
     console.log('[getRecomendados] ON')
 
 
     // getting user tags
-    const userID = req.params.userID
+    const userID = req.body.userID
 
     const userDocRef = db.collection('users').doc(userID);
     const userDocData = await userDocRef.get()
@@ -157,22 +158,25 @@ app.get('/getemalta', async (req, res)=>{
      }
 })
 
+
 //post dos comentários no bd
 
 app.post("/postcoments",(req, res)=>{
     console.log("[postcoments] ON")
-    const jsonData = req.body
+    const {uid, local_id, comment, note} = req.body
     
-    const uid = jsonData.uid //deve ser fornecido no post, é um exemplo tirado do firebase
-    const local_id = jsonData.local_id//deve ser fornecido no post, é um exemplo tirado do firebase
+    // const uid = jsonData.uid //deve ser fornecido no post, é um exemplo tirado do firebase
+    // const local_id = jsonData.local_id//deve ser fornecido no post, é um exemplo tirado do firebase
     const docRefNewAssessment= db.collection(`users/${uid}/assessments`).doc(`${local_id}`)
     const docRefLocal = db.collection(`locations`).doc(`${local_id}`)
 
     const objectAssessment = {
-        "comment" : String(jsonData.comment),
-        "note" : jsonData.note
+        // "comment" : String(jsonData.comment),
+        // "note" : jsonData.note
+        "comment" : comment,
+        "note" : note
     }
-    
+    console.log(uid+" "+local_id+" "+objectAssessment.comment+" "+objectAssessment.note)
     const listAssessmentReference = {"assessment":[docRefNewAssessment]}
    
     docRefNewAssessment.set(objectAssessment, {merge: true})
@@ -184,7 +188,7 @@ app.post("/postcoments",(req, res)=>{
             console.log(error)
         })
     
-    docRefLocal.set(listAssessmentReference, {merge:true})
+    docRefLocal.set(listAssessmentReference, {merge: true})
         .then(()=>{
             console.log("referencia no locations adicionada")
         })
@@ -232,6 +236,23 @@ app.post("/postsavelocations", async (req, res) => {
         res.status(500).send("Erro interno do servidor");
     }
 });
+
+app.post('/localdetail', jsonParser, async (req, res)=>{
+
+    console.log('[localdetail] ON')
+
+    const local_ID = req.body.local_ID
+
+    const localRef = db.collection('locations').doc(local_ID);
+    const doc = await localRef.get();
+
+    if (!doc.exists) {
+        console.log('No such document!');
+    } else {
+        res.send( doc.data() );
+    }
+
+})
 
 app.listen(port, ()=>{
     console.log('[SERVER] OK porta:', port)
