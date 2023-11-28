@@ -157,9 +157,17 @@ app.get('/getemalta', async (req, res)=>{
      }
 })
 
+app.get("/getcoments/:local_ID", async (req, res)=>{
+    console,log("[getcoments] ON")
+    const local_ID = req.params.local_ID
+
+    const docRefLocal = await db.collection("locations").doc(`${local_ID}`)
+
+})
+
 //post dos comentários no bd
 
-app.post("/postcoments",(req, res)=>{
+app.post("/postcoments",async (req, res)=>{
     console.log("[postcoments] ON")
     const jsonData = req.body
     
@@ -167,31 +175,48 @@ app.post("/postcoments",(req, res)=>{
     const local_id = jsonData.local_id//deve ser fornecido no post, é um exemplo tirado do firebase
     const docRefNewAssessment= db.collection(`users/${uid}/assessments`).doc(`${local_id}`)
     const docRefLocal = db.collection(`locations`).doc(`${local_id}`)
-
+    const localDoc = await docRefLocal.get()
+    // console.log(localDoc)
     const objectAssessment = {
         "comment" : String(jsonData.comment),
         "note" : jsonData.note
     }
-    
-    const listAssessmentReference = {"assessment":[docRefNewAssessment]}
+
+    function double_check(lista, item){
+        for(let i = 0;i<lista.length; i++){
+            if (lista[i].path == item.path){
+                return false
+            }
+        }
+        return true
+    }
+
+    if (localDoc.exists){
+        const savedAssessments = localDoc.data().assessments || []
+        if (savedAssessments.length == 0 || double_check(savedAssessments, docRefNewAssessment)){
+            savedAssessments.push(docRefNewAssessment)
+        }
+        const listAssessmentReference = {"assessments":savedAssessments}
+        docRefLocal.set(listAssessmentReference, {merge:true})
+        .then(()=>{
+            console.log("referencia no locations adicionada")
+        })
+        .catch((error)=>{
+            console.log("Erro ao adicionar 1")
+            console.log(error)
+        })
+    }
+
    
     docRefNewAssessment.set(objectAssessment, {merge: true})
         .then(()=>{
             console.log("referencia e documento adicionados")
         })
         .catch((error)=>{
-            console.log("Erro ao adicionar")
+            console.log("Erro ao adicionar 2")
             console.log(error)
         })
     
-    docRefLocal.set(listAssessmentReference, {merge:true})
-        .then(()=>{
-            console.log("referencia no locations adicionada")
-        })
-        .catch((error)=>{
-            console.log("Erro ao adicionar")
-            console.log(error)
-        })
 
     res.send("Operação realizada sem erros");
 
