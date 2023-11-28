@@ -158,10 +158,22 @@ app.get('/getemalta', async (req, res)=>{
 })
 
 app.get("/getcoments/:local_ID", async (req, res)=>{
-    console,log("[getcoments] ON")
+    console.log("[getcoments] ON")
     const local_ID = req.params.local_ID
+    const responseList = []
 
-    const docRefLocal = await db.collection("locations").doc(`${local_ID}`)
+    const docRefLocal = db.collection("locations").doc(`${local_ID}`)
+
+    const querySnapshot = await docRefLocal.get()
+    const referencesList = querySnapshot.data().assessments
+
+    for(x in referencesList){
+        const snapshot = await referencesList[x].get()
+        responseList.push(snapshot.data())
+        console.log(responseList)
+    }
+
+    res.send(responseList)
 
 })
 
@@ -176,7 +188,6 @@ app.post("/postcoments",async (req, res)=>{
     const docRefNewAssessment= db.collection(`users/${uid}/assessments`).doc(`${local_id}`)
     const docRefLocal = db.collection(`locations`).doc(`${local_id}`)
     const localDoc = await docRefLocal.get()
-    // console.log(localDoc)
     const objectAssessment = {
         "comment" : String(jsonData.comment),
         "note" : jsonData.note
