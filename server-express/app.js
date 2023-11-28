@@ -167,17 +167,34 @@ app.get("/getcoments/:local_ID", async (req, res)=>{
     const querySnapshot = await docRefLocal.get()
     const referencesList = querySnapshot.data().assessments
 
-    for(x in referencesList){
+    for(let x = 0; x<referencesList.length;x++){
         const snapshot = await referencesList[x].get()
         responseList.push(snapshot.data())
-        console.log(responseList)
     }
 
     res.send(responseList)
 
 })
 
-//post dos comentários no bd
+app.get("/getnote/:local_ID", async(req, res)=>{
+    console.log("[getnote] ON")
+    const local_ID = req.params.local_ID
+    var averageNote = 0 
+
+    const docRefLocal = db.collection("locations").doc(`${local_ID}`)
+
+    const querySnapshot = await docRefLocal.get()
+    const referencesList = querySnapshot.data().assessments
+
+    for(let x = 0; x<referencesList.length;x++){
+        const snapshot = await referencesList[x].get()
+        averageNote = (averageNote+snapshot.data().note)/(x+1)
+    }
+
+    averageNote = averageNote.toFixed(1)
+    res.send(averageNote)
+
+})
 
 app.post("/postcoments",async (req, res)=>{
     console.log("[postcoments] ON")
