@@ -4,6 +4,8 @@ import { StarRating } from './star-rating'
 export const LocalRating = ({starIndexes, selectedIndex, setSelectedIndex}) => {
 
 
+
+
     return (
         <div className='local-rating'>
 

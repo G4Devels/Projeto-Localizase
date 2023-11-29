@@ -3,8 +3,10 @@ import { SaveIcon } from "./save_icon"
 import { LocalRating } from "./LocalRating"
 import { useEffect, useRef, useState } from "react"
 import { motion } from 'framer-motion'
+import { db } from "../../services/firebaseConfig"
 import axios from 'axios'
 import '../../component_styles/local_detail.css'
+import { collection, doc, getDoc } from "firebase/firestore"
 
 export const LocalDetail = () => {
 
@@ -12,7 +14,7 @@ export const LocalDetail = () => {
     const [localData, setLocalData] = useState(null)
 
     const [savedState, setSavedState] = useState(false)
-    const starIndexes = [...new Array(5).keys()]
+    const starIndexes = [...new Array(5).keys()].map(index => index + 1)
     const [selectedIndex, setSelectedIndex] = useState(null)
 
     const [tagArray, setTagArray] = useState(['Pet friendly', 'Sair a noite', 'Gastrobar', 'Familiar'])
@@ -21,7 +23,13 @@ export const LocalDetail = () => {
     const carousel = useRef()
     const [width, setWidth] = useState(0)
 
+    const [noteUserOfBD, setNoteUserOfBD] = useState(null)
+
+    const userData = localStorage.getItem("@AuthFirebase:user");
+    const userID = JSON.parse(userData)
+
     useEffect(() => {
+        noteBD()
 
         setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
 
@@ -40,7 +48,30 @@ export const LocalDetail = () => {
         })
         .catch(error => console.log(error))
 
+        if (selectedIndex >= 1){
+            axios.post('http://localhost:5000/postcoments', {
+                "uid": userID.uid, 
+                "local_id": local_id, 
+                "comment": "", 
+                "note": selectedIndex,
+            })
+        }
+
     }, [selectedIndex, savedState])
+
+
+    async function noteBD (){   
+        const collectionsUsers = doc(db, 'users', userID.uid);
+        const collectionsAssessmentsOfUsers = doc(collectionsUsers, 'assessments', local_id);
+        const docAssessments =  await getDoc(collectionsAssessmentsOfUsers);
+
+        if (docAssessments.exists) {
+            const noteUser = docAssessments.data().note;
+            setNoteUserOfBD(noteUser)
+        }
+    }
+
+    
 
     
 
@@ -61,7 +92,7 @@ export const LocalDetail = () => {
                     </section>
                     
                     <form onChange={(e) => {e.preventDefault(); console.log('oi')}} className="get-and-show-statistics">
-                        <LocalRating selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} starIndexes={starIndexes} />
+                        <LocalRating selectedIndex={(selectedIndex === null) ? noteUserOfBD : selectedIndex } setSelectedIndex={setSelectedIndex} starIndexes={starIndexes} />
                         <SaveIcon savedState={savedState} setSavedState={setSavedState}/>
                     </form>
                 </div>
