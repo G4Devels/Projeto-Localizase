@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { db } from "../../services/firebaseConfig"
 import axios from 'axios'
 import '../../component_styles/local_detail.css'
-import { collection, doc, getDoc } from "firebase/firestore"
+import { collection, doc, getDoc, updateDoc } from "firebase/firestore"
 
 export const LocalDetail = () => {
 
@@ -29,7 +29,6 @@ export const LocalDetail = () => {
     const userID = JSON.parse(userData)
 
     useEffect(() => {
-        noteBD()
 
         setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
 
@@ -57,6 +56,12 @@ export const LocalDetail = () => {
             })
         }
 
+        noteBD()
+        setTimeout(() => {
+            checkLocationSavedDB()
+        }, 1000);
+        
+
     }, [selectedIndex, savedState])
 
 
@@ -65,15 +70,60 @@ export const LocalDetail = () => {
         const collectionsAssessmentsOfUsers = doc(collectionsUsers, 'assessments', local_id);
         const docAssessments =  await getDoc(collectionsAssessmentsOfUsers);
 
-        if (docAssessments.exists) {
+        if (docAssessments.exists()) {
             const noteUser = docAssessments.data().note;
             setNoteUserOfBD(noteUser)
         }
+
     }
 
-    
+    // esta função verifica se o local ja esta salvo pelo usuário, se estiver seleciona o botão de salvo
+    async function checkLocationSavedDB (){   
+        const collectionsUsers = doc(db, 'users', userID.uid);
+        const docUsers =  await getDoc(collectionsUsers);
 
-    
+        if (docUsers.exists()) {
+            const savedUser = docUsers.data().saved;
+            
+            if (savedUser != undefined){
+
+                savedUser.map(referencia => referencia.id).forEach(id => {
+                    console.log(id + " = " + local_id)
+                    if (local_id === id){
+                        setSavedState(true)
+                    };
+                });
+
+            };
+        };
+    };
+
+    async function savedLocationDB (){
+        // se não tiver nenhum local salvo referente ao id deste local adicionará no saved lá no firebase
+        if (!savedState){
+            await axios.post('http://localhost:5000/postsavelocations', {
+                "uid": userID.uid, 
+                "local_id": local_id,
+            });
+        }
+        // se esse local ja estiver salvo no saved excluira o local salvo no firebase
+        else if (savedState){
+            const collectionsUsers = doc(db, 'users', userID.uid);
+            const docUsers =  await getDoc(collectionsUsers);
+
+            if (docUsers.exists()) {
+                const savedUser = docUsers.data().saved;
+
+                savedUser.map(referencia => referencia.id).forEach(async id => {
+                    console.log(id + " = " + local_id)
+                    if (local_id === id){
+                        const removeSaved = savedUser.filter(value => value.id !== id);
+                        await updateDoc(collectionsUsers, { saved: removeSaved});
+                    };
+                });
+            };
+        };
+    };
 
     return localData === null ? null : (
 
@@ -93,7 +143,11 @@ export const LocalDetail = () => {
                     
                     <form onChange={(e) => {e.preventDefault(); console.log('oi')}} className="get-and-show-statistics">
                         <LocalRating selectedIndex={(selectedIndex === null) ? noteUserOfBD : selectedIndex } setSelectedIndex={setSelectedIndex} starIndexes={starIndexes} />
-                        <SaveIcon savedState={savedState} setSavedState={setSavedState}/>
+
+                        <div onClick={savedLocationDB}>
+                            <SaveIcon savedState={savedState} setSavedState={setSavedState}/>
+                        </div>
+                        
                     </form>
                 </div>
 
