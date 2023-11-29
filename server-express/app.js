@@ -214,8 +214,6 @@ app.post("/postcoments",async (req, res)=>{
         "note" : note
     }
 
-    console.log(uid+" "+local_id+" "+objectAssessment.comment+" "+objectAssessment.note)
-
     function double_check(lista, item){
         for(let i = 0;i<lista.length; i++){
             if (lista[i].path == item.path){
@@ -259,9 +257,7 @@ app.post("/postcoments",async (req, res)=>{
 
 app.post("/postsavelocations", async (req, res) => {
     console.log("[postsavelocations] ON")
-    const jsonData = req.body;
-    const uid = jsonData.uid;
-    const local_id = jsonData.local_id;
+    const { uid, local_id } = req.body
 
     const docRefUserSaverLocation = db.collection(`users`).doc(`${uid}`);
 
