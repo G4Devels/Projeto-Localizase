@@ -39,12 +39,12 @@ export const MainUserProfile = () => {
     }
 
     function saveUserProfile (event) {
-        
+        // TO DO: LÓGICA DE CONSUMO À API EXPRESS PARA SALVAR OS DADOS APÓS CADA MODIFICAÇÃO
     }
 
 
     useEffect(() => {
-        // TO DO: LÓGICA DE CONSUMO À API EXPRESS PARA SALVAR OS DADOS APÓS CADA MODIFICAÇÃO
+        // TO DO: LÓGICA DE CONSUMO À API EXPRESS PARA LER OS DADOS APÓS CADA MODIFICAÇÃO
     }, [name, surname, tagArray])
 
 
