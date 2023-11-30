@@ -19,6 +19,7 @@ const db = getFirestore()
 
 app.use(cors());
 
+
 app.post('/getrecomendados', jsonParser, async (req, res)=>{
 
     console.log('[getRecomendados] ON')
@@ -162,6 +163,7 @@ app.get('/getemalta', async (req, res)=>{
      }
 })
 
+
 app.post('/localdetail', jsonParser, async (req, res)=>{
 
     console.log('[localdetail] ON')
@@ -178,6 +180,33 @@ app.post('/localdetail', jsonParser, async (req, res)=>{
     }
 
 })
+
+
+app.post('/getTagArray', jsonParser, async (req, res) => {
+    console.log('[getTagArray] ON')
+
+    let tag_reference_array = req.body.tag_reference_array
+    tag_reference_array = tag_reference_array.map((value, index) => value._path.segments[1])
+
+    var tags_name = tag_reference_array.map(async (tag_ID, index) => {
+
+        const tagRef = db.collection('tags').doc(tag_ID);
+        const doc = await tagRef.get();
+    
+        if (!doc.exists) {
+            console.log('No such document!');
+        } else {
+            return doc.data().name
+        }
+        
+    })
+
+    Promise.all(tags_name)
+    .then(values => res.send(values))
+    .catch(error => console.log(error))
+
+})
+
 
 app.listen(port, ()=>{
     console.log('[SERVER] OK')

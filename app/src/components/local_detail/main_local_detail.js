@@ -10,25 +10,37 @@ export const LocalDetail = () => {
 
     const {local_id} = useParams()
     const [localData, setLocalData] = useState(null)
-    const [savedState, setSavedState] = useState(false)
 
-    const tagArray = ['Pet friendly', 'Sair a noite', 'Gastrobar', 'Familiar']
+    const [savedState, setSavedState] = useState(false)
+    const starIndexes = [...new Array(5).keys()]
+    const [selectedIndex, setSelectedIndex] = useState(null)
+
+    const [tagArray, setTagArray] = useState(['Pet friendly', 'Sair a noite', 'Gastrobar', 'Familiar'])
     const [carouselImgs, setCarouselImgs] = useState(null)
 
     const carousel = useRef()
     const [width, setWidth] = useState(0)
 
     useEffect(() => {
-        console.log(local_id)
+
         setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
 
         axios.post(`http://localhost:5000/localdetail`, {local_ID: local_id})
         .then(res => {
             setLocalData(res.data)
+            console.log(res.data)
             setCarouselImgs(res.data.carousel_imgs)
+
+            axios.post(`http://localhost:5000/getTagArray`, {tag_reference_array: res.data.tags})
+            .then(res => {
+                setTagArray(res.data)
+            })
+            .catch(error => console.log(error))
+
         })
         .catch(error => console.log(error))
-    }, [])
+
+    }, [selectedIndex, savedState])
 
     
 
@@ -48,10 +60,10 @@ export const LocalDetail = () => {
                         <p>{localData.address}</p>
                     </section>
                     
-                    <section className="get-and-show-statistics">
-                        <LocalRating />
+                    <form onChange={(e) => {e.preventDefault(); console.log('oi')}} className="get-and-show-statistics">
+                        <LocalRating selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} starIndexes={starIndexes} />
                         <SaveIcon savedState={savedState} setSavedState={setSavedState}/>
-                    </section>
+                    </form>
                 </div>
 
 
