@@ -39,6 +39,7 @@ export const MainUserProfile = () => {
     }
 
     function saveUserProfile (event) {
+        event.preventDefault()
         // TO DO: LÓGICA DE CONSUMO À API EXPRESS PARA SALVAR OS DADOS APÓS CADA MODIFICAÇÃO
     }
 
@@ -62,12 +63,12 @@ export const MainUserProfile = () => {
                 <div className='input-group'>
                     <section className='input-section'>
                         <p htmlFor='user-name'>Nome</p>
-                        <input type='text' value={name} id='user-name' placeholder='Digite seu nome' onChange={(e) => {e.target.value = e.target.value.toUpperCase()}} />
+                        <input type='text' value={name} id='user-name' placeholder='Digite seu nome' onChange={(e) => {e.target.value = e.target.value.toUpperCase(); setName(e.target.value)}} />
                     </section>
 
                     <section className='input-section'>
                         <p htmlFor='user-surname'>Sobrenome</p>
-                        <input type='text' value={surname} id='user-surname' placeholder='Digite seu sobrenome' onChange={(e) => {e.target.value = e.target.value.toUpperCase()}}/>
+                        <input type='text' value={surname} id='user-surname' placeholder='Digite seu sobrenome' onChange={(e) => {e.target.value = e.target.value.toUpperCase(); setSurname(e.target.value)}}/>
                     </section>
                 </div>
             </div>
