@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import '../../component_styles/user_profile.css'
+import { useFetcher } from 'react-router-dom'
 
 export const MainUserProfile = () => {
 
@@ -13,6 +14,9 @@ export const MainUserProfile = () => {
         7: 'Gastrobar', 
         8: 'Familiar'
     })
+
+    const [name, setName] = useState('NOME')
+    const [surname, setSurname] = useState('SOBRENOME')
 
     function updateUserImagePreview (event) {
         const fileData = event.target.files[0]
@@ -35,9 +39,13 @@ export const MainUserProfile = () => {
     }
 
     function saveUserProfile (event) {
-        event.preventDefault()
-
+        
     }
+
+
+    useEffect(() => {
+        // TO DO: LÓGICA DE CONSUMO À API EXPRESS PARA SALVAR OS DADOS APÓS CADA MODIFICAÇÃO
+    }, [name, surname, tagArray])
 
 
     return (
@@ -54,12 +62,12 @@ export const MainUserProfile = () => {
                 <div className='input-group'>
                     <section className='input-section'>
                         <p htmlFor='user-name'>Nome</p>
-                        <input type='text' id='user-name' placeholder='Digite seu nome' onChange={(e) => {e.target.value = e.target.value.toUpperCase()}} />
+                        <input type='text' value={name} id='user-name' placeholder='Digite seu nome' onChange={(e) => {e.target.value = e.target.value.toUpperCase()}} />
                     </section>
 
                     <section className='input-section'>
                         <p htmlFor='user-surname'>Sobrenome</p>
-                        <input type='text' id='user-surname' placeholder='Digite seu sobrenome' onChange={(e) => {e.target.value = e.target.value.toUpperCase()}}/>
+                        <input type='text' value={surname} id='user-surname' placeholder='Digite seu sobrenome' onChange={(e) => {e.target.value = e.target.value.toUpperCase()}}/>
                     </section>
                 </div>
             </div>
