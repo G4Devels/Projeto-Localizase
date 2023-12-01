@@ -208,6 +208,41 @@ app.post('/getTagArray', jsonParser, async (req, res) => {
 })
 
 
+app.post('/getUserTags', jsonParser, async (req, res) => {
+    console.log('[getUserTags] ON')
+
+    const userID = req.body.userID
+
+    const userData = db.collection('users').doc(userID);
+    const doc = await userData.get();
+
+    const tagsID = !doc.exists ? console.log('No such document!') : doc.data().tags
+
+    const tagsData = tagsID.map(async (tagID, index) => {
+
+        const tagRef = db.collection('tags').doc(tagID);
+        const doc = await tagRef.get();
+    
+        if (!doc.exists) {
+            console.log('No such document!');
+        } else {
+            return doc.data().name
+        }
+
+    })
+
+
+    Promise.all(tagsData)
+    .then(values => {
+        let userTags = {}
+        values.forEach((value, index) => userTags[index] = value)
+        res.send(userTags)
+    })
+    .catch(error => console.log(error))
+
+})
+
+
 app.listen(port, ()=>{
     console.log('[SERVER] OK')
 })

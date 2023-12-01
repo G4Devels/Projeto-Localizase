@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import '../../component_styles/user_profile.css'
-import { useFetcher } from 'react-router-dom'
+import { useFetcher, useParams } from 'react-router-dom'
+import axios from 'axios'
 
 export const MainUserProfile = () => {
 
+    const {user_id} = useParams()
     const [tagArray, setTagArray] = useState({
         1: 'Pet friendly', 
         2: 'Sair a noite', 
@@ -46,7 +48,14 @@ export const MainUserProfile = () => {
 
     useEffect(() => {
         // TO DO: LÓGICA DE CONSUMO À API EXPRESS PARA LER OS DADOS APÓS CADA MODIFICAÇÃO
-    }, [name, surname, tagArray])
+
+        axios.post(`http://localhost:5000/getUserTags`, {userID: user_id})
+        .then(res => {
+            setTagArray(res.data)
+        })
+        .catch(error => console.log(error))
+
+    }, [])
 
 
     return (
