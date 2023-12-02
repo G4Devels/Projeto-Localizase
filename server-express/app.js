@@ -366,6 +366,137 @@ app.post('/getUserTags', jsonParser, async (req, res) => {
 
 })
 
+// Função para ler a nota do usuário no banco de dados.
+app.post('/postNoteBD', jsonParser, async (req, res) => {
+    console.log('[postNoteBD] ON');
+
+    const {userID, localID} = req.body;
+
+    const collectionsUsers = db.collection('users').doc(userID);
+    const collectionsAssessmentsOfUsers = collectionsUsers.collection('assessments').doc(localID);
+
+    try {
+        const docAssessments =  await collectionsAssessmentsOfUsers.get();
+
+        if (!docAssessments.exists) {
+            res.status(404).send('No such document!');
+        }
+        else{
+            res.send(docAssessments.data());
+        };
+
+    } catch (error) {
+        res.status(500).send("Erro interno do servidor");
+    };
+});
+
+// se esse local ja estiver salvo no saved excluira o local salvo no firebase
+app.post('/deleteSaved', jsonParser, async (req, res) => {
+    console.log('[deleteSaved] ON');
+
+    const { userID, localID } = req.body;
+
+    const collectionsUsers = db.collection('users').doc(userID);
+
+    try {
+        const docUsers =  await collectionsUsers.get();
+
+        if (docUsers.exists) {
+            const savedUser = docUsers.data().saved;
+
+            savedUser.map(referencia => referencia.id).forEach(async id => {
+                if (localID === id){
+                    const removeSaved = savedUser.filter(value => value.id !== id);
+                    await collectionsUsers.update({
+                        saved: removeSaved
+                    })
+                };
+            });
+            res.send("operação realizada sem erros!");
+        }
+        else {
+            res.status(404).send("no such document");
+        };
+    } catch (error) {
+        res.status(500).send("Erro interno do servidor");
+    };
+});
+
+
+// função para calcular a nota média do local, que será chamada toda vez que atualizar a nota.
+app.post('/calculationAvarage', jsonParser, async (req, res) => {
+    console.log('[calculationAvarage] ON');
+
+    const { localID } = req.body;
+
+    const collectionLocations = db.collection('locations').doc(localID);
+    let listNotes = []
+    let sumOfGrades = 0
+
+    try {
+        const docLocation =  await collectionLocations.get();
+
+        if (docLocation.exists) {
+            const assessmentsLocation = docLocation.data().assessments
+
+            for ( const referenciaAssessments of assessmentsLocation){
+                const collectionUserAssessments = await referenciaAssessments.get()
+
+                if(collectionUserAssessments.exists){
+                    const assessmentsNote = collectionUserAssessments.data().note
+                    listNotes.push(assessmentsNote)
+                    sumOfGrades += assessmentsNote
+                }
+            }
+
+            res.send({avarageGrade: sumOfGrades / listNotes.length})
+        }
+        else {
+            res.status(404).send("no such document");
+        };
+    } catch (error) {
+        res.status(500).send("Erro interno do servidor");
+    };
+});
+
+
+// esta função verifica se o local ja esta salvo pelo usuário, se estiver seleciona o botão de salvo
+app.post('/checkLocationSavedDB', jsonParser, async (req, res) => {
+    console.log('[checkLocationSavedDB] ON');
+
+    const { userID, localID } = req.body;
+
+    const collectionsUsers = db.collection('users').doc(userID);
+
+    try{
+        const docUsers =  await collectionsUsers.get();
+
+        if (docUsers.exists) {
+            const savedUser = docUsers.data().saved;
+            
+            if (savedUser != undefined){
+
+                savedUser.map(referencia => referencia.id).forEach(id => {
+                    if (localID === id){
+                        res.send(true)
+                    };
+                });
+
+            }
+            else{
+                res.status(404).send("no such document");
+            }
+        }
+        else {
+            res.status(404).send("no such document");
+        };
+    } catch (error) {
+        res.status(500).send("Erro interno do servidor");
+    };
+});
+
+
+
 
 app.listen(port, ()=>{
     console.log('[SERVER] OK porta:', port)
