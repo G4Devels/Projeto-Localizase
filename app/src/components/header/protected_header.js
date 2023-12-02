@@ -15,6 +15,9 @@ export const MainProtectedHeader = () => {
     const { signOut } = useContext(AuthAccountsContext);
     const [imageSrc, setImageSrc] = useState(logo)
 
+    const userData = localStorage.getItem("@AuthFirebase:user");
+    const userID = JSON.parse(userData)
+
 
     return (
         <>
@@ -29,12 +32,10 @@ export const MainProtectedHeader = () => {
                         <img src={logoutIcon} className='icon' alt="Ícone"/>
                     </button>  
 
-                    <Link to="/userprofile/:user_id">
-                        <button className="highlighted-button">
+                    <button className="highlighted-button" onClick={() => window.location.assign( `/userprofile/${userID.uid}`) }>
                             Perfil
-                            <img src={userIcon} className='icon' alt="Ícone"/>
-                        </button>  
-                    </Link>
+                        <img src={userIcon} className='icon' alt="Ícone"/>
+                    </button>  
                     
                 </div>
                 

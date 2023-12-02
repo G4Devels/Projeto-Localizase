@@ -55,55 +55,37 @@ export const LocalDetail = () => {
                 "note": selectedIndex,
             })
         }
+        
 
-        calculationAvarage()
+        axios.post('http://localhost:5000/calculationAvarage', {
+            "localID": local_id,
+        })
+        .then(res => { setAvarage(res.data.avarageGrade) })
+        .catch(erro => { console.log(erro) })
 
-        noteBD()
+
+
+        axios.post('http://localhost:5000/postNoteBD', {
+            "userID": userID.uid,
+            "localID": local_id,
+        })
+        .then(res => { setNoteUserOfBD(res.data.note) })
+        .catch(erro => { console.log(erro) })
+
+
+
         
         setTimeout(() => {
-            checkLocationSavedDB()
+            axios.post('http://localhost:5000/checkLocationSavedDB', {
+                "userID": userID.uid,
+                "localID": local_id,
+            })
+            .then(res => { setSavedState(res.data) })
+            .catch(erro => { console.log(erro) })
         }, 1000);
         
 
     }, [selectedIndex, savedState])
-
-
-
-    // Função para o usuário dar a nota e adicionar no banco de dados.
-    async function noteBD (){   
-        const collectionsUsers = doc(db, 'users', userID.uid);
-        const collectionsAssessmentsOfUsers = doc(collectionsUsers, 'assessments', local_id);
-        const docAssessments =  await getDoc(collectionsAssessmentsOfUsers);
-
-        if (docAssessments.exists()) {
-            const noteUser = docAssessments.data().note;
-            setNoteUserOfBD(noteUser)
-        }
-
-    }
-
-
-
-    // esta função verifica se o local ja esta salvo pelo usuário, se estiver seleciona o botão de salvo
-    async function checkLocationSavedDB (){   
-        const collectionsUsers = doc(db, 'users', userID.uid);
-        const docUsers =  await getDoc(collectionsUsers);
-
-        if (docUsers.exists()) {
-            const savedUser = docUsers.data().saved;
-            
-            if (savedUser != undefined){
-
-                savedUser.map(referencia => referencia.id).forEach(id => {
-                    if (local_id === id){
-                        setSavedState(true)
-                    };
-                });
-
-            };
-        };
-    };
-
 
 
     async function savedLocationDB (){
@@ -116,52 +98,12 @@ export const LocalDetail = () => {
         }
         // se esse local ja estiver salvo no saved excluira o local salvo no firebase
         else if (savedState){
-            const collectionsUsers = doc(db, 'users', userID.uid);
-            const docUsers =  await getDoc(collectionsUsers);
-
-            if (docUsers.exists()) {
-                const savedUser = docUsers.data().saved;
-
-                savedUser.map(referencia => referencia.id).forEach(async id => {
-                    if (local_id === id){
-                        const removeSaved = savedUser.filter(value => value.id !== id);
-                        await updateDoc(collectionsUsers, { saved: removeSaved});
-                    };
-                });
-            };
+            await axios.post('http://localhost:5000/deleteSaved', {
+                "userID": userID.uid,
+                "localID": local_id,
+            })
         };
     };
-
-
-    // função para calcular a nota média do local, que será chamada toda vez que atualizar a nota.
-    async function calculationAvarage (){
-        const collectionLocations = doc(db, 'locations', local_id)
-        const docLocation = await getDoc(collectionLocations);
-        let listNotes = []
-        let sumOfGrades = 0
-
-        if (docLocation.exists()) {
-
-            const assessmentsLocation = docLocation.data().assessments
-
-            for ( const referenciaAssessments of assessmentsLocation){
-                const collectionUserAssessments = await getDoc(referenciaAssessments)
-
-                if(collectionUserAssessments.exists()){
-                    const assessmentsNote = collectionUserAssessments.data().note
-                    listNotes.push(assessmentsNote)
-                    sumOfGrades += assessmentsNote
-                }
-            }
-
-            const avarageGrade = sumOfGrades / listNotes.length
-
-            setAvarage(avarageGrade)
-
-        }
-
-        return "documento não existe"
-    }
 
 
     return localData === null ? null : (
