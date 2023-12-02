@@ -8,12 +8,13 @@ import '../../component_styles/protected_header.css';
 
 import logo2 from "../../assets/logo_colorida.png"
 import logo from "../../assets/logo_branca.png"
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 export const MainProtectedHeader = () => {
 
     const { signOut } = useContext(AuthAccountsContext);
     const [imageSrc, setImageSrc] = useState(logo)
+
 
     return (
         <>
@@ -28,10 +29,13 @@ export const MainProtectedHeader = () => {
                         <img src={logoutIcon} className='icon' alt="Ícone"/>
                     </button>  
 
-                    <button className="highlighted-button" onClick={() => signOut()}>
-                        Perfil
-                        <img src={userIcon} className='icon' alt="Ícone"/>
-                    </button>  
+                    <Link to="/userprofile/:user_id">
+                        <button className="highlighted-button">
+                            Perfil
+                            <img src={userIcon} className='icon' alt="Ícone"/>
+                        </button>  
+                    </Link>
+                    
                 </div>
                 
             </header>

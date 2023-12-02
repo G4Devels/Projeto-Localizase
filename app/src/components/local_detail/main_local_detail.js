@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { db } from "../../services/firebaseConfig"
 import axios from 'axios'
 import '../../component_styles/local_detail.css'
-import { collection, doc, getDoc, updateDoc } from "firebase/firestore"
+import { doc, getDoc, updateDoc } from "firebase/firestore"
 
 export const LocalDetail = () => {
 
@@ -24,6 +24,7 @@ export const LocalDetail = () => {
     const [width, setWidth] = useState(0)
 
     const [noteUserOfBD, setNoteUserOfBD] = useState(null)
+    const [avarage, setAvarage] = useState(null)
 
     const userData = localStorage.getItem("@AuthFirebase:user");
     const userID = JSON.parse(userData)
@@ -35,7 +36,6 @@ export const LocalDetail = () => {
         axios.post(`http://localhost:5000/localdetail`, {local_ID: local_id})
         .then(res => {
             setLocalData(res.data)
-            console.log(res.data)
             setCarouselImgs(res.data.carousel_imgs)
 
             axios.post(`http://localhost:5000/getTagArray`, {tag_reference_array: res.data.tags})
@@ -56,7 +56,10 @@ export const LocalDetail = () => {
             })
         }
 
+        calculationAvarage()
+
         noteBD()
+        
         setTimeout(() => {
             checkLocationSavedDB()
         }, 1000);
@@ -65,6 +68,8 @@ export const LocalDetail = () => {
     }, [selectedIndex, savedState])
 
 
+
+    // Função para o usuário dar a nota e adicionar no banco de dados.
     async function noteBD (){   
         const collectionsUsers = doc(db, 'users', userID.uid);
         const collectionsAssessmentsOfUsers = doc(collectionsUsers, 'assessments', local_id);
@@ -77,6 +82,8 @@ export const LocalDetail = () => {
 
     }
 
+
+
     // esta função verifica se o local ja esta salvo pelo usuário, se estiver seleciona o botão de salvo
     async function checkLocationSavedDB (){   
         const collectionsUsers = doc(db, 'users', userID.uid);
@@ -88,7 +95,6 @@ export const LocalDetail = () => {
             if (savedUser != undefined){
 
                 savedUser.map(referencia => referencia.id).forEach(id => {
-                    console.log(id + " = " + local_id)
                     if (local_id === id){
                         setSavedState(true)
                     };
@@ -97,6 +103,8 @@ export const LocalDetail = () => {
             };
         };
     };
+
+
 
     async function savedLocationDB (){
         // se não tiver nenhum local salvo referente ao id deste local adicionará no saved lá no firebase
@@ -115,7 +123,6 @@ export const LocalDetail = () => {
                 const savedUser = docUsers.data().saved;
 
                 savedUser.map(referencia => referencia.id).forEach(async id => {
-                    console.log(id + " = " + local_id)
                     if (local_id === id){
                         const removeSaved = savedUser.filter(value => value.id !== id);
                         await updateDoc(collectionsUsers, { saved: removeSaved});
@@ -124,6 +131,38 @@ export const LocalDetail = () => {
             };
         };
     };
+
+
+    // função para calcular a nota média do local, que será chamada toda vez que atualizar a nota.
+    async function calculationAvarage (){
+        const collectionLocations = doc(db, 'locations', local_id)
+        const docLocation = await getDoc(collectionLocations);
+        let listNotes = []
+        let sumOfGrades = 0
+
+        if (docLocation.exists()) {
+
+            const assessmentsLocation = docLocation.data().assessments
+
+            for ( const referenciaAssessments of assessmentsLocation){
+                const collectionUserAssessments = await getDoc(referenciaAssessments)
+
+                if(collectionUserAssessments.exists()){
+                    const assessmentsNote = collectionUserAssessments.data().note
+                    listNotes.push(assessmentsNote)
+                    sumOfGrades += assessmentsNote
+                }
+            }
+
+            const avarageGrade = sumOfGrades / listNotes.length
+
+            setAvarage(avarageGrade)
+
+        }
+
+        return "documento não existe"
+    }
+
 
     return localData === null ? null : (
 
@@ -142,7 +181,7 @@ export const LocalDetail = () => {
                     </section>
                     
                     <form onChange={(e) => {e.preventDefault(); console.log('oi')}} className="get-and-show-statistics">
-                        <LocalRating selectedIndex={(selectedIndex === null) ? noteUserOfBD : selectedIndex } setSelectedIndex={setSelectedIndex} starIndexes={starIndexes} />
+                        <LocalRating selectedIndex={(selectedIndex === null) ? noteUserOfBD : selectedIndex } setSelectedIndex={setSelectedIndex} starIndexes={starIndexes} averageGrade={avarage}/>
 
                         <div onClick={savedLocationDB}>
                             <SaveIcon savedState={savedState} setSavedState={setSavedState}/>
