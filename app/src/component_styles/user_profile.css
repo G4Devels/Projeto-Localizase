@@ -1,0 +1,143 @@
+.user-profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.input-group {
+    display: flex;
+}
+
+.user-profile-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.user-profile-section .user-image-input-container {
+    width: 145px;
+    height: 145px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px 0px var(--color07);
+}
+
+.user-profile-section .user-image-input-container:hover {
+    box-shadow: 0px 0px 15px 0px var(--color07);
+}
+
+.user-profile-image {
+    position: absolute;
+    padding: 3px;
+    object-fit: cover;
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+}
+
+.user-profile-section .user-image-input {
+    position: absolute;
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    background-color: aliceblue;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.user-profile-section input[type="text"] {
+    border-width: 0px 0px 2px 0px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0);
+    background-color: none;
+}
+
+.user-profile-section input[type="text"]:hover {
+    border-color: #ff800054;
+}
+
+.user-profile-section input[type="text"]:focus {
+    border-color: var(--color07);
+}
+
+
+
+
+.user-preferences {
+    flex-direction: column;
+}
+
+.tag-group{
+    background-color: #ff80001e;
+    box-shadow: 0px 0px 10px 0px #ff800086;
+    padding: 5px;
+    border-radius: 20px;
+    max-width: 650px;
+    min-height: 300px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.tag-content {
+    width: 150px;
+    height: max-content;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 20px;
+    background-color: var(--color09);
+    color: var(--color01);
+}
+
+.tag-content button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--color07);
+    color: var(--color01);
+    
+    border-radius: 50%;
+    padding: 5px;
+
+    width: 30px;
+    height: 30px;
+}
+
+.tag-content button:hover {
+    box-shadow: 0px 0px 10px 0px var(--color07);
+}
+
+
+.user-main-data {
+    flex-wrap: wrap;
+}
+
+
+.submit-user-profile {
+    background-color: var(--color07);
+    color: white;
+    cursor: pointer;
+    width: 150px;
+    height: 50;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.submit-user-profile:hover {
+    background-color: var(--color07-hover);
+}

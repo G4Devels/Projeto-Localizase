@@ -10,6 +10,7 @@ import { CommonContainer } from "../components/commonContainer";
 import { ForgotPassword } from "../components/forgotPassword/forgotPassword"
 import { Error_404 } from "../components/error_404_page/error_404"
 import { LocalDetail } from "../components/local_detail/main_local_detail";
+import { MainUserProfile } from "../components/user_profile/main_user_profile";
 
 export const AppRoutes = () => {
     return (
@@ -24,6 +25,7 @@ export const AppRoutes = () => {
                     <Route path="/test" element={ <ProtectedContainer> <MainTest/> </ProtectedContainer> } />
                     <Route path="/home" element={ <ProtectedContainer> <MainHome/> </ProtectedContainer> } />
                     <Route path="/localdetail/:local_id" element={ <ProtectedContainer> <LocalDetail /> </ProtectedContainer> } />
+                    <Route path="/userprofile/:user_id" element={ <ProtectedContainer> <MainUserProfile /> </ProtectedContainer>} />
                 </Route>
 
                 <Route path="/pagina_nao_encontrada" element={ <Error_404/> }/>
