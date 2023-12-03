@@ -5,9 +5,9 @@ var jsonParser = bodyParser.json()
 const app = express()
 const port = 5000
 
-
 const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
+const { getStorage } = require('firebase-admin/storage');
 
 const serviceAccount = require('./API_keys/localizase-b0c83-591dc4e68d1c.json');
 
@@ -16,6 +16,7 @@ initializeApp({
 })
 
 const db = getFirestore()
+const storage = getStorage()
 
 app.use(cors());
 
@@ -449,7 +450,7 @@ app.post('/calculationAvarage', jsonParser, async (req, res) => {
                 }
             }
 
-            res.send({avarageGrade: sumOfGrades / listNotes.length})
+            res.send({avarageGrade: (sumOfGrades / listNotes.length).toFixed(1)})
         }
         else {
             res.status(404).send("no such document");
@@ -494,6 +495,59 @@ app.post('/checkLocationSavedDB', jsonParser, async (req, res) => {
         res.status(500).send("Erro interno do servidor");
     };
 });
+
+
+app.post('/postImageProfile', jsonParser, async (req, res) => {
+    console.log('[postImage] ON')
+    const { userID, photoURL } = req.body;
+    const collectionUsers = db.collection('users').doc(userID)
+
+    try {
+        
+        const docUser = await collectionUsers.get()
+        if(docUser.exists){
+            collectionUsers.set({ photoURL: photoURL }, { merge: true })
+            .then((res)=>{
+                res.send("photoURL salva com sucesso")
+            })
+            .catch((error)=>{
+                res.send("erro ao salvar photoURL")
+            });
+        }
+        else{
+            res.send("no such document")
+        }
+
+    } catch (error) {
+        res.status(500).send("Erro interno no servidor!")
+    }
+
+    
+});
+
+app.post('/getImageProfile', jsonParser, async (req, res) => {
+    console.log("[getImageProfile] ON");
+
+    const { userID } = req.body;
+    const collectionUsers = db.collection('users').doc(userID)
+
+    try {
+        
+        const docUser = await collectionUsers.get()
+        if(docUser.exists){
+            const photoURLProfile = docUser.data().photoURL
+            res.send(photoURLProfile)
+        }
+        else{
+            res.send("no such document")
+        }
+
+    } catch (error) {
+        res.status(500).send("Erro interno no servidor!")
+    }
+});
+
+
 
 
 
