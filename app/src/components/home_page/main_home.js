@@ -96,14 +96,17 @@ export const MainHome = () => {
     function analyseChoice (choice) {
         if (choice === 0) {
             getRecomendados()
+            setComponentLoading(true)
         }
 
         else if (choice === 1) {
             getEmAlta()
+            setComponentLoading(true)
         }
 
         else {
             getSalvos(userObject.uid)
+            setComponentLoading(true)
         }
     }
 
@@ -184,9 +187,7 @@ export const MainHome = () => {
 
     useEffect(() => {
         
-        
         analyseChoice(choice)
-        setComponentLoading(true)
 
     }, [choice])
 

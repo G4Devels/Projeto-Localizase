@@ -7,6 +7,7 @@ import { db } from "../../services/firebaseConfig"
 import axios from 'axios'
 import '../../component_styles/local_detail.css'
 import { doc, getDoc, updateDoc } from "firebase/firestore"
+import { ToastContainer, toast } from "react-toastify"
 
 export const LocalDetail = () => {
 
@@ -94,7 +95,8 @@ export const LocalDetail = () => {
             await axios.post('http://localhost:5000/postsavelocations', {
                 "uid": userID.uid, 
                 "local_id": local_id,
-            });
+            }).then((res) => toast.success(`Local salvo na sua lista de favoritos!`))
+            
         }
         // se esse local ja estiver salvo no saved excluira o local salvo no firebase
         else if (savedState){
@@ -184,7 +186,7 @@ export const LocalDetail = () => {
                     <iframe src={localData.google_maps_API} width="100%" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
-
+                <ToastContainer/>
             </div>
             
         </div>

@@ -5,6 +5,14 @@
     align-items: center;
 }
 
+.componentLoadingProfile .loadingAuthPage{
+    width: 50px;
+}
+
+.componentLoadingProfile .divLoadingAuthPage{
+    height: 50px;
+}
+
 
 .input-group {
     display: flex;
