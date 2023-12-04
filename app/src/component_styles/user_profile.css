@@ -94,21 +94,93 @@
     flex-wrap: wrap;
 }
 
-.tag-content {
+.tag-content label{
     width: 150px;
     height: max-content;
 
     display: flex;
     align-items: center;
+    justify-content: center;
 
     gap: 10px;
-    border: 1px solid black;
     padding: 5px;
     margin: 5px;
     border-radius: 20px;
     background-color: var(--color09);
     color: var(--color01);
+    
 }
+
+.tag-group input{
+    position: absolute;
+    width: 150px;
+    height: 32.5px;
+    border-radius: 20px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.tag-group .tag-content input:checked ~label{
+    color: var(--color01);
+    box-shadow: 4px 4px 0px 0px var(--color09);
+}
+.tag-group .tag-content input:hover ~label{
+    color: var(--color01);
+    box-shadow: 4px 4px 0px 0px var(--color02);
+}
+
+.tag-group .orangeP label{
+    color: var(--color07);
+    box-shadow: 4px 4px 0px 0px var(--color07);
+}
+
+.tag-group .orangeP input:checked ~label{
+    background-color: var(--color07);
+}
+
+.tag-group .orangeP input:hover ~label{
+    background-color: var(--color07);
+}
+
+.tag-group .greenP label{
+    color: var(--color05);
+    box-shadow: 4px 4px 0px 0px var(--color05);
+}
+
+.tag-group .greenP input:checked ~label{
+    background-color: var(--color05);
+}
+
+.tag-group .greenP input:hover ~label{
+    background-color: var(--color05);
+}
+
+.tag-group .pinkP label{
+    color: var(--color04);
+    box-shadow: 4px 4px 0px 0px var(--color04);
+}
+
+.tag-group .pinkP input:checked ~label{
+    background-color: var(--color04);
+}
+
+.tag-group .pinkP input:hover label{
+    background-color: var(--color04);
+}
+
+.tag-group .yellowP label{
+    color: var(--color03);
+    box-shadow: 4px 4px 0px 0px var(--color03);
+}
+
+.tag-group .yellowP input:checked ~label{
+    background-color: var(--color03);
+}
+
+.tag-group .yellowP input:hover ~label{
+    background-color: var(--color03);
+}
+
 
 .tag-content button {
     cursor: pointer;

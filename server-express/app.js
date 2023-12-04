@@ -336,36 +336,50 @@ app.post('/getTagArray', jsonParser, async (req, res) => {
 app.post('/getUserTags', jsonParser, async (req, res) => {
     console.log('[getUserTags] ON')
 
-    const userID = req.body.userID
+    let userID = req.body.userID
 
-    const userData = db.collection('users').doc(userID);
-    const doc = await userData.get();
+    // const userData = await db.collection('tags').doc('09oF7InGWJRziAEE8Lh5').get();
 
-    const tagsID = !doc.exists ? console.log('No such document!') : doc.data().tags
+    // const tagsID = !userData.exists ? console.log('No such document!') : userData.data()
 
-    const tagsData = tagsID.map(async (tagID, index) => {
+    let listTags = []
 
-        const tagRef = db.collection('tags').doc(tagID);
-        const doc = await tagRef.get();
+    db.collection("tags").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            listTags.push(doc.data())
+            console.log(doc.data().name);
+        });
+        res.send(listTags)
+    });
     
-        if (!doc.exists) {
-            console.log('No such document!');
-        } else {
-            return doc.data().name
-        }
+    
+    // const tagsData = tagsID.map(async (tagID, index) => {
 
-    })
+    //     // const tagRef = db.collection('tags').doc(tagID);
+    //     // const doc = await tagRef.get();
+    
+    //     // if (!doc.exists) {
+    //     //     console.log('No such document!');
+    //     // } else {
+    //     //     return doc.data().name
+    //     // }
+    //     return tagID
+
+    // })
 
 
-    Promise.all(tagsData)
-    .then(values => {
-        let userTags = {}
-        values.forEach((value, index) => userTags[index] = value)
-        res.send(userTags)
-    })
-    .catch(error => console.log(error))
+    // Promise.all(tagsData)
+    // .then(values => {
+    //     let userTags = {}
+    //     values.forEach((value, index) => userTags[index] = value)
+    //     res.send(userTags)
+    // })
+    // .catch(error => console.log(error))
 
 })
+
+
 
 // Função para ler a nota do usuário no banco de dados.
 app.post('/postNoteBD', jsonParser, async (req, res) => {

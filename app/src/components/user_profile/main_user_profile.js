@@ -113,8 +113,16 @@ export const MainUserProfile = () => {
     }, [])
 
 
+    function setTagClass(tagClass) {
+        return `tag-content ${tagClass}`
+    }
+
+    let number = 0
+    const listColors = ["tag-content orangeP", "tag-content greenP", "tag-content pinkP", "tag-content yellowP"]
+
     return (
-        
+    
+
         <>
             <form className="user-profile" onSubmit={e => saveUserProfile(e)}>
                 
@@ -147,11 +155,21 @@ export const MainUserProfile = () => {
                     </div>
 
                     <div className='tag-group'>
-                        {Object.keys(tagArray).map((index, _) => {
+                        {Object.keys(tagArray).map((value, index) => {
+                            if (number < 3) {
+                                number += 1
+                            } else {
+                                number = 0
+                            };
                             return (
-                                <div key={index} className='tag-content'>
-                                    <button value={index} onClick={e => removeTagFromTagGroup(e)}>X</button>
-                                    <p>{tagArray[index]}</p>
+
+                                <div key={index} className={listColors[number]}>
+                                    <input type="checkbox" name="interesse" id={tagArray[value].name}></input>
+                                    <label>
+                                        {/* <button value={value.name} onClick={e => removeTagFromTagGroup(e)}>X</button> */}
+                                        {console.log(tagArray[value])}
+                                        <p>{tagArray[value].name}</p>
+                                    </label>
                                 </div>
                             )
                         })}
