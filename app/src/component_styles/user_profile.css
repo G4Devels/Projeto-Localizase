@@ -83,15 +83,16 @@
 }
 
 .tag-group{
-    background-color: #ff80001e;
-    box-shadow: 0px 0px 10px 0px #ff800086;
-    padding: 5px;
+    /* background-color: #ff80001e; */
+    box-shadow: 0px 0px 10px 0px #26262686;
+    padding: 10px 5px ;
     border-radius: 20px;
-    max-width: 650px;
+    max-width: 670px;
     min-height: 300px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    gap: 5px;
 }
 
 .tag-content label{
@@ -99,6 +100,7 @@
     height: max-content;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
@@ -114,10 +116,14 @@
 .tag-group input{
     position: absolute;
     width: 150px;
-    height: 32.5px;
+    height: 80px;
     border-radius: 20px;
     opacity: 0;
     cursor: pointer;
+}
+
+.tag-content i{
+    font-size: 2em;
 }
 
 .tag-group .tag-content input:checked ~label{
@@ -164,7 +170,7 @@
     background-color: var(--color04);
 }
 
-.tag-group .pinkP input:hover label{
+.tag-group .pinkP input:hover ~label{
     background-color: var(--color04);
 }
 

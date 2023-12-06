@@ -17,6 +17,12 @@
     justify-content: center;
 }
 
+.link-btn img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
 .common-header-content {
     padding: 0px 20px;
     width: 100%;

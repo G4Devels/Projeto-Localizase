@@ -1,3 +1,7 @@
+.user-profile {
+    padding: 50px 0;
+}
+
 .protected-header {
     width: 100%;
     background-color: var(--color09);
@@ -9,9 +13,19 @@
 }
 
 .protected-header .buttons-and-sections {
-    width: 200px;
+    width: max-content;
     display: flex;
     justify-content: space-around;
+    gap: 10px;
+}
+
+.highlighted-button img {
+    border-radius: 50%;
+}
+
+.protected-header .buttons-and-sections .icon {
+    margin-left: 10px;
+
 }
 
 .protected-header button{
@@ -22,7 +36,7 @@
     color: var(--color01);
     border-radius: 8px;
 
-    width: 90px;
+    
     height: 35px;
     padding: 10px;
 

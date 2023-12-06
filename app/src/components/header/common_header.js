@@ -19,6 +19,9 @@ import logo from "../../assets/logo_branca.png"
 
 export const CommonHeader = () => {
 
+    const userData = localStorage.getItem("@AuthFirebase:user");
+    const user = JSON.parse(userData)
+
     const { signed } = useContext(AuthAccountsContext);
     const navRef = useRef();
     
@@ -88,7 +91,7 @@ export const CommonHeader = () => {
                         
                         <Link className="link-btn" to={signed ? "/home" : "/login"}>
                             Entrar
-                            <img className='section-icons' src={loginIcon} alt='�cone'/>
+                            <img src={(user != null) ? user.photoURL : loginIcon} className='icon' alt="Ícone"/>
                         </Link>
                         
                         <button className='nav-btn nav-btn-close' onClick={showNavBar}>

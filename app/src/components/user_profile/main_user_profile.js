@@ -56,6 +56,13 @@ export const MainUserProfile = () => {
                             "photoURL": url,
                         });
 
+                        updateProfile(auth.currentUser, {
+                            photoURL: url
+                        })
+                        const user = JSON.parse(localStorage.getItem('@AuthFirebase:user'));
+                        user.photoURL = url;
+                        localStorage.setItem('@AuthFirebase:user', JSON.stringify(user));
+
                     })
                     .catch((error)=> console.log(error));
 
@@ -124,6 +131,7 @@ export const MainUserProfile = () => {
     
 
         <>
+            <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'></link>
             <form className="user-profile" onSubmit={e => saveUserProfile(e)}>
                 
                 <div className="user-profile-section user-main-data">
@@ -167,8 +175,8 @@ export const MainUserProfile = () => {
                                     <input type="checkbox" name="interesse" id={tagArray[value].name}></input>
                                     <label>
                                         {/* <button value={value.name} onClick={e => removeTagFromTagGroup(e)}>X</button> */}
-                                        {console.log(tagArray[value])}
                                         <p>{tagArray[value].name}</p>
+                                        <i className={tagArray[value].icon}></i>
                                     </label>
                                 </div>
                             )
