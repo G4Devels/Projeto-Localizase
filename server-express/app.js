@@ -347,8 +347,7 @@ app.post('/getUserTags', jsonParser, async (req, res) => {
     db.collection("tags").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
-            listTags.push(doc.data())
-            console.log(doc.data().name);
+            listTags.push(doc.data());
         });
         res.send(listTags)
     });
