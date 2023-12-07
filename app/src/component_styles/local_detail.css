@@ -111,6 +111,7 @@
     flex-direction: column;
     justify-content: space-around;
     gap: 20px;
+    padding-right: 10px;
 }
 
 .carousel {
