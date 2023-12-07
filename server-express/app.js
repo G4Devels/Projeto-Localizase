@@ -82,7 +82,7 @@ app.post('/getrecomendados', jsonParser, async (req, res)=>{
 })
 
 
-app.get('/getemalta', async (req, res)=>{
+app.post('/getemalta', async (req, res)=>{
     console.log('[getEmAlta] ON')
 
     var local_dict = {}
@@ -333,49 +333,80 @@ app.post('/getTagArray', jsonParser, async (req, res) => {
 })
 
 
-app.post('/getUserTags', jsonParser, async (req, res) => {
+app.post('/getTags', jsonParser, async (req, res) => {
     console.log('[getUserTags] ON')
 
-    let userID = req.body.userID
-
-    // const userData = await db.collection('tags').doc('09oF7InGWJRziAEE8Lh5').get();
-
-    // const tagsID = !userData.exists ? console.log('No such document!') : userData.data()
-
-    let listTags = []
+    const listTags = []
 
     db.collection("tags").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
             listTags.push(doc.data());
         });
         res.send(listTags)
     });
+
+})
+
+
+app.post('/getUserTags', jsonParser, async (req, res) => {
+    const userID = req.body.userID;
+    const userData = await db.collection('users').doc(userID).get();
+
+    const tagsID = !userData.exists ? console.log('No such document!') : userData.data();
     
     
-    // const tagsData = tagsID.map(async (tagID, index) => {
+    const tagsData = tagsID.tags.map(async (tagID, index) => {
 
-    //     // const tagRef = db.collection('tags').doc(tagID);
-    //     // const doc = await tagRef.get();
+        const tagRef = db.collection('tags').doc(tagID);
+        const doc = await tagRef.get();
     
-    //     // if (!doc.exists) {
-    //     //     console.log('No such document!');
-    //     // } else {
-    //     //     return doc.data().name
-    //     // }
-    //     return tagID
+        if (!doc.exists) {
+            console.log('No such document!');
+        } else {
+            return doc.data().name;
+        };
 
-    // })
+        return tagID;
+
+    });
 
 
-    // Promise.all(tagsData)
-    // .then(values => {
-    //     let userTags = {}
-    //     values.forEach((value, index) => userTags[index] = value)
-    //     res.send(userTags)
-    // })
-    // .catch(error => console.log(error))
+    Promise.all(tagsData)
+    .then(values => {
+        let userTags = [];
+        values.forEach((value, index) => userTags.push(value));
+        res.send(userTags);
+    })
+    .catch(error => console.log(error));
+});
 
+app.post('/postNewTags', jsonParser, async (req, res) => {
+    console.log("[postNewTags] ON")
+
+    const { userID, listTags } = req.body;
+
+    try {
+
+        const collectionTags = await db.collection('tags').get()
+
+        const listTagsID = []
+
+        if (!collectionTags.exists){
+            collectionTags.forEach((value, index) => {
+                listTags.forEach((name, position) =>{
+                    if (name === value.data().name){
+                        listTagsID.push(value.id)
+                    }
+                })
+            })
+        }
+        const collectionUsers = db.collection('users').doc(userID)
+        await collectionUsers.set({tags: listTagsID})
+        res.send("Tags enviadas ao Firebase")
+
+    } catch (error) {
+        res.status(404).send(error)
+    }
 })
 
 

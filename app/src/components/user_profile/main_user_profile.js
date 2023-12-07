@@ -8,6 +8,7 @@ import { storage } from '../../services/firebaseConfig'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { ToastContainer, toast } from 'react-toastify'
 import { Loader } from "../loader_component"
+import userIcon from '../../assets/common-landing-page-login-icon.png'
 
 export const MainUserProfile = () => {
 
@@ -15,22 +16,14 @@ export const MainUserProfile = () => {
 
     const {user_id} = useParams()
 
-    const [tagArray, setTagArray] = useState({}
-        // 1: 'Pet friendly', 
-        // 2: 'Sair a noite', 
-        // 3: 'Gastrobar', 
-        // 4: 'Familiar', 
-        // 5: 'Gastrobar', 
-        // 6: 'Familiar', 
-        // 7: 'Gastrobar', 
-        // 8: 'Familiar'
-    )
+    const [tagArray, setTagArray] = useState({})
+    const [tagArrayUser, setTagArrayUser] = useState({})
 
     const [removeComponentLoading, setRemoveComponentLoading] = useState(false)
 
     const userData = localStorage.getItem("@AuthFirebase:user");
     const user = JSON.parse(userData)
-    const [name, setName] = useState(user.displayName)
+    const [name, setName] = useState((user === null) ? null : user.displayName)
 
     const [imageProfile, setImageProfile] = useState(null)
     const [surname, setSurname] = useState('sobrenome')
@@ -99,29 +92,54 @@ export const MainUserProfile = () => {
         const user = JSON.parse(localStorage.getItem('@AuthFirebase:user'));
         user.displayName = name;
         localStorage.setItem('@AuthFirebase:user', JSON.stringify(user));
-        toast.success("Nome salvo com sucesso!")
+
+        axios.post('http://localhost:5000/postNewTags', {
+            "userID": user_id,
+            "listTags": tagArrayUser,
+        })
+
+        toast.success("Dados salvos com sucesso!")
     }
 
 
     useEffect(() => {
 
-        axios.post('http://localhost:5000/getImageProfile', { 
-            "userID": user.uid, 
+        (user != null && user.photoURL != undefined) ? setImageProfile(user.photoURL) : setImageProfile(null)
+
+        axios.post('http://localhost:5000/getUserTags', {userID: user_id})
+        .then(res => {
+            setTagArrayUser(res.data)
         })
-        .then(res => setImageProfile(res.data))
         .catch(error => console.log(error))
         
-        axios.post(`http://localhost:5000/getUserTags`, {userID: user_id})
+        axios.post(`http://localhost:5000/getTags`)
         .then(res => {
             setTagArray(res.data)
             setRemoveComponentLoading(true)
         })
         .catch(error => console.log(error))
+
     }, [])
 
 
-    function setTagClass(tagClass) {
-        return `tag-content ${tagClass}`
+    function addTagToList(tag) {
+        var checkbox = document.getElementById(tag);
+        if(checkbox.checked ){
+            tagArrayUser.push(tag)
+        }
+        else {
+            if (tagArrayUser.length === 3){
+                toast.error("Você precisa ter 3 gostos adicionados!")
+                checkbox.checked = true
+            }
+            else {
+                for (let index = 0; index < tagArrayUser.length + 1; index++) {
+                    if(tag == tagArrayUser[index]){
+                        tagArrayUser.splice(index, 1)
+                    }
+                }
+            }
+        }
     }
 
     let number = 0
@@ -137,7 +155,7 @@ export const MainUserProfile = () => {
                 <div className="user-profile-section user-main-data">
                     
                     <div className='user-image-input-container'>
-                        <img className='user-profile-image' id='user-profile-image' src={imageProfile}/> 
+                        <img className='user-profile-image' id='user-profile-image' src={(imageProfile === null) ? userIcon : imageProfile}/> 
                         <input name='nome' type='file' className='user-image-input' accept='image/*' onChange={e => updateUserImagePreview(e)}/> 
                     </div>
                     
@@ -156,32 +174,43 @@ export const MainUserProfile = () => {
                 </div>
 
                 <div className="user-profile-section user-preferences">
-                    <p>Suas preferências</p>
+                    <h1>Suas preferências</h1>
 
                     <div className='componentLoadingProfile'>
                             {!removeComponentLoading && <Loader />}
                     </div>
 
-                    <div className='tag-group'>
-                        {Object.keys(tagArray).map((value, index) => {
+                    {removeComponentLoading && <div className='tag-group'>
+                        {tagArray != null ? Object.keys(tagArray).map((valueT, indexT) => {
+
                             if (number < 3) {
                                 number += 1
                             } else {
                                 number = 0
                             };
-                            return (
 
-                                <div key={index} className={listColors[number]}>
-                                    <input type="checkbox" name="interesse" id={tagArray[value].name}></input>
+
+                            for (let index = 0; index < (tagArrayUser.length) + 1; index++) {
+                                
+                                if (tagArrayUser[index] == tagArray[valueT].name){
+                                    var checkbox = document.getElementById(tagArray[valueT].name);
+                                    checkbox.checked = true;
+                                    break
+                                }
+                            }
+                            
+                            return (
+                                <div key={indexT} className={listColors[number]}>
+                                    <input type="checkbox" name="interesse" id={tagArray[valueT].name} onClick={() => addTagToList(tagArray[valueT].name)}></input>
                                     <label>
                                         {/* <button value={value.name} onClick={e => removeTagFromTagGroup(e)}>X</button> */}
-                                        <p>{tagArray[value].name}</p>
-                                        <i className={tagArray[value].icon}></i>
+                                        <p>{tagArray[valueT].name}</p>
+                                        <i className={tagArray[valueT].icon}></i>
                                     </label>
                                 </div>
                             )
-                        })}
-                    </div>
+                        }) : console.log("Pois é KKKK")}
+                    </div>}
 
                 </div>
 
