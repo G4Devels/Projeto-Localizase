@@ -29,19 +29,19 @@ export const MainProtectedHeader = () => {
                 <Link to='/' ><img className='localizase-logo' src={ imageSrc } onMouseOver={() => setImageSrc( logo2 )} onMouseOut={() => setImageSrc( logo )} alt="Imagem"></img></Link>
                 
                 <div className="buttons-and-sections">
-                    <button onClick={() => { window.location.href = '/home'} }>
+                    <button className="linkButton" onClick={() => { window.location.href = '/home'} }>
                         Home
                         <img src={homeIcon} className='icon' alt="Ícone"/>
                     </button>  
 
-                    <button onClick={() => signOut()}>
+                    <button className="linkButton" onClick={() => signOut()}>
                         Sair
                         <img src={logoutIcon} className='icon' alt="Ícone"/>
                     </button>  
 
                     <button className="highlighted-button" onClick={() => window.location.assign( `/userprofile/${user.uid}`) }>
                             Perfil
-                        <img src={(user != null) ? user.photoURL : userIcon} className='icon' alt="Ícone"/>
+                        <img src={(user != null && user.photoURL != undefined) ? user.photoURL : userIcon} className='icon' alt="Ícone"/>
                     </button>  
                     
                 </div>

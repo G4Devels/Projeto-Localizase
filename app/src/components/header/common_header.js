@@ -91,7 +91,7 @@ export const CommonHeader = () => {
                         
                         <Link className="link-btn" to={signed ? "/home" : "/login"}>
                             Entrar
-                            <img src={(user != null) ? user.photoURL : loginIcon} className='icon' alt="Ícone"/>
+                            <img src={(user != null && user.photoURL != undefined) ? user.photoURL : loginIcon} className='icon' alt="Ícone"/>
                         </Link>
                         
                         <button className='nav-btn nav-btn-close' onClick={showNavBar}>

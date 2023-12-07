@@ -27,6 +27,12 @@
     margin-left: 10px;
 
 }
+.protected-header .buttons-and-sections .linkButton:hover {
+    color: whitesmoke;
+    border: solid var(--color01);
+    border-width: 0px 0px 2px 0px;
+}
+
 
 .protected-header button{
 
@@ -34,8 +40,6 @@
     border: none;
     
     color: var(--color01);
-    border-radius: 8px;
-
     
     height: 35px;
     padding: 10px;
@@ -50,6 +54,11 @@
 
 .protected-header .highlighted-button {
     background-color: var(--color07);
+    border-radius: 8px;
+}
+
+.protected-header .highlighted-button:hover {
+    background-color: var(--color07-hover);
 }
 
 .protected-header .icon {

@@ -79,6 +79,7 @@ header .header-nav a {
 header .header-nav .nav-link-to-section {
     display: flex;
     align-items: center;
+    padding-bottom: 5px;
 }
 
 header .header-nav .nav-link-to-section:hover {
