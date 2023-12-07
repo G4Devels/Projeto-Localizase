@@ -106,6 +106,7 @@
 }
 
 .about-text {
+    max-width: 700px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -115,7 +116,7 @@
 }
 
 .carousel {
-    max-width: 350px;
+    max-width: 793.59px;
     padding: 10px;
     cursor: grab;
     overflow: hidden;
@@ -137,9 +138,13 @@
 }
 
 
-@media (max-width: 860px) {
+@media (max-width: 1080px) {
     .about-section {
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    .about-text {
+        max-width: 793.59px;
     }
 }
