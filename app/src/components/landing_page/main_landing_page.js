@@ -20,8 +20,8 @@ export const MainLanding = () => {
 
     return (
         
-        <div className='landing-page-content'>
-
+        <div className='landing-page-container'>
+            
             <div className='linhaLanding'></div>
 
             <div id='#our-service-section' className='landing-main-section'>
