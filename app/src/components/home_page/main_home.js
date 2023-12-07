@@ -11,6 +11,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { MainFooter } from "../footer/main_footer";
 import { MainNavbar, MainProtectedHeader } from "../header/protected_header";
 import { MenuSectionInput } from "../menu_section_input";
+import { Loader } from "../loader_component"
 
 
 export const MainHome = () => {
@@ -70,6 +71,7 @@ export const MainHome = () => {
         },
     ]
 
+    const [componentLoading, setComponentLoading] = useState(false)
 
     const { signOut } = useContext(AuthAccountsContext);
 
@@ -79,11 +81,6 @@ export const MainHome = () => {
     const [choice, setChoice] = useState(0);
 
     const [locationsData, setLocationsData] = useState([])
-
-
-    useEffect(() => {
-        analyseChoice(choice)
-    }, [choice])
 
 
     async function getDocData (collection, document) {
@@ -97,11 +94,11 @@ export const MainHome = () => {
 
 
     function analyseChoice (choice) {
-        if (choice == 0) {
+        if (choice === 0) {
             getRecomendados()
         }
 
-        else if (choice == 1) {
+        else if (choice === 1) {
             getEmAlta()
         }
 
@@ -113,7 +110,7 @@ export const MainHome = () => {
 
     function getRecomendados () {
 
-        axios.post(`http://localhost:5000/getrecomendados`, {userID: userObject.uid})
+        axios.post('http://localhost:5000/getrecomendados', {userID: userObject.uid})
         .then(res => {
             setLocationsData(res.data)
         })
@@ -123,10 +120,8 @@ export const MainHome = () => {
 
 
     const  getEmAlta = async () => {
-        /*const baseURL = "http://localhost:5000/getemalta"
+        const baseURL = "http://localhost:5000/getemalta"
         axios.get(baseURL).then( async (response) => {
-            setPost(response.data);
-            console.log(response.data)
             setLocationsData(response.data)
           }).catch((error)=>{
             if (error.response && error.response.status === 404) {
@@ -135,15 +130,6 @@ export const MainHome = () => {
                 console.error('Erro desconhecido:', error);
               }
           })
-        setLocationsData(emAlta)
-        if (!post) return null;
-
-        return (
-          <div>
-            <h1>{post.title}</h1>
-            <p>{post.body}</p>
-          </div>
-        );*/
     }
 
     async function getSalvos (userUID) {
@@ -153,7 +139,7 @@ export const MainHome = () => {
         const savedDocumentReferencesObject = userDocument.saved
         let savedDocumentReferencesObjectKeys = null
 
-        if (savedDocumentReferencesObject != undefined) {
+        if (savedDocumentReferencesObject !== undefined) {
             savedDocumentReferencesObjectKeys = Object.keys(savedDocumentReferencesObject)
         }
         else {
@@ -185,6 +171,15 @@ export const MainHome = () => {
     }
 
 
+    useEffect(() => {
+        
+        
+        analyseChoice(choice)
+        setComponentLoading(true)
+
+    }, [choice])
+
+
     return (
         <>
 
@@ -196,6 +191,11 @@ export const MainHome = () => {
                 </MenuSection>
 
                 <CardsSection locations={locationsData}/>
+                <div className="loadingHome">
+
+                    {!componentLoading && <Loader/>}
+
+                </div>
             </div> 
             
         </>

@@ -9,6 +9,7 @@
   --color05: #6cf15a;
   --color06: #0166f8;
   --color07: #ff7e00;
+  --color07-hover: #f17900;
   --color08: rgb(172, 193, 201);
   --color09: #012034;
   --color10: #003B62;
@@ -35,7 +36,7 @@ h2 {
   font-size: 1.40em;
 }
 
-p, span{
+a, p, span, blockquote{
   font-size: 1.25em;
 }
 
@@ -69,6 +70,5 @@ input:focus{
 
 .mainContainer {
   flex: 1 1 0;
-  margin: 50px 0px;
   display: flex;
 }

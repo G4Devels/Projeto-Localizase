@@ -125,7 +125,7 @@ export const MainLogin = () => {
                         
                         <hr />
 
-                        <Link to="/registro"> Não possui uma conta? Cadastrar-se</Link>
+                        <Link to="/registro" className='linkCreateAccount'> Não possui uma conta? Cadastrar-se</Link>
 
                         {forgotPassHTML}
 
