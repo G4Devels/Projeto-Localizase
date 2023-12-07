@@ -1,11 +1,19 @@
 .cards_section {
 
+    width: 100%;
+
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    gap: 50px; 
 
     padding: 20px;
+    
+}
 
+.cards_section a {
+    font-size: 1em;
 }
 
 .card {

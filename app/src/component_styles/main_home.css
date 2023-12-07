@@ -4,8 +4,3 @@
     flex-direction: column;
     align-items: center;
 }
-.footerHome{
-    position: absolute;
-    bottom: 0;
-    min-width: 100%
-}
