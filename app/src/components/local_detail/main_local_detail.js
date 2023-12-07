@@ -19,11 +19,9 @@ export const LocalDetail = () => {
     const [carouselImgs, setCarouselImgs] = useState(null)
 
     const carousel = useRef()
-    const [width, setWidth] = useState(0)
+    //const [carroselWidth, setCarroselWidth] = useState(0)
 
     useEffect(() => {
-
-        setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
 
         axios.post(`http://localhost:5000/localdetail`, {local_ID: local_id})
         .then(res => {
@@ -99,12 +97,16 @@ export const LocalDetail = () => {
                     <motion.div ref={carousel} className="carousel" whileTap={{cursor: "grabbing"}}>
 
                         <motion.div className="inner-carousel"
-                        onDrag={()=>{console.log(carousel.current?.scrollWidth, carousel.current?.offsetWidth)}}
                             drag="x"
-                            dragConstraints={{right: 0, left: -width}}
+                            dragConstraints={{right: 0, left: -600}}
+                            dragElastic={0.8}
                         >
                             {
-                                carouselImgs.map((imgSrc, index) => <img key={index} className='local-carrosel-image' src={imgSrc} alt="Imagem do carrosel"/> )
+                                carouselImgs.map((imgSrc, index) => (
+                                    <motion.div>
+                                        <img key={index} className='local-carrosel-image' src={imgSrc} alt="Imagem do carrosel"/> 
+                                    </motion.div>
+                                ))
                             }
                         </motion.div>
 
