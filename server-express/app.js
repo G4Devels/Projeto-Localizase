@@ -138,7 +138,7 @@ app.get('/getemalta', jsonParser,async (req, res)=>{
         
                         if (!existeNaLista) {
                             console.log(newObj.name, "Nome")
-                            if (!(locations.length == 5)){
+                            if (!(locations.length == 6)){
                                 locations.push(newObj);
                             }
                         }
