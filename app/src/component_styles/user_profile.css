@@ -249,3 +249,71 @@
 .submit-user-profile:hover {
     background-color: var(--color07-hover);
 }
+
+@media screen and (max-width: 700px) {
+
+    .tag-content p{
+        font-size: 1em;
+    }
+    .tag-content i{
+        font-size: 1.8em;
+    }
+    .tag-content label{
+        width: 120px;
+    }
+    
+    .tag-group input{
+        width: 120px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .tag-content p{
+        font-size: 0.8em;
+    }
+    .tag-content i{
+        font-size: 1.6em;
+    }
+    .tag-content label{
+        width: 100px;
+    }
+    
+    .tag-group input{
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .tag-group {
+        /* width: 350px;*/
+        height: 390px; 
+        overflow-y: auto;
+    }
+    .tag-group::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        background-image: transparent;
+    }
+    .tag-group::-webkit-scrollbar-thumb {
+        border: transparent;
+    }
+    
+    .tag-content p{
+        font-size: 1.2em;
+    }
+    .tag-content i{
+        font-size: 2em;
+    }
+    .tag-content label{
+        width: 150px;
+    }
+    
+    .tag-group input{
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 290px) {
+
+    
+}

@@ -58,7 +58,7 @@ export const CommonHeader = () => {
             else {
                 setCurrentBackgroundimageState(currentBackgroundimageState + 1)
             }
-        }, 5000)
+        }, 10000)
 
         return () => clearTimeout(timer)
     })
