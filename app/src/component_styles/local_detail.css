@@ -69,7 +69,7 @@
 }
 
 .local-detail .tags-section .tag-name:hover{
-    background-color: rgba(1, 32, 52, 0.870);
+    background-color: var(--color02);
     color: white;
     cursor: pointer;
 }

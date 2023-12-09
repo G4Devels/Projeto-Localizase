@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
 
+@font-face {
+  font-family: SuperBoys;
+  src: url('./assets/SuperBoys.ttf');
+}
+
 :root {
   --color00: #000;
   --color01: #fff;
@@ -29,11 +34,14 @@ body, html {
 }
 
 h1 {
+  color: var(--color02);
   font-size: 1.5em;
+  font-family: SuperBoys;
 }
 
 h2 {
   font-size: 1.40em;
+  font-family: SuperBoys;
 }
 
 a, p, span, blockquote{
