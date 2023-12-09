@@ -118,36 +118,30 @@ export const MainHome = () => {
             setLocationsData(res.data)
             setComponentLoading(true)
         })
-        .catch(error => {
-            console.log(error)
-            setLocationsData(null)
-            setComponentLoading(true)
-        })
+        .catch(error => console.log(error))
 
     }
 
 
-    const  getEmAlta = () => {
-        // const baseURL = "http://localhost:5000/getemalta"
-        // axios.get(baseURL).then( async (response) => {
-        //     console.log(response.data)
-        //     setLocationsData(response.data)
-        //   }).catch((error)=>{
-        //     if (error.response && error.response.status === 404) {
-        //         console.log('Recurso não encontrado');
-        //       } else {
-        //         console.error('Erro desconhecido:', error);
-        //       }
-        //   })
-        axios.post('http://localhost:5000/getrecomendadosXXX', {userID: userObject.uid})
-        .then(res => {
-            setLocationsData(res.data)
+    const  getEmAlta = async () => {
+
+        const baseURL = "http://localhost:5000/getemalta"
+        axios.get(baseURL)
+        .then( async (response) => {
+            setLocationsData(response.data)
             setComponentLoading(true)
-        })
-        .catch(error => {
+          })
+        .catch((error)=>{
             setLocationsData(null)
             setComponentLoading(true)
+            if (error.response && error.response.status === 404){
+                console.log('Recurso não encontrado');
+            } 
+            else{
+                console.error('Erro desconhecido:', error);
+            }
         })
+
     }
 
     async function getSalvos (userUID) {

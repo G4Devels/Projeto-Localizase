@@ -82,7 +82,7 @@ app.post('/getrecomendados', jsonParser, async (req, res)=>{
 })
 
 
-app.post('/getemalta', async (req, res)=>{
+app.get('/getemalta', jsonParser,async (req, res)=>{
     console.log('[getEmAlta] ON')
 
     var local_dict = {}
@@ -101,46 +101,69 @@ app.post('/getemalta', async (req, res)=>{
         return newObj;
       }
 
-    const request_details = async (data)=>{
+    const ordered_details = async (data)=>{
+        // console.log(data)
         const result =  await fetch(`https://maps.googleapis.com/maps/api/place/details/json?fields=name%2Crating%2Cformatted_address&place_id=${data}&key=AIzaSyCMJrJhS4l2cYlWoPEMhtF3y929GY8U6C8&reviews_no_translations=false&reviews_sort=newest`)
         if (result.ok) {
+            console.log("---------------")
+            // console.log(result)
             const data = await result.json();
+            // console.log(data)
+            // console.log(data.result.rating)
             local_dict[data.result.formatted_address] = data.result.rating;
             const ordered_array = Object.entries(local_dict);
+            // console.log(ordered_array)
             ordered_array.sort((a,b)=>b[1]-a[1]);
             const ordered_dict = Object.fromEntries(ordered_array);
+            //console.log(ordered_dict)
             local_dict = ordered_dict;
-            const local_list = Object.keys(local_dict)
-            const locationsRef = db.collection('locations');
-            for(const datas of local_list){
-                const queryLocal = await locationsRef.where("address", "==", datas).get();
-                const doc = queryLocal.docs[0]
-                const objLocal = doc.data()
-                console.log(objLocal.name, "local")
-                if(!queryLocal.empty){
-                        newObj = keysToString(objLocal)
-                        const existeNaLista = locations.some(location => location.name === objLocal.name);
-                        if (!existeNaLista){
-                            locations.push(newObj)
-                        }
-                }else{
-                    console.log("Elemento não encontrado")
-                }
-
-            }
-          }else{
-            console.log("Erro na requisição:", result.status, result.statusText, );
-          }
+        
+    }else{
+        console,log("Problemas no firebase")
     }
-    
+}
+    const check_details = async()=>{
+        const local_list = Object.keys(local_dict)
+        console.log(local_list)
+        const locationsRef = db.collection('locations');
+        for (const datas of local_list) {
+            try {
+                const queryLocal = await locationsRef.where("address", "==", datas).get();
+                if (!queryLocal.empty) {
+                    queryLocal.forEach(doc => {
+                        console.log(datas, "ENCONTRADO")
+                        const objLocal = doc.data();
+                        newObj = keysToString(objLocal);
+        
+                        const existeNaLista = locations.some(location => location.name === objLocal.name);
+        
+                        if (!existeNaLista) {
+                            console.log(newObj.name, "Nome")
+                            if (!(locations.length == 6)){
+                                locations.push(newObj);
+                            }
+                        }
+                    });
+                } else {
+                    console.log("Elemento não encontrado para o endereço:", datas);
+                }
+            } catch (error) {
+                console.error("Erro na consulta ao Firestore:", error);
+            }
+        }
+        
+    }
     const tratement_request = async (list_IDs)=>{
+        console.log(list_IDs)
         for (const item of list_IDs) {
-            await request_details(item);
+            await ordered_details(item);
             
             if (item == list_IDs[list_IDs.length]){
                 break
             }
           }
+          await check_details();
+        //    console.log(locations)
            res.send(locations)
     }
 
@@ -151,6 +174,7 @@ app.post('/getemalta', async (req, res)=>{
         const locations = []; // Array para armazenar os valores de "local_ID"
         querySnapshot.forEach((doc) => {
             // Para cada documento na coleção, obtenha o campo "local_ID" e adicione ao array
+            console.log(doc.data().name)
             locations.push(doc.data().places_id_api);
         });
         tratement_request(locations)
