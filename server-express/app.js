@@ -501,6 +501,7 @@ app.post('/calculationAvarage', jsonParser, async (req, res) => {
     const collectionLocations = db.collection('locations').doc(localID);
     let listNotes = []
     let sumOfGrades = 0
+    let amountAssessments = 0
 
     try {
         const docLocation =  await collectionLocations.get();
@@ -514,11 +515,11 @@ app.post('/calculationAvarage', jsonParser, async (req, res) => {
                 if(collectionUserAssessments.exists){
                     const assessmentsNote = collectionUserAssessments.data().note
                     listNotes.push(assessmentsNote)
+                    amountAssessments += 1
                     sumOfGrades += assessmentsNote
                 }
             }
-
-            res.send({avarageGrade: (sumOfGrades / listNotes.length).toFixed(1)})
+            res.send({avarageGrade: (sumOfGrades / listNotes.length).toFixed(1), assessmentsLocation: amountAssessments})
         }
         else {
             res.status(404).send("no such document");
