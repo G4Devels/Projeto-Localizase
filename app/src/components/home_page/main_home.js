@@ -155,6 +155,13 @@ export const MainHome = () => {
         
         const userDocument = await getDocData(`users`, userUID)
         const savedDocumentReferencesObject = userDocument.saved
+
+        if ( savedDocumentReferencesObject.length === 0) {
+            setComponentLoading(true)
+            setLocationsData(null)
+            return
+        }
+
         let savedDocumentReferencesObjectKeys = null
 
         if (savedDocumentReferencesObject !== undefined) {
@@ -189,7 +196,6 @@ export const MainHome = () => {
             setLocationsData(null)
             setComponentLoading(true)
         })
-
 
     }
 
