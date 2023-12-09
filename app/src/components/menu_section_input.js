@@ -1,8 +1,18 @@
-export const MenuSectionInput = ({setChoice, choiceValue, inputName}) => {
+import recomendadosIcon from '../assets/home_recomendados_icon.png'
+import emAltaIcon from '../assets/home_emalta_icon.png'
+import salvosIcon from '../assets/home_salvos_icon.png'
+
+export const MenuSectionInput = ({setChoice, choiceValue, inputName, inputIconIndex}) => {
+
+    const Icons = [recomendadosIcon, emAltaIcon, salvosIcon]
+
     return (
         <div className='input_container'>
             <input type='radio' id={inputName} name='choice' value={inputName} onClick={() => setChoice(choiceValue)}/>
-            <div className='input_content'><label htmlFor={inputName}> {inputName} </label></div>
+            <div className='input_content'>
+                <img className='menu-section-icon' src={Icons[inputIconIndex]} alt={inputName}/>
+            </div>
         </div>
     )
+
 }

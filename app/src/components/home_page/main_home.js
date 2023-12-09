@@ -212,9 +212,9 @@ export const MainHome = () => {
 
             <div className="home">
                 <MenuSection>
-                    <MenuSectionInput choiceValue={0} inputName={'Recomendados'} setChoice={setChoice} />
-                    <MenuSectionInput choiceValue={1} inputName={'Em alta'} setChoice={setChoice} />
-                    <MenuSectionInput choiceValue={2} inputName={'Salvos'} setChoice={setChoice} />
+                    <MenuSectionInput choiceValue={0} inputName={'Recomendados'} setChoice={setChoice} inputIconIndex={0}/>
+                    <MenuSectionInput choiceValue={1} inputName={'Em alta'} setChoice={setChoice} inputIconIndex={1}/>
+                    <MenuSectionInput choiceValue={2} inputName={'Salvos'} setChoice={setChoice} inputIconIndex={2}/>
                 </MenuSection>
                 <div className="loadingHome">
 
