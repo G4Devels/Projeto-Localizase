@@ -71,6 +71,10 @@
     width: 100%;
 }
 
+.auth h1 {
+    color: var(--color01);
+}
+
 .auth form {
     width: 100%;
     flex-grow: 0.25;
