@@ -29,6 +29,7 @@
 }
 
 .star-section img{
+    cursor: pointer;
     width: 2em;
     height: 2em;
 }
