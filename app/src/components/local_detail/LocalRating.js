@@ -1,7 +1,7 @@
 import '../../component_styles/local_rating.css'
 import { StarRating } from './star-rating'
 
-export const LocalRating = ({starIndexes, selectedIndex, setSelectedIndex, averageGrade}) => {
+export const LocalRating = ({starIndexes, selectedIndex, setSelectedIndex, averageGrade, assessmentsLocal}) => {
 
 
 
@@ -23,6 +23,8 @@ export const LocalRating = ({starIndexes, selectedIndex, setSelectedIndex, avera
                         />
                     )}
                 </section>
+
+                <p className="totalAssessments" > {assessmentsLocal} Avaliações </p>
 
                 <progress value={averageGrade * 100/5} max="100" />
             </div>

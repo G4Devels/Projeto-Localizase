@@ -34,3 +34,7 @@
     height: 2em;
 }
 
+.rating-data .totalAssessments{
+    margin-bottom: 7px;
+    color: #363e42;
+}
