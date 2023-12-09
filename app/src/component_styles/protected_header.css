@@ -6,6 +6,7 @@
     width: 100%;
     background-color: var(--color09);
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
@@ -15,8 +16,8 @@
 .protected-header .buttons-and-sections {
     width: max-content;
     display: flex;
-    justify-content: space-around;
-    gap: 10px;
+    justify-content: flex-end;
+    gap: 25px;
 }
 
 .highlighted-button img {
@@ -64,4 +65,11 @@
 .protected-header .icon {
     width: 30px;
     height: 30px;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .protected-header .buttons-and-sections {
+        width: 100%;
+    }
 }

@@ -45,10 +45,10 @@ header .header-nav {
     min-height: 15vh;
     padding: 20px;
 
-    min-width: 700px;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: space-between;
+    gap: 25px;
 }
 
 
