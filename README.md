@@ -43,6 +43,56 @@ Design                  | <img src="https://img.shields.io/badge/figma-0078D6?st
 
 ---
 
+<details>
+<summary>
+  
+  ## Clique para ver o mapa do nosso site | 🗺
+  
+</summary>
+
+<div align="center">
+
+  ## Landing | 📖
+  <img src="./website_screens/landing_page.png">
+
+  ---
+
+  <br>
+  
+  ## Login | 🔒
+  <img src="./website_screens/login_page.png">
+
+  ---
+
+  <br>
+  
+  ## Register | 📑
+  <img src="./website_screens/register_page.png">
+
+  ---
+
+  <br>
+  
+  ## Test | 🧮
+  <img src="./website_screens/test_page.png">
+
+  ---
+
+  <br>
+  
+  ## Home | 🏠
+  <img src="./website_screens/home_page.png">
+
+  ---
+
+  <br>
+  
+  ## Profile | 👤
+  <img src="./website_screens/profile_page.png">
+  
+</div>
+
+</details>
 
 # Como executar | 💻
 ```bash
