@@ -26,6 +26,7 @@ export const LocalDetail = () => {
 
     const [noteUserOfBD, setNoteUserOfBD] = useState(null)
     const [avarage, setAvarage] = useState(null)
+    const [assessments, setAssessments] = useState(0)
 
     const userData = localStorage.getItem("@AuthFirebase:user");
     const userID = JSON.parse(userData)
@@ -59,7 +60,10 @@ export const LocalDetail = () => {
         axios.post('http://localhost:5000/calculationAvarage', {
             "localID": local_id,
         })
-        .then(res => { setAvarage(res.data.avarageGrade) })
+        .then(res => { 
+            setAvarage(res.data.avarageGrade) 
+            setAssessments(res.data.assessmentsLocation)
+        })
         .catch(erro => { console.log(erro) })
 
 
@@ -123,7 +127,7 @@ export const LocalDetail = () => {
                     </section>
                     
                     <form onChange={(e) => {e.preventDefault(); console.log('oi')}} className="get-and-show-statistics">
-                        <LocalRating selectedIndex={(selectedIndex === null) ? noteUserOfBD : selectedIndex } setSelectedIndex={setSelectedIndex} starIndexes={starIndexes} averageGrade={avarage}/>
+                        <LocalRating selectedIndex={(selectedIndex === null) ? noteUserOfBD : selectedIndex } setSelectedIndex={setSelectedIndex} starIndexes={starIndexes} averageGrade={avarage} assessmentsLocal={assessments}/>
 
                         <div onClick={savedLocationDB}>
                             <SaveIcon savedState={savedState} setSavedState={setSavedState}/>
