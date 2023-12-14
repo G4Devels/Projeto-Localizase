@@ -24,9 +24,9 @@ export const LocalRating = ({starIndexes, selectedIndex, setSelectedIndex, avera
                     )}
                 </section>
 
-                <p className="totalAssessments" > {assessmentsLocal} Avaliações </p>
-
                 <progress value={averageGrade * 100/5} max="100" />
+
+                <p className="totalAssessments" > {assessmentsLocal} Avaliações </p>
             </div>
 
         </div>
