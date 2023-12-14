@@ -149,8 +149,9 @@ export const MainHome = () => {
         
         const userDocument = await getDocData(`users`, userUID)
         const savedDocumentReferencesObject = userDocument.saved
+        console.log(savedDocumentReferencesObject)
 
-        if ( savedDocumentReferencesObject.length === 0) {
+        if ( savedDocumentReferencesObject === undefined || savedDocumentReferencesObject.length === 0) {
             setComponentLoading(true)
             setLocationsData(null)
             return
