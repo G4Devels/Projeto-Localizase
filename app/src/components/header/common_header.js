@@ -19,6 +19,9 @@ import logo from "../../assets/logo_branca.png"
 
 export const CommonHeader = () => {
 
+    const userData = localStorage.getItem("@AuthFirebase:user");
+    const user = JSON.parse(userData)
+
     const { signed } = useContext(AuthAccountsContext);
     const navRef = useRef();
     
@@ -55,7 +58,7 @@ export const CommonHeader = () => {
             else {
                 setCurrentBackgroundimageState(currentBackgroundimageState + 1)
             }
-        }, 5000)
+        }, 10000)
 
         return () => clearTimeout(timer)
     })
@@ -71,24 +74,24 @@ export const CommonHeader = () => {
                         
                     <nav ref={navRef} className="header-nav">
 
-                        <a className='nav-link-to-section' href='#about-us-container'>
-                            Sobre nós
-                            <img className='section-icons' src={aboutUsIcon} alt='�cone'/>
-                        </a>
-
-                        <a className='nav-link-to-section' href='#our-service-container'>
+                        <a className='nav-link-to-section' href='#our-service-section' onClick={ () => document.getElementById('#our-service-section').scrollIntoView({behavior:'smooth'}) }>
                             Nosso serviço
                             <img className='section-icons' src={ourServiceIcon} alt='�cone'/>
                         </a>
                         
-                        <a className='nav-link-to-section' href='#experiences-container'>
+                        <a className='nav-link-to-section' href='#experiences-section' onClick={ () => document.getElementById('#experiences-section').scrollIntoView({behavior:'smooth'}) }>
                             Experiências
                             <img className='section-icons' src={experienceIcon} alt='�cone'/>
+                        </a>
+
+                        <a className='nav-link-to-section' href='#about-us-section' onClick={ () => document.getElementById('#about-us-section').scrollIntoView({behavior:'smooth'}) }>
+                            Sobre nós
+                            <img className='section-icons' src={aboutUsIcon} alt='�cone'/>
                         </a>
                         
                         <Link className="link-btn" to={signed ? "/home" : "/login"}>
                             Entrar
-                            <img className='section-icons' src={loginIcon} alt='�cone'/>
+                            <img src={(user != null && user.photoURL != undefined) ? user.photoURL : loginIcon} className='icon' alt="Ícone"/>
                         </Link>
                         
                         <button className='nav-btn nav-btn-close' onClick={showNavBar}>

@@ -5,8 +5,7 @@ import {GenericErrorMessage} from "../../components/generic_error_message";
 import errorCrying from '../../assets/error_crying.png'
 
 export const CardsSection = ( {locations} ) => {
-
-    if (locations != null || locations != undefined) {
+    if (locations !== null) {
         return(
         
             <div className="cards_section">

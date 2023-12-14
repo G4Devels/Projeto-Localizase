@@ -8,7 +8,6 @@ import locationIcon from '../../assets/localpin-icon.svg';
 import descriptionIcon from '../../assets/description-icon.svg';
 
 export const LocalCard = ( {cardData} ) => {
-    console.log(cardData.local_ID)
     return(
 
         <div className='card' onClick={() => window.location.assign( `/localdetail/${cardData.local_ID}`) }>

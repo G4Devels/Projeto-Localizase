@@ -1,7 +1,12 @@
+.user-profile {
+    padding: 50px 0;
+}
+
 .protected-header {
     width: 100%;
     background-color: var(--color09);
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
@@ -9,10 +14,26 @@
 }
 
 .protected-header .buttons-and-sections {
-    width: 200px;
+    width: max-content;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
+    gap: 25px;
 }
+
+.highlighted-button img {
+    border-radius: 50%;
+}
+
+.protected-header .buttons-and-sections .icon {
+    margin-left: 10px;
+
+}
+.protected-header .buttons-and-sections .linkButton:hover {
+    color: whitesmoke;
+    border: solid var(--color01);
+    border-width: 0px 0px 2px 0px;
+}
+
 
 .protected-header button{
 
@@ -20,9 +41,7 @@
     border: none;
     
     color: var(--color01);
-    border-radius: 8px;
-
-    width: 90px;
+    
     height: 35px;
     padding: 10px;
 
@@ -36,9 +55,21 @@
 
 .protected-header .highlighted-button {
     background-color: var(--color07);
+    border-radius: 8px;
+}
+
+.protected-header .highlighted-button:hover {
+    background-color: var(--color07-hover);
 }
 
 .protected-header .icon {
     width: 30px;
     height: 30px;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .protected-header .buttons-and-sections {
+        width: 100%;
+    }
 }

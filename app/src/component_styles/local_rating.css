@@ -29,7 +29,12 @@
 }
 
 .star-section img{
+    cursor: pointer;
     width: 2em;
     height: 2em;
 }
 
+.rating-data .totalAssessments{
+    margin-bottom: 7px;
+    color: #363e42;
+}

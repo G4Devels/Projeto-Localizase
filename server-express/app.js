@@ -5,9 +5,9 @@ var jsonParser = bodyParser.json()
 const app = express()
 const port = 5000
 
-
 const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
+const { getStorage } = require('firebase-admin/storage');
 
 const serviceAccount = require('./API_keys/localizase-b0c83-591dc4e68d1c.json');
 
@@ -16,6 +16,7 @@ initializeApp({
 })
 
 const db = getFirestore()
+const storage = getStorage()
 
 app.use(cors());
 
@@ -224,16 +225,18 @@ app.get("/getnote/:local_ID", async(req, res)=>{
 
 app.post("/postcoments",async (req, res)=>{
     console.log("[postcoments] ON")
-    const jsonData = req.body
+    const {uid, local_id, comment, note} = req.body
     
-    const uid = jsonData.uid //deve ser fornecido no post, é um exemplo tirado do firebase
-    const local_id = jsonData.local_id//deve ser fornecido no post, é um exemplo tirado do firebase
+    // const uid = jsonData.uid //deve ser fornecido no post, é um exemplo tirado do firebase
+    // const local_id = jsonData.local_id//deve ser fornecido no post, é um exemplo tirado do firebase
     const docRefNewAssessment= db.collection(`users/${uid}/assessments`).doc(`${local_id}`)
     const docRefLocal = db.collection(`locations`).doc(`${local_id}`)
     const localDoc = await docRefLocal.get()
     const objectAssessment = {
-        "comment" : String(jsonData.comment),
-        "note" : jsonData.note
+        // "comment" : String(jsonData.comment),
+        // "note" : jsonData.note
+        "comment" : comment,
+        "note" : note
     }
 
     function double_check(lista, item){
@@ -279,9 +282,7 @@ app.post("/postcoments",async (req, res)=>{
 
 app.post("/postsavelocations", async (req, res) => {
     console.log("[postsavelocations] ON")
-    const jsonData = req.body;
-    const uid = jsonData.uid;
-    const local_id = jsonData.local_id;
+    const { uid, local_id } = req.body
 
     const docRefUserSaverLocation = db.collection(`users`).doc(`${uid}`);
 
@@ -311,6 +312,7 @@ app.post("/postsavelocations", async (req, res) => {
         res.status(500).send("Erro interno do servidor");
     }
 });
+
 app.post('/localdetail', jsonParser, async (req, res)=>{
 
     console.log('[localdetail] ON')
@@ -327,6 +329,297 @@ app.post('/localdetail', jsonParser, async (req, res)=>{
     }
 
 })
+
+
+app.post('/getTagArray', jsonParser, async (req, res) => {
+    console.log('[getTagArray] ON')
+
+    let tag_reference_array = req.body.tag_reference_array
+    tag_reference_array = tag_reference_array.map((value, index) => value._path.segments[1])
+
+    var tags_name = tag_reference_array.map(async (tag_ID, index) => {
+
+        const tagRef = db.collection('tags').doc(tag_ID);
+        const doc = await tagRef.get();
+    
+        if (!doc.exists) {
+            console.log('No such document!');
+        } else {
+            return doc.data().name
+        }
+        
+    })
+
+    Promise.all(tags_name)
+    .then(values => res.send(values))
+    .catch(error => console.log(error))
+
+})
+
+
+app.post('/getTags', jsonParser, async (req, res) => {
+    console.log('[getUserTags] ON')
+
+    const listTags = []
+
+    db.collection("tags").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            listTags.push(doc.data());
+        });
+        res.send(listTags)
+    });
+
+})
+
+
+app.post('/getUserTags', jsonParser, async (req, res) => {
+    const userID = req.body.userID;
+    const userData = await db.collection('users').doc(userID).get();
+
+    const tagsID = !userData.exists ? console.log('No such document!') : userData.data();
+    
+    
+    const tagsData = tagsID.tags.map(async (tagID, index) => {
+
+        const tagRef = db.collection('tags').doc(tagID);
+        const doc = await tagRef.get();
+    
+        if (!doc.exists) {
+            console.log('No such document!');
+        } else {
+            return doc.data().name;
+        };
+
+        return tagID;
+
+    });
+
+
+    Promise.all(tagsData)
+    .then(values => {
+        let userTags = [];
+        values.forEach((value, index) => userTags.push(value));
+        res.send(userTags);
+    })
+    .catch(error => console.log(error));
+});
+
+app.post('/postNewTags', jsonParser, async (req, res) => {
+    console.log("[postNewTags] ON")
+
+    const { userID, listTags } = req.body;
+
+    try {
+
+        const collectionTags = await db.collection('tags').get()
+
+        const listTagsID = []
+
+        if (!collectionTags.exists){
+            collectionTags.forEach((value, index) => {
+                listTags.forEach((name, position) =>{
+                    if (name === value.data().name){
+                        listTagsID.push(value.id)
+                    }
+                })
+            })
+        }
+        const collectionUsers = db.collection('users').doc(userID)
+        await collectionUsers.set({tags: listTagsID})
+        res.send("Tags enviadas ao Firebase")
+
+    } catch (error) {
+        res.status(404).send(error)
+    }
+})
+
+
+
+// Função para ler a nota do usuário no banco de dados.
+app.post('/postNoteBD', jsonParser, async (req, res) => {
+    console.log('[postNoteBD] ON');
+
+    const {userID, localID} = req.body;
+
+    const collectionsUsers = db.collection('users').doc(userID);
+    const collectionsAssessmentsOfUsers = collectionsUsers.collection('assessments').doc(localID);
+
+    try {
+        const docAssessments =  await collectionsAssessmentsOfUsers.get();
+
+        if (!docAssessments.exists) {
+            res.status(404).send('No such document!');
+        }
+        else{
+            res.send(docAssessments.data());
+        };
+
+    } catch (error) {
+        res.status(500).send("Erro interno do servidor");
+    };
+});
+
+// se esse local ja estiver salvo no saved excluira o local salvo no firebase
+app.post('/deleteSaved', jsonParser, async (req, res) => {
+    console.log('[deleteSaved] ON');
+
+    const { userID, localID } = req.body;
+
+    const collectionsUsers = db.collection('users').doc(userID);
+
+    try {
+        const docUsers =  await collectionsUsers.get();
+
+        if (docUsers.exists) {
+            const savedUser = docUsers.data().saved;
+
+            savedUser.map(referencia => referencia.id).forEach(async id => {
+                if (localID === id){
+                    const removeSaved = savedUser.filter(value => value.id !== id);
+                    await collectionsUsers.update({
+                        saved: removeSaved
+                    })
+                };
+            });
+            res.send("operação realizada sem erros!");
+        }
+        else {
+            res.status(404).send("no such document");
+        };
+    } catch (error) {
+        res.status(500).send("Erro interno do servidor");
+    };
+});
+
+
+// função para calcular a nota média do local, que será chamada toda vez que atualizar a nota.
+app.post('/calculationAvarage', jsonParser, async (req, res) => {
+    console.log('[calculationAvarage] ON');
+
+    const { localID } = req.body;
+
+    const collectionLocations = db.collection('locations').doc(localID);
+    let listNotes = []
+    let sumOfGrades = 0
+    let amountAssessments = 0
+
+    try {
+        const docLocation =  await collectionLocations.get();
+
+        if (docLocation.exists) {
+            const assessmentsLocation = docLocation.data().assessments
+
+            for ( const referenciaAssessments of assessmentsLocation){
+                const collectionUserAssessments = await referenciaAssessments.get()
+
+                if(collectionUserAssessments.exists){
+                    const assessmentsNote = collectionUserAssessments.data().note
+                    listNotes.push(assessmentsNote)
+                    amountAssessments += 1
+                    sumOfGrades += assessmentsNote
+                }
+            }
+            res.send({avarageGrade: (sumOfGrades / listNotes.length).toFixed(1), assessmentsLocation: amountAssessments})
+        }
+        else {
+            res.status(404).send("no such document");
+        };
+    } catch (error) {
+        res.status(500).send("Erro interno do servidor");
+    };
+});
+
+
+// esta função verifica se o local ja esta salvo pelo usuário, se estiver seleciona o botão de salvo
+app.post('/checkLocationSavedDB', jsonParser, async (req, res) => {
+    console.log('[checkLocationSavedDB] ON');
+
+    const { userID, localID } = req.body;
+
+    const collectionsUsers = db.collection('users').doc(userID);
+
+    try{
+        const docUsers =  await collectionsUsers.get();
+
+        if (docUsers.exists) {
+            const savedUser = docUsers.data().saved;
+            
+            if (savedUser != undefined){
+
+                savedUser.map(referencia => referencia.id).forEach(id => {
+                    if (localID === id){
+                        res.send(true)
+                    };
+                });
+
+            }
+            else{
+                res.status(404).send("no such document");
+            }
+        }
+        else {
+            res.status(404).send("no such document");
+        };
+    } catch (error) {
+        res.status(500).send("Erro interno do servidor");
+    };
+});
+
+
+app.post('/postImageProfile', jsonParser, async (req, res) => {
+    console.log('[postImage] ON')
+    const { userID, photoURL } = req.body;
+    const collectionUsers = db.collection('users').doc(userID)
+
+    try {
+        
+        const docUser = await collectionUsers.get()
+        if(docUser.exists){
+            collectionUsers.set({ photoURL: photoURL }, { merge: true })
+            .then((res)=>{
+                res.send("photoURL salva com sucesso")
+            })
+            .catch((error)=>{
+                res.send("erro ao salvar photoURL")
+            });
+        }
+        else{
+            res.send("no such document")
+        }
+
+    } catch (error) {
+        res.status(500).send("Erro interno no servidor!")
+    }
+
+    
+});
+
+app.post('/getImageProfile', jsonParser, async (req, res) => {
+    console.log("[getImageProfile] ON");
+
+    const { userID } = req.body;
+    const collectionUsers = db.collection('users').doc(userID)
+
+    try {
+        
+        const docUser = await collectionUsers.get()
+        if(docUser.exists){
+            const photoURLProfile = docUser.data().photoURL
+            res.send(photoURLProfile)
+        }
+        else{
+            res.send("no such document")
+        }
+
+    } catch (error) {
+        res.status(500).send("Erro interno no servidor!")
+    }
+});
+
+
+
+
+
 
 app.listen(port, ()=>{
     console.log('[SERVER] OK porta:', port)
