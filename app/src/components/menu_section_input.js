@@ -5,7 +5,6 @@ import salvosIcon from '../assets/home_salvos_icon.png'
 export const MenuSectionInput = ({atualChoice, setChoice, choiceValue, inputName, inputIconIndex}) => {
 
     const Icons = [recomendadosIcon, emAltaIcon, salvosIcon]
-    console.log(choiceValue, '---', inputIconIndex)
 
     return (
         <div className='input_container'>
