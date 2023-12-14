@@ -118,7 +118,11 @@ export const MainHome = () => {
             setLocationsData(res.data)
             setComponentLoading(true)
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            setLocationsData(null)
+            setComponentLoading(true)
+            console.log(error)
+        })
 
     }
 
@@ -150,9 +154,9 @@ export const MainHome = () => {
         const userDocument = await getDocData(`users`, userUID)
         const savedDocumentReferencesObject = userDocument.saved
 
-        if ( savedDocumentReferencesObject.length === 0) {
-            setComponentLoading(true)
+        if ( savedDocumentReferencesObject !== undefined) {
             setLocationsData(null)
+            setComponentLoading(true)
             return
         }
 
@@ -162,7 +166,9 @@ export const MainHome = () => {
             savedDocumentReferencesObjectKeys = Object.keys(savedDocumentReferencesObject)
         }
         else {
-            return setLocationsData(null)
+            setLocationsData(null)
+            setComponentLoading(true)
+            return
         }
         
 
@@ -189,6 +195,7 @@ export const MainHome = () => {
             console.log(error)
             setLocationsData(null)
             setComponentLoading(true)
+            return
         })
 
     }
