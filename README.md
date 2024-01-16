@@ -147,7 +147,7 @@ Design                  | <img src="https://img.shields.io/badge/figma-0078D6?st
             </sub>
           </a>
           <br>
-          <p><br>Front-End<br><br><br></p>
+          <p><br>Front-End<br><strong>Ex-membro <br> da equipe</strong><br></p>
         </td>
         <td>
           <a href="https://github.com/nicolasscarvalho">
@@ -181,6 +181,17 @@ Design                  | <img src="https://img.shields.io/badge/figma-0078D6?st
           </a>
           <br>
           <p><br>Back-End<br><br><br></p>
+        </td>
+        <td>
+          <a href="https://github.com/vitoriadz">
+            <img src="https://avatars.githubusercontent.com/u/96701270?v=4" width="100px;" alt="Vitória Diniz"/>
+            <br>
+            <sub>
+              <b>Vitória Diniz</b>
+            </sub>
+          </a>
+          <br>
+          <p><br>Web Designer<br>Front-end<br><br></p>
         </td>
       </tr>
   </table>
