@@ -12,6 +12,7 @@ import { MainFooter } from "../footer/main_footer";
 import { MainNavbar, MainProtectedHeader } from "../header/protected_header";
 import { MenuSectionInput } from "../menu_section_input";
 import { Loader } from "../loader_component"
+import { SearchInput } from "../search_bar/search_bar";
 
 
 export const MainHome = () => {
@@ -81,6 +82,8 @@ export const MainHome = () => {
     const [choice, setChoice] = useState(0);
 
     const [locationsData, setLocationsData] = useState([])
+
+    const [text, setText] = useState('')
 
 
     async function getDocData (collection, document) {
@@ -203,9 +206,13 @@ export const MainHome = () => {
 
     useEffect(() => {
         
+        if(text) {
+            console.log(text)
+        }
+
         analyseChoice(choice)
 
-    }, [choice])
+    }, [choice, text])
 
 
     return (
@@ -217,6 +224,9 @@ export const MainHome = () => {
                     <MenuSectionInput atualChoice={choice} choiceValue={1} inputName={'Em alta'} setChoice={setChoice} inputIconIndex={1}/>
                     <MenuSectionInput atualChoice={choice} choiceValue={2} inputName={'Salvos'} setChoice={setChoice} inputIconIndex={2}/>
                 </MenuSection>
+
+                <SearchInput search={text} onChange={(searchChange) => setText(searchChange)} />
+
                 <div className="loadingHome">
 
 
