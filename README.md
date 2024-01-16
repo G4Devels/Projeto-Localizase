@@ -136,7 +136,7 @@ Design                  | <img src="https://img.shields.io/badge/figma-0078D6?st
             </sub>
           </a>
           <br>
-          <p><br>Designer<br>Front-End<br><br></p>
+          <p><br>Web Designer<br>Front-End<br><br></p>
         </td>
         <td>
           <a href="https://github.com/vivirnogueira">
